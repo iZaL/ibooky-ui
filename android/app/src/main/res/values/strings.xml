@@ -1,3 +1,4 @@
 <resources>
+    <string moduleConfig="true" name="reactNativeCodePush_androidDeploymentKey">LVZOIY8EFt0KW3ancth8vPkTbe9Q687af85f-1654-43d6-b735-3ff7e4bf4cd7</string>
     <string name="app_name">ibooky</string>
 </resources>

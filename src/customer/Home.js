@@ -1,18 +1,38 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import {Text, View} from 'react-native';
 import {connect} from 'react-redux';
+import HomeMenu from 'customer/components/HomeMenu';
+import {CategoriesPropType} from 'customer/common/proptypes';
+import {ACTIONS as CUSTOMER_ACTIONS} from 'customer/common/actions';
+import Spinner from 'components/Spinner';
+import colors from "../assets/theme/colors";
 
 class Home extends Component {
-  static propTypes = {};
+  state = {
+    activeMenuItemID: 1,
+  };
 
-  static defaultProps = {};
+  componentDidMount() {
+    this.props.dispatch(CUSTOMER_ACTIONS.fetchCategories());
+  }
 
-  componentDidMount() {}
+  onHomeMenuItemPress = (item: object) => {
+    this.setState({
+      activeMenuItemID: item.id,
+    });
+  };
 
   render() {
+    let {categories} = this.props;
     return (
-      <View style={{flex: 1}}>
-        <Text style={{textAlign: 'center', fontSize: 40}}>Home</Text>
+      <View>
+        <HomeMenu
+          items={categories}
+          onItemPress={this.onHomeMenuItemPress}
+          activeID={this.state.activeMenuItemID}
+        />
+        <Spinner isVisible={true} />
       </View>
     );
   }
@@ -20,7 +40,12 @@ class Home extends Component {
 
 function mapStateToProps(state) {
   return {
-    state,
+    categories: [
+      {id: 1, name: 'Coupons'},
+      {id: 2, name: 'Samsung'},
+      {id: 3, name: 'Sumo Houseware'},
+      {id: 4, name: 'Tools'},
+    ],
   };
 }
 

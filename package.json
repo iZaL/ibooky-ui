@@ -23,6 +23,7 @@
     "react-native-paper": "^1.2.7",
     "react-native-platform-touchable": "^1.1.1",
     "react-native-push-notification": "^3.0.2",
+    "react-native-spinkit": "^1.1.1",
     "react-native-swiper": "^1.5.13",
     "react-native-vector-icons": "^4.6.0",
     "react-navigation": "^2.0.0-rc.2",
@@ -35,12 +36,12 @@
   },
   "devDependencies": {
     "babel-jest": "22.4.3",
-    "babel-preset-react-native": "4.0.0",
-    "jest": "22.4.3",
-    "react-test-renderer": "16.3.2",
     "babel-plugin-module-resolver": "^3.1.1",
     "babel-preset-flow": "^6.23.0",
-    "flow-bin": "^0.70.0"
+    "babel-preset-react-native": "4.0.0",
+    "flow-bin": "^0.70.0",
+    "jest": "22.4.3",
+    "react-test-renderer": "16.3.2"
   },
   "jest": {
     "preset": "react-native"

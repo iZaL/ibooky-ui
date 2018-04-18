@@ -40,11 +40,11 @@
 	<false/>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string/>
-    <key>NSAppTransportSecurity</key>
-    <dict>
-        <key>NSAllowsArbitraryLoads</key>
-        <true/>
-    </dict>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 	<key>CodePushDeploymentKey</key>
 	<string>GNEorxPaWc7l6vW-rx2uhgUf89iR687af85f-1654-43d6-b735-3ff7e4bf4cd7</string>
 	<key>UIAppFonts</key>
@@ -62,13 +62,13 @@
 		<string>Zocial.ttf</string>
 	</array>
 	<key>LSApplicationQueriesSchemes</key>
-    <array>
-        <string>comgooglemaps-x-callback</string>
-        <string>snapchat</string>
-        <string>fb</string>
-        <string>twitter</string>
-        <string>instagram</string>
-        <string>comgooglemaps</string>
-    </array>
+	<array>
+		<string>comgooglemaps-x-callback</string>
+		<string>snapchat</string>
+		<string>fb</string>
+		<string>twitter</string>
+		<string>instagram</string>
+		<string>comgooglemaps</string>
+	</array>
 </dict>
 </plist>

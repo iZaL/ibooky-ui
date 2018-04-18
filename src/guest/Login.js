@@ -13,6 +13,8 @@ import Button from 'components/Button';
 import colors from 'assets/theme/colors';
 import Divider from 'components/Divider';
 import BackButton from 'components/BackButton';
+import {Button as PaperButton} from 'react-native-paper';
+
 
 class Login extends Component {
   static propTypes = {
@@ -155,27 +157,27 @@ class Login extends Component {
             onPress={this.handleLogin}
             disabled={auth.login.busy}
             title={auth.login.busy ? I18n.t('logging_in') : I18n.t('login')}
-            style={{marginTop: 20}}
+            style={[{backgroundColor: colors.primary},{marginTop:30}]}
           />
 
-          <Divider style={{marginVertical: 30}} />
+          <Divider style={{marginTop: 30}} />
 
-          <Button
+          <PaperButton
             onPress={this.handleRegisterRoute}
-            style={{backgroundColor: colors.secondary}}
-            disabled={busy}
-            title={I18n.t('create_account')}
-          />
+          >
+            <Text style={{textAlign: 'center'}}>
+              {I18n.t('create_account')}
+            </Text>
+          </PaperButton>
 
-          <TouchableHighlight
+          <PaperButton
             onPress={this.handleForgotPasswordRoute}
-            style={{paddingTop: 100}}
-            underlayColor="transparent"
-            disabled={busy}>
+          >
             <Text style={{textAlign: 'center'}}>
               {I18n.t('forgot_password')}
             </Text>
-          </TouchableHighlight>
+          </PaperButton>
+
         </FormContent>
       </FormContainer>
     );

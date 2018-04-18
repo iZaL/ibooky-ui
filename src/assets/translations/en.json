@@ -46,7 +46,7 @@
   "order_details" : "Order Details",
   "time" : "Time",
   "welcome_to" : "Welcome to",
-  "app_name" : "BeeProtection",
+  "app_name" : "iBooky",
   "car_wash" : "Car Wash",
   "protection" : "Protection",
   "cart_success" : "Added to Cart",
@@ -139,5 +139,5 @@
   "start_driving" : "Start Driving",
   "stop_driving" : "Stop Driving",
 
-  "have_an_account" : "Have an account ?"
+  "have_an_account" : "Have an account ?",
 }

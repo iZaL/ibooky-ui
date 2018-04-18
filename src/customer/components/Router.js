@@ -23,6 +23,13 @@ const navOptions = {
     backgroundColor: colors.primary,
     borderBottomWidth: 0,
   },
+
+};
+
+const cardStyle = {
+  cardStyle:{
+    backgroundColor:colors.white
+  }
 };
 
 const AuthStack = createStackNavigator(
@@ -44,6 +51,7 @@ const AuthStack = createStackNavigator(
     navigationOptions: {
       ...navOptions,
     },
+    ...cardStyle
   },
 );
 
@@ -61,6 +69,7 @@ const HomeStack = createStackNavigator(
     navigationOptions: {
       ...navOptions,
     },
+    ...cardStyle
   },
 );
 
@@ -78,6 +87,7 @@ const SettingStack = createStackNavigator(
     navigationOptions: {
       ...navOptions,
     },
+    ...cardStyle
   },
 );
 

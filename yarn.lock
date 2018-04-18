@@ -4763,6 +4763,12 @@ react-native-i18n@^2.0.12:
   dependencies:
     i18n-js "^3.0.3"
 
+react-native-image-progress@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/react-native-image-progress/-/react-native-image-progress-1.1.0.tgz#737140d699fb3fb107ec70615736dfdc2eef7b35"
+  dependencies:
+    prop-types "^15.5.10"
+
 "react-native-maps@git+ssh://git@github.com:react-community/react-native-maps.git":
   version "0.21.0"
   resolved "git+ssh://git@github.com:react-community/react-native-maps.git#6086621cfa8181ff578643dd5e277b62ba1bf2ed"
@@ -4820,15 +4826,15 @@ react-native-swiper@^1.5.13:
   dependencies:
     prop-types "^15.5.10"
 
-react-native-tab-view@react-navigation/react-native-tab-view:
-  version "0.0.74"
-  resolved "https://codeload.github.com/react-navigation/react-native-tab-view/tar.gz/36ebd834d78b841fc19778c966465d02fd1213bb"
+react-native-tab-view@^0.0.77, react-native-tab-view@~0.0.77:
+  version "0.0.77"
+  resolved "https://registry.yarnpkg.com/react-native-tab-view/-/react-native-tab-view-0.0.77.tgz#11ceb8e7c23100d07e628dc151b57797524d00d4"
   dependencies:
     prop-types "^15.6.0"
 
-react-native-tab-view@~0.0.77:
-  version "0.0.77"
-  resolved "https://registry.yarnpkg.com/react-native-tab-view/-/react-native-tab-view-0.0.77.tgz#11ceb8e7c23100d07e628dc151b57797524d00d4"
+react-native-tab-view@react-navigation/react-native-tab-view:
+  version "0.0.74"
+  resolved "https://codeload.github.com/react-navigation/react-native-tab-view/tar.gz/36ebd834d78b841fc19778c966465d02fd1213bb"
   dependencies:
     prop-types "^15.6.0"
 

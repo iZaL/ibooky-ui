@@ -15,7 +15,6 @@ import Divider from 'components/Divider';
 import BackButton from 'components/BackButton';
 import {Button as PaperButton} from 'react-native-paper';
 
-
 class Login extends Component {
   static propTypes = {
     actions: PropTypes.object.isRequired,
@@ -157,27 +156,22 @@ class Login extends Component {
             onPress={this.handleLogin}
             disabled={auth.login.busy}
             title={auth.login.busy ? I18n.t('logging_in') : I18n.t('login')}
-            style={[{backgroundColor: colors.primary},{marginTop:30}]}
+            style={[{backgroundColor: colors.primary}, {marginTop: 30}]}
           />
 
           <Divider style={{marginTop: 30}} />
 
-          <PaperButton
-            onPress={this.handleRegisterRoute}
-          >
+          <PaperButton onPress={this.handleRegisterRoute}>
             <Text style={{textAlign: 'center'}}>
               {I18n.t('create_account')}
             </Text>
           </PaperButton>
 
-          <PaperButton
-            onPress={this.handleForgotPasswordRoute}
-          >
+          <PaperButton onPress={this.handleForgotPasswordRoute}>
             <Text style={{textAlign: 'center'}}>
               {I18n.t('forgot_password')}
             </Text>
           </PaperButton>
-
         </FormContent>
       </FormContainer>
     );

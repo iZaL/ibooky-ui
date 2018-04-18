@@ -5,10 +5,10 @@ import {connect} from 'react-redux';
 import HomeMenu from 'customer/components/HomeMenu';
 import {CategoriesPropType} from 'customer/common/proptypes';
 import {ACTIONS as CUSTOMER_ACTIONS} from 'customer/common/actions';
-import Spinner from 'components/Spinner';
-import colors from "../assets/theme/colors";
+import ProductList from "customer/components/ProductList";
 
 class Home extends Component {
+
   state = {
     activeMenuItemID: 1,
   };
@@ -24,15 +24,21 @@ class Home extends Component {
   };
 
   render() {
-    let {categories} = this.props;
+    let {categories,products} = this.props;
     return (
       <View>
+
         <HomeMenu
           items={categories}
           onItemPress={this.onHomeMenuItemPress}
           activeID={this.state.activeMenuItemID}
         />
-        <Spinner isVisible={true} />
+
+        <ProductList
+          items={products}
+          onItemPress={this.onHomeMenuItemPress}
+        />
+
       </View>
     );
   }
@@ -46,6 +52,12 @@ function mapStateToProps(state) {
       {id: 3, name: 'Sumo Houseware'},
       {id: 4, name: 'Tools'},
     ],
+    products: [
+      {id: 1, name: 'Offer 1', 'image': 'http://ibooky.test/uploads/dental-clinic1.jpg'},
+      {id: 2, name: 'Offer 2', 'image': 'http://ibooky.test/uploads/dental-clinic2.jpg'},
+      {id: 3, name: 'Offer 3', 'image': 'http://ibooky.test/uploads/dental-clinic3.jpg'},
+      {id: 4, name: 'Offer 4', 'image': 'http://ibooky.test/uploads/dental-clinic4.jpg'},
+    ]
   };
 }
 

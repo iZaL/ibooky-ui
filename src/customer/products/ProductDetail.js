@@ -15,11 +15,7 @@ import IconFactory from "../../components/IconFactory";
 class ProductDetail extends Component {
 
   static navigationOptions = ({navigation}) => {
-    {/*<MaterialCommunityIcons*/}
-      {/*name="cart-outline"*/}
-      {/*size={30}*/}
-      {/*color={colors.white}*/}
-    {/*/>*/}
+
     return {
       headerRight: (
         <NavButton

@@ -11,6 +11,7 @@ import Drawer from 'customer/components/Drawer';
 import Home from 'customer/Home';
 import Settings from 'customer/Settings';
 import ProductDetail from 'customer/products/ProductDetail';
+import Cart from 'customer/cart/Cart';
 
 const getDrawerIcon = navigation => {
   return {
@@ -68,13 +69,16 @@ const HomeStack = createStackNavigator(
     ProductDetail: {
       screen: ProductDetail,
     },
+    Cart:{
+      screen:Cart
+    }
   },
   {
     navigationOptions: {
       ...navOptions,
     },
     ...cardStyle,
-    // initialRouteName:'ProductDetail'
+    initialRouteName:'Cart'
   },
 );
 

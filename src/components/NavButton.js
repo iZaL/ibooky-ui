@@ -7,25 +7,20 @@ import {isRTL} from 'utils/locale';
 import Touchable from "react-native-platform-touchable";
 
 export default class NavButton extends Component {
+
   static propTypes = {
     text: PropTypes.string,
     icon: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
     onPress: PropTypes.func.isRequired,
   };
 
-  handlePress() {
-    this.props.onPress();
-  }
-
   render() {
-    const {style, text, icon, containerStyle} = this.props;
+    const {style, text, icon, onPress} = this.props;
 
     return (
       <Touchable
         underlayColor="transparent"
-        onPress={() => {
-          this.handlePress();
-        }}
+        onPress={onPress}
         style={[styles.container, style]}
       >
         {icon ? (

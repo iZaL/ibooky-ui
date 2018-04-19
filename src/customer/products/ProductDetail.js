@@ -1,18 +1,52 @@
 import React, {Component} from 'react';
 import {ScrollView, View} from 'react-native';
 import {connect} from 'react-redux';
-import {CategoriesPropType} from 'customer/common/proptypes';
 import ProductDescription from "customer/products/components/ProductDescription";
 import ProductImages from "customer/products/components/ProductImages";
 import Divider from "components/Divider";
 import ProductInfo from "customer/products/components/ProductInfo";
+import Button from "components/Button";
+import I18n from 'utils/locale';
+import NavButton from "components/NavButton";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import colors from "../../assets/theme/colors";
+import IconFactory from "../../components/IconFactory";
 
 class ProductDetail extends Component {
+
+  static navigationOptions = ({navigation}) => {
+    {/*<MaterialCommunityIcons*/}
+      {/*name="cart-outline"*/}
+      {/*size={30}*/}
+      {/*color={colors.white}*/}
+    {/*/>*/}
+    return {
+      headerRight: (
+        <NavButton
+          icon={
+            <IconFactory type="MaterialCommunityIcons" name="cart-outline" color="white" size={26}/>
+          }
+          onPress={() =>
+            navigation.state.params &&
+            navigation.state.params.handleRightButtonPress()
+          }
+        />
+      ),
+    };
+  };
+
   componentDidMount() {
-    // this.props.dispatch(CUSTOMER_ACTIONS.fetchCategories());
+    this.props.navigation.setParams({
+      handleRightButtonPress: this.loadCartScene,
+    });
   }
 
-  onItemPress = () => {
+  loadCartScene = () => {
+    this.props.navigation.navigate('Cart');
+  };
+
+  onAddToCartPress = () => {
+
   };
 
   render() {
@@ -22,6 +56,10 @@ class ProductDetail extends Component {
         <ProductImages images={product.images} />
         <View style={{paddingHorizontal: 10}}>
           <ProductInfo item={product}/>
+          <Divider/>
+
+          <Button title={I18n.t('add_to_cart').toUpperCase()} onPress={this.onAddToCartPress}/>
+
           <Divider/>
           <ProductDescription text={product.description}/>
         </View>

@@ -53,10 +53,10 @@ function mapStateToProps(state) {
       {id: 4, name: 'Tools'},
     ],
     products: [
-      {id: 1, name: 'Offer 1', 'image': 'http://ibooky.test/uploads/dental-clinic1.jpg'},
-      {id: 2, name: 'Offer 2', 'image': 'http://ibooky.test/uploads/dental-clinic2.jpg'},
-      {id: 3, name: 'Offer 3', 'image': 'http://ibooky.test/uploads/dental-clinic3.jpg'},
-      {id: 4, name: 'Offer 4', 'image': 'http://ibooky.test/uploads/dental-clinic4.jpg'},
+      {id: 1, title: 'Offer 1',offerPercentage:'50%',oldPrice:'50KD',price:'30KD', images: ['http://ibooky.test/uploads/dental-clinic1.jpg','http://ibooky.test/uploads/dental-clinic2.jpg','http://ibooky.test/uploads/dental-clinic3.jpg','http://ibooky.test/uploads/dental-clinic4.jpg']},
+      {id: 2, title: 'Offer 2',offerPercentage:'50%',oldPrice:'50KD',price:'30KD', images: ['http://ibooky.test/uploads/dental-clinic1.jpg','http://ibooky.test/uploads/dental-clinic2.jpg','http://ibooky.test/uploads/dental-clinic3.jpg','http://ibooky.test/uploads/dental-clinic4.jpg']},
+      {id: 3, title: 'Offer 3',offerPercentage:'50%',oldPrice:'50KD',price:'30KD', images: ['http://ibooky.test/uploads/dental-clinic1.jpg','http://ibooky.test/uploads/dental-clinic2.jpg','http://ibooky.test/uploads/dental-clinic3.jpg','http://ibooky.test/uploads/dental-clinic4.jpg']},
+      {id: 4, title: 'Offer 4',offerPercentage:'50%',oldPrice:'50KD',price:'30KD', images: ['http://ibooky.test/uploads/dental-clinic1.jpg','http://ibooky.test/uploads/dental-clinic2.jpg','http://ibooky.test/uploads/dental-clinic3.jpg','http://ibooky.test/uploads/dental-clinic4.jpg']},
     ]
   };
 }

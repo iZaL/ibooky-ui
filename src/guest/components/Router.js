@@ -1,11 +1,11 @@
 import React from 'react';
-import {StackNavigator} from 'react-navigation';
+import {createStackNavigator} from 'react-navigation';
 import Login from 'guest/Login';
 import Register from 'guest/Register';
 import Forgot from 'guest/Forgot';
 import colors from 'assets/theme/colors';
 
-export const Router = StackNavigator(
+export const Router = createStackNavigator(
   {
     Login: {
       screen: Login,

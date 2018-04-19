@@ -45,16 +45,5 @@ export default class extends Component {
 
 const styles = StyleSheet.create({
   listContainer: {
-    backgroundColor: colors.blue,
-  },
-  itemContainer: {
-    // padding: 10,
-  },
-  name: {
-    fontSize: 16,
-    color: colors.white,
-  },
-  nameActive: {
-    fontWeight: '700',
   },
 });

@@ -25,7 +25,8 @@ export default class extends Component {
     return (
       <TouchableRipple
         onPress={() => onPress(item)}
-        style={styles.itemContainer}>
+        style={styles.container}
+      >
         <Text style={[styles.name, item.id === activeID && styles.nameActive]}>
           {item.name}
         </Text>
@@ -36,11 +37,13 @@ export default class extends Component {
 
 const styles = StyleSheet.create({
   itemContainer: {
-    padding: 10,
   },
   name: {
+    minWidth:100,
+    padding:10,
     fontSize: 16,
     color: colors.white,
+    textAlign:'center'
   },
   nameActive: {
     fontWeight: '900',

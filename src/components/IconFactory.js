@@ -39,7 +39,7 @@ class IconFactory extends Component {
         name={name}
         color={color}
         size={size}
-        style={[{width: 24, height: 24}, style]}
+        style={[{width: size, height: size}, style]}
       />
     );
   }

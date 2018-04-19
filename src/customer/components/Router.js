@@ -1,14 +1,16 @@
 import React from 'react';
 import {createDrawerNavigator, createStackNavigator} from 'react-navigation';
-import Drawer from 'customer/components/Drawer';
-import Home from 'customer/Home';
-import Settings from 'customer/Settings';
+
 import Login from 'guest/Login';
 import Register from 'guest/Register';
 import Forgot from 'guest/Forgot';
 import DrawerIcon from 'components/DrawerIcon';
 import I18n from 'utils/locale';
 import colors from 'assets/theme/colors';
+import Drawer from 'customer/components/Drawer';
+import Home from 'customer/Home';
+import Settings from 'customer/Settings';
+import ProductDetail from 'customer/products/ProductDetail';
 
 const getDrawerIcon = navigation => {
   return {
@@ -63,12 +65,16 @@ const HomeStack = createStackNavigator(
         title: I18n.t('app_name'),
       }),
     },
+    ProductDetail: {
+      screen: ProductDetail,
+    },
   },
   {
     navigationOptions: {
       ...navOptions,
     },
     ...cardStyle,
+    // initialRouteName:'ProductDetail'
   },
 );
 

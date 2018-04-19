@@ -23,10 +23,7 @@ export default class extends Component {
     let {item, onPress, activeID} = this.props;
 
     return (
-      <TouchableRipple
-        onPress={() => onPress(item)}
-        style={styles.container}
-      >
+      <TouchableRipple onPress={() => onPress(item)} style={styles.container}>
         <Text style={[styles.name, item.id === activeID && styles.nameActive]}>
           {item.name}
         </Text>
@@ -36,14 +33,13 @@ export default class extends Component {
 }
 
 const styles = StyleSheet.create({
-  itemContainer: {
-  },
+  itemContainer: {},
   name: {
-    minWidth:100,
-    padding:10,
+    minWidth: 100,
+    padding: 10,
     fontSize: 16,
     color: colors.white,
-    textAlign:'center'
+    textAlign: 'center',
   },
   nameActive: {
     fontWeight: '900',

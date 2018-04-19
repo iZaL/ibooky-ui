@@ -2,28 +2,31 @@
  * @flow
  */
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import {FlatList, StyleSheet} from 'react-native';
+import {FlatList, StyleSheet, View} from 'react-native';
 import Divider from 'components/Divider';
-import colors from 'assets/theme/colors';
-import ProductItem from 'customer/components/ProductItem';
 import {CategoriesProp} from 'customer/common/proptypes';
+import ProductImages from "customer/products/components/ProductImages";
+import {TouchableRipple} from "react-native-paper";
+import ProductInfo from "customer/products/components/ProductInfo";
 
 export default class extends Component {
-
   static propTypes = {
     items: CategoriesProp.isRequired,
   };
 
-
-  shouldComponentUpdate(nextProps) {
-    return nextProps.activeID !== this.props.activeID;
-  }
-
   renderRow = ({item}) => {
-    let {onItemPress, activeID} = this.props;
+    let {onItemPress} = this.props;
     return (
-      <ProductItem item={item} onPress={onItemPress} activeID={activeID} />
+      <View style={styles.container}>
+        <ProductImages images={item.images}/>
+
+        <TouchableRipple
+          onPress={onItemPress}
+          style={styles.itemContainer}
+        >
+          <ProductInfo item={item}/>
+        </TouchableRipple>
+      </View>
     );
   };
 
@@ -34,7 +37,7 @@ export default class extends Component {
         data={items}
         style={styles.listContainer}
         renderItem={this.renderRow}
-        ItemSeparatorComponent={() => <Divider />}
+        ItemSeparatorComponent={() => <Divider/>}
         keyExtractor={(item, index) => `${index}`}
         showsVerticalScrollIndicator={false}
         showsHorizontalScrollIndicator={false}
@@ -44,6 +47,8 @@ export default class extends Component {
 }
 
 const styles = StyleSheet.create({
-  listContainer: {
-  },
+  listContainer: {},
+  itemContainer:{
+    paddingHorizontal:10
+  }
 });

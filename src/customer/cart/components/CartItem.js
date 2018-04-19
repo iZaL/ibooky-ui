@@ -23,7 +23,7 @@ export default class extends Component {
   // }
 
   render() {
-    let {item,total} = this.props;
+    let {item} = this.props;
 
     return (
       <View style={styles.container}>
@@ -47,10 +47,12 @@ const styles = StyleSheet.create({
     padding:10,
     borderRadius:5,
     borderWidth:1,
-    borderColor:colors.fadedWhite,
+    borderColor:colors.lightGrey,
     shadowColor:colors.fadedWhite,
     shadowOpacity:1,
-    shadowOffset:{width:1,height:1}
+    shadowOffset:{width:1,height:1},
+    marginBottom:10,
+
   },
 
 });

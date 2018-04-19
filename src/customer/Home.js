@@ -6,14 +6,22 @@ import HomeMenu from 'customer/components/HomeMenu';
 import {CategoriesPropType} from 'customer/common/proptypes';
 import {ACTIONS as CUSTOMER_ACTIONS} from 'customer/common/actions';
 import ProductList from 'customer/products/components/ProductList';
+import Spinner from "components/Spinner";
 
 class Home extends Component {
   state = {
     activeMenuItemID: 1,
+    loading: true
   };
 
   componentDidMount() {
     this.props.dispatch(CUSTOMER_ACTIONS.fetchCategories());
+
+    setTimeout(() => {
+      this.setState({
+        loading: false
+      })
+    }, 1000);
   }
 
   onHomeMenuItemPress = (item: object) => {
@@ -30,18 +38,38 @@ class Home extends Component {
 
   render() {
     let {categories, products} = this.props;
+    let {loading} = this.state;
     return (
-      <View>
-        <HomeMenu
-          items={categories}
-          onItemPress={this.onHomeMenuItemPress}
-          activeID={this.state.activeMenuItemID}
-        />
+      <View style={{flex: 1}}>
 
-        <ProductList
-          items={products}
-          onItemPress={this.onProductListItemPress}
-        />
+        {/*<View style={{*/}
+          {/*justifyContent: 'center',*/}
+          {/*alignItems: 'center',*/}
+          {/*zIndex: 1000,*/}
+          {/*position: 'absolute',*/}
+          {/*top: 0,*/}
+          {/*bottom: 0,*/}
+          {/*left: 0,*/}
+          {/*right: 0*/}
+        {/*}}>*/}
+          {/*<Spinner isVisible={loading} style={{color: '#FFFFFF50'}}/>*/}
+        {/*</View>*/}
+
+        <View>
+          <HomeMenu
+            items={categories}
+            onItemPress={this.onHomeMenuItemPress}
+            activeID={this.state.activeMenuItemID}
+          />
+        </View>
+        <View style={[{flex: 1,}, loading && {opacity: .3}]}>
+          <ProductList
+            items={products}
+            onItemPress={this.onProductListItemPress}
+          />
+        </View>
+
+
       </View>
     );
   }

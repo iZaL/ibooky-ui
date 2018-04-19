@@ -4,6 +4,7 @@ import Spinner from 'react-native-spinkit';
 import colors from '../assets/theme/colors';
 
 export default class extends Component {
+
   shouldComponentUpdate(nextProps) {
     return nextProps.isVisible !== this.props.isVisible;
   }

@@ -18,15 +18,11 @@ export default class extends Component {
   };
 
   render() {
-    const {style, title, titleStyle, disabled, ...rest} = this.props;
+    const {style, title, titleStyle, ...rest} = this.props;
     return (
       <PaperButton
+        style={[styles.button, style]}
         {...rest}
-        disabled={disabled}
-        style={[styles.button, style, disabled && {opacity: 0.4}]}
-        raised
-        primary
-        dark
       >
         <Text style={[styles.buttonText, titleStyle]}>{title}</Text>
       </PaperButton>
@@ -36,6 +32,5 @@ export default class extends Component {
 
 const styles = StyleSheet.create({
   button: {
-    paddingVertical: 10,
   },
 });

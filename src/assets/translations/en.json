@@ -143,5 +143,9 @@
   "time_remaining" : "Time Remaining",
   "share" : "Share",
   "quantity" : "Quantity",
-  "amount" : "Amount"
+  "amount" : "Amount",
+
+  "buy_now" : "Buy Now",
+  "checkout_proceed" : "Proceed to Checkout",
+  "shopping_continue" : "Continue Shopping"
 }

@@ -30,7 +30,9 @@ export default class extends Component {
         style={styles.swiper}
         autoPlay={false}
         showsButtons={false}
-        removeClippedSubviews={false}>
+        removeClippedSubviews={false}
+        loop={false}
+      >
         {images.map((image, i) => {
           return (
             <Image

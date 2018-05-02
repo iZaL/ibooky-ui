@@ -27,7 +27,7 @@ export default class extends Component {
 
     return (
 
-      <View>
+      <View style={styles.container}>
         <Title> {item.title}</Title>
         <Subheading>
           {' '}
@@ -70,7 +70,9 @@ export default class extends Component {
 }
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    paddingVertical:5
+  },
   swiper: {
     backgroundColor: colors.error,
     height: 424,

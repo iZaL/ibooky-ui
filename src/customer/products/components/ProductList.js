@@ -8,6 +8,9 @@ import {CategoriesProp} from 'customer/common/proptypes';
 import ProductImages from "customer/products/components/ProductImages";
 import {TouchableRipple} from "react-native-paper";
 import ProductInfo from "customer/products/components/ProductInfo";
+import Button from "components/Button";
+import I18n from 'utils/locale';
+
 
 export default class extends Component {
   static propTypes = {
@@ -15,7 +18,7 @@ export default class extends Component {
   };
 
   renderRow = ({item}) => {
-    let {onItemPress} = this.props;
+    let {onItemPress,onAddToCartPress} = this.props;
     return (
       <View style={styles.container}>
         <ProductImages images={item.images}/>
@@ -26,6 +29,9 @@ export default class extends Component {
         >
           <ProductInfo item={item}/>
         </TouchableRipple>
+
+        <Button primary raised dark title={I18n.t('buy_now').toUpperCase()} onPress={()=>onAddToCartPress(item)}/>
+
       </View>
     );
   };

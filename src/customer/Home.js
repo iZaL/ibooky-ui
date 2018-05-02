@@ -36,6 +36,12 @@ class Home extends Component {
     });
   };
 
+  onAddToCartPress = (item:object) => {
+    this.props.navigation.navigate('ProductDetail', {
+      productID: item.id,
+    });
+  };
+
   render() {
     let {categories, products} = this.props;
     let {loading} = this.state;
@@ -66,9 +72,9 @@ class Home extends Component {
           <ProductList
             items={products}
             onItemPress={this.onProductListItemPress}
+            onAddToCartPress={this.onAddToCartPress}
           />
         </View>
-
 
       </View>
     );

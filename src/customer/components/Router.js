@@ -78,7 +78,7 @@ const HomeStack = createStackNavigator(
       ...navOptions,
     },
     ...cardStyle,
-    // initialRouteName:'Cart'
+    initialRouteName:'ProductDetail'
   },
 );
 

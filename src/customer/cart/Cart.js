@@ -7,6 +7,8 @@ import {connect} from 'react-redux';
 import CartEmpty from 'customer/cart/components/CartEmpty';
 import CartItem from "./components/CartItem";
 import colors from "assets/theme/colors";
+import Button from "components/Button";
+import I18n from 'utils/locale';
 
 type State = {
   dates: Array,
@@ -22,6 +24,14 @@ class Cart extends PureComponent {
 
   static defaultProps = {
     products: []
+  };
+
+  onCheckoutPress = () => {
+
+  };
+
+  onShoppingContinuePress = () => {
+
   };
 
   render() {
@@ -51,6 +61,9 @@ class Cart extends PureComponent {
             )
           })
         }
+
+        <Button primary raised dark title={I18n.t('checkout_proceed').toUpperCase()} onPress={this.onCheckoutPress} style={{marginTop:20}}/>
+        <Button raised title={I18n.t('shopping_continue').toUpperCase()} onPress={this.onShoppingContinuePress} style={{marginTop:20}}/>
 
       </ScrollView>
     );
@@ -96,7 +109,7 @@ function mapStateToProps(state) {
           total:2000
         }
       }
-      ],
+    ],
   };
 }
 

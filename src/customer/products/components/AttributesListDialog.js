@@ -48,11 +48,12 @@ export default class extends Component {
             <View>
               {
                 items.map((item,i) => {
+                  let activeItem = activeIDs[item.parent_id];
                   return (
                     <TouchableRipple onPress={() => onItemPress(item)} key={i}>
                       <View style={styles.row}>
                         <View pointerEvents="none">
-                          <RadioButton value="normal" checked={activeIDs.includes(item.id)}/>
+                          <RadioButton value="normal" checked={activeItem ? activeItem.includes(item.id) : false}/>
                         </View>
                         <Subheading style={styles.text}>{item.name}</Subheading>
                       </View>

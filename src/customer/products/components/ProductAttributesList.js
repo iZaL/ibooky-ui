@@ -17,12 +17,23 @@ export default class extends Component {
   };
 
   renderRow = ({item}) => {
-    let {onItemPress} = this.props;
+    let {onItemPress, activeChildrenIDs} = this.props;
+    let activeChildIDs = activeChildrenIDs[item.id];
+
     return (
       <TouchableRipple onPress={() => onItemPress(item)}>
         <View style={styles.itemContainer}>
           <Text style={styles.name}>{item.name.toUpperCase()}</Text>
-          <Text style={styles.value}></Text>
+          <Text style={styles.value}>
+            {
+              activeChildIDs && activeChildIDs.map(childID => {
+                let child = item.children.find(child => child.id === childID);
+                if(child) {
+                  return child.name.toUpperCase();
+                }
+              })
+            }
+            </Text>
         </View>
       </TouchableRipple>
     );
@@ -48,15 +59,14 @@ const styles = StyleSheet.create({
   listContainer: {},
   itemContainer: {
     flexDirection: 'row',
-    alignItems:'center',
-    justifyContent:'center',
-    paddingVertical:10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 10,
   },
-  name:{
-  },
-  value:{
-    paddingHorizontal:10,
-    fontWeight:'900',
-    color:colors.primary
+  name: {},
+  value: {
+    paddingHorizontal: 10,
+    fontWeight: '900',
+    color: colors.primary
   }
 });

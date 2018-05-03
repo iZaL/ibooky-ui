@@ -4,13 +4,8 @@ export function reducer(
   state = {
     users: {},
     categories: {},
-    packages: {},
-    services: {},
-    timings: {},
-    // addresses: {},
-    drivers: {},
-    jobs: {},
-    areas: {},
+    products: {},
+    attributes:{}
   },
   action = {},
 ) {

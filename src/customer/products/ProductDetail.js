@@ -156,7 +156,7 @@ class ProductDetail extends Component {
 
               <AttributeDialog
                 visible={attributesListDialogVisible}
-                close={this.hideAttributesListDialog}
+                // close={this.hideAttributesListDialog}
                 save={this.onAttributesListDialogSavePress}
                 onItemPress={this.onAttributeDialogItemPress}
                 item={product.attributes.find(attribute => attribute.id === activeParentID) || {children:[]}}

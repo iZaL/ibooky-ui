@@ -55,11 +55,11 @@ export default class extends Component {
           </ScrollView>
         </DialogScrollArea>
         <DialogActions>
-          <Button primary onPress={close} color={colors.mediumGrey}>
-            {I18n.t('cancel')}
-          </Button>
+          {/*<Button primary onPress={close} color={colors.mediumGrey}>*/}
+            {/*{I18n.t('cancel')}*/}
+          {/*</Button>*/}
           <Button primary onPress={save}>
-            {I18n.t('confirm')}
+            {I18n.t('ok')}
           </Button>
         </DialogActions>
       </Dialog>

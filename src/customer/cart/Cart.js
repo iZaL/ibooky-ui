@@ -9,6 +9,7 @@ import CartItem from "./components/CartItem";
 import colors from "assets/theme/colors";
 import Button from "components/Button";
 import I18n from 'utils/locale';
+import {SELECTORS as CART_SELECTORS} from "customer/selectors/cart";
 
 type State = {
   dates: Array,
@@ -35,8 +36,10 @@ class Cart extends PureComponent {
   render() {
     let {
       products,
-      cartTotal,
+      cartProducts,
     } = this.props;
+
+    console.log('cartProducts',cartProducts);
 
     let {} = this.state;
 
@@ -70,6 +73,7 @@ class Cart extends PureComponent {
 
 function mapStateToProps(state) {
   return {
+    cartProducts:CART_SELECTORS.getCartProducts(state),
     cartTotal:100,
     products: [{
       id: 1,

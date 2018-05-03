@@ -148,8 +148,6 @@ class Cart extends PureComponent {
 
     console.log('products',products);
 
-    let {} = this.state;
-
     if (!products.length) {
       return <CartEmpty/>;
     }

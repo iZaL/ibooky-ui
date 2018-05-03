@@ -34,7 +34,7 @@ class ProductDetail extends Component {
   state = {
     attributesListDialogVisible: false,
     activeParentID: null,
-    attribute_child_ids: {}
+    attributeIDs: []
   };
 
   componentDidMount() {
@@ -55,35 +55,45 @@ class ProductDetail extends Component {
     });
   };
 
-  onAttributeDialogSavePress = (child: object) => {
+  onAttributeDialogItemPress = (child: object) => {
+    let {attributeIDs} = this.state;
+
+    let productAttributes = this.props.product.attributes || [];
+
+    let parentAttribute = productAttributes.find(attribute => attribute.id === child.parent_id);
+
+    let childrenIDs = parentAttribute.children.map(child => child.id);
+
+    let newState = attributeIDs.filter(id => !childrenIDs.includes(id)).concat(child.id);
+
     this.setState({
-      attribute_child_ids: {
-        ...this.state.attribute_child_ids,
-        [child.parent_id]: {
-          parent_id: child.parent_id,
-          child_id: child.id,
-        }
-      }
+      attributeIDs: newState
     });
   };
 
   setCartItem = () => {
 
     let {product} = this.props;
-    let {attribute_child_ids} = this.state;
+    let {attributeIDs} = this.state;
 
-    Object.keys(attribute_child_ids).map(parentID => attribute_child_ids[parentID]).map(attribute => {
-      let parentAttribute = {
-        [attribute.parent_id]: {
-          parent_id: attribute.parent_id,
-          child_id: attribute.child_id
-        }
-      };
-      this.props.dispatch(PRODUCT_ACTIONS.setCartItem({
-        product_id: product.id,
-        attributes: parentAttribute
-      }));
-    });
+    // Object.keys(attributeIDs).map(parentID => attributeIDs[parentID]).map(attribute => {
+    //   let parentAttribute = {
+    //     [attribute.parent_id]: {
+    //       parent_id: attribute.parent_id,
+    //       child_id: attribute.child_id
+    //     }
+    //   };
+    //   this.props.dispatch(PRODUCT_ACTIONS.setCartItem({
+    //     product_id: product.id,
+    //     attributes: parentAttribute
+    //   }));
+    // });
+
+    this.props.dispatch(PRODUCT_ACTIONS.setCartItem({
+      product_id: product.id,
+      attributes: attributeIDs
+    }));
+
     this.hideAttributesListDialog();
     this.loadCartScene();
   };
@@ -113,15 +123,15 @@ class ProductDetail extends Component {
 
   render() {
     let {product} = this.props;
-    let {attributesListDialogVisible, attribute_child_ids, activeParentID} = this.state;
+    let {attributesListDialogVisible, attributeIDs, activeParentID} = this.state;
 
-    let attribute_list_items = [];
-    if (activeParentID) {
-      let attribute = product.attributes.find(attribute => attribute.id === activeParentID);
-      if (attribute) {
-        attribute_list_items = attribute.children || [];
-      }
-    }
+    // let attribute_list_items = [];
+    // if (activeParentID) {
+    //   let attribute = product.attributes.find(attribute => attribute.id === activeParentID);
+    //   if (attribute) {
+    //     attribute_list_items = attribute.children || [];
+    //   }
+    // }
 
     return (
       <ScrollView style={{flex: 1}} contentContainerStyle={{paddingBottom: 50}}>
@@ -141,16 +151,16 @@ class ProductDetail extends Component {
               <AttributesList
                 items={product.attributes}
                 onItemPress={this.onAttributesListItemPress}
-                activeIDs={attribute_child_ids}
+                activeIDs={attributeIDs}
               />
 
               <AttributeDialog
                 visible={attributesListDialogVisible}
                 close={this.hideAttributesListDialog}
                 save={this.onAttributesListDialogSavePress}
-                onItemPress={this.onAttributeDialogSavePress}
+                onItemPress={this.onAttributeDialogItemPress}
                 item={product.attributes.find(attribute => attribute.id === activeParentID) || {children:[]}}
-                activeIDs={attribute_child_ids}
+                activeIDs={attributeIDs}
               />
 
               <Divider/>

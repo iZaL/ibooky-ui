@@ -14,20 +14,11 @@ export default class extends Component {
   static propTypes = {
     items: CategoriesProp.isRequired,
     onItemPress: PropTypes.func.isRequired,
-    activeIDs:PropTypes.shape({
-      parent_id:PropTypes.number,
-      child_id:PropTypes.number,
-    })
+    activeIDs:PropTypes.array
   };
 
   renderRow = ({item}) => {
     let {onItemPress, activeIDs} = this.props;
-
-    let selectedChild = {};
-
-    if(activeIDs[item.id]) {
-      selectedChild = item.children.find(child => child.id === activeIDs[item.id].child_id);
-    }
 
     return (
       <TouchableRipple onPress={() => onItemPress(item)}>
@@ -35,7 +26,7 @@ export default class extends Component {
           <Text style={styles.name}>{item.name.toUpperCase()}</Text>
           <Text style={styles.value}>
             {
-              selectedChild.id && selectedChild.name.toUpperCase()
+              item.children.map(child => activeIDs.includes(child.id) ? child.name.toUpperCase() : '')
             }
             </Text>
         </View>

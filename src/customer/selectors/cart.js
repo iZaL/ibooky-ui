@@ -5,7 +5,7 @@ import {Schema} from 'utils/schema';
 const cartProducts = state => state.customer.cart.products;
 const schemas = state => state.entities;
 
-const getCartItems = createSelector(
+const getCartProducts = createSelector(
   [schemas, cartProducts],
   (entities, products) => {
     return Object.keys(products)

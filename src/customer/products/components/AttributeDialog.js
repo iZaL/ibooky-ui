@@ -20,17 +20,17 @@ export default class extends Component {
   static propTypes = {
     visible: PropTypes.bool.isRequired,
     item: PropTypes.shape({
-      children:PropTypes.func.isRequired
+      children:PropTypes.array.isRequired
     }),
     save: PropTypes.func.isRequired,
     close: PropTypes.func.isRequired,
     onItemPress:PropTypes.func.isRequired,
-    activeIDs:PropTypes.object.isRequired
+    activeIDs:PropTypes.array
   };
 
   render() {
     const {visible, close, save, onItemPress, item, activeIDs} = this.props;
-    console.log('item',item);
+
     return (
       <Dialog onDismiss={close} visible={visible}>
         <DialogTitle>{`${I18n.t('select')} `}</DialogTitle>
@@ -39,12 +39,11 @@ export default class extends Component {
             <View>
               {
                 item.children.map((item,i) => {
-                  let activeItem = activeIDs[item.parent_id];
                   return (
                     <TouchableRipple onPress={() => onItemPress(item)} key={i}>
                       <View style={styles.row}>
                         <View pointerEvents="none">
-                          <RadioButton value="normal" checked={activeItem ? activeItem.child_id === item.id : false}/>
+                          <RadioButton value="normal" checked={activeIDs.includes(item.id)} />
                         </View>
                         <Subheading style={styles.text}>{item.name}</Subheading>
                       </View>

@@ -1,5 +1,4 @@
 /* @flow */
-
 import React, {Component} from 'react';
 import {ScrollView, View, StyleSheet} from 'react-native';
 import {
@@ -13,21 +12,9 @@ import {
   TouchableRipple,
 } from 'react-native-paper';
 import PropTypes from 'prop-types';
-
-type Props = {
-  visible: boolean,
-  close: Function,
-};
-
-type State = {
-  checked: number,
-};
+import I18n from 'utils/locale';
 
 export default class extends Component {
-
-  state = {
-    checked: 0,
-  };
 
   static propTypes = {
     visible: PropTypes.bool.isRequired,
@@ -49,8 +36,6 @@ export default class extends Component {
               {
                 items.map((item,i) => {
                   let activeItem = activeIDs[item.parent_id];
-                  // console.log('item.id',item);
-                  // console.log('activeItem',activeItem);
                   return (
                     <TouchableRipple onPress={() => onItemPress(item)} key={i}>
                       <View style={styles.row}>
@@ -68,10 +53,10 @@ export default class extends Component {
         </DialogScrollArea>
         <DialogActions>
           <Button primary onPress={close}>
-            Cancel
+            {I18n.t('cancel')}
           </Button>
           <Button primary onPress={save}>
-            Ok
+            {I18n.t('ok')}
           </Button>
         </DialogActions>
       </Dialog>

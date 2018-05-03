@@ -215,7 +215,6 @@ function mapStateToProps(state) {
         }
       ],
     },
-    cart: state.customer.cart
   };
 }
 

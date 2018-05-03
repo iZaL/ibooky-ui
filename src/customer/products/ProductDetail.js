@@ -33,7 +33,7 @@ class ProductDetail extends Component {
 
   state = {
     attributesListDialogVisible: false,
-    attributes_list: [],
+    activeParentID: null,
     attribute_child_ids: {}
   };
 
@@ -47,92 +47,46 @@ class ProductDetail extends Component {
     this.props.navigation.navigate('Cart');
   };
 
-  onAddToCartPress = () => {
-    this.props.navigation.navigate('Cart');
-  };
-
   onProductAttributesListItemPress = (item: object) => {
-    console.log('item', item);
-
     this.setState({
-      attributes_list: item.children || []
+      activeParentID: item.id || []
     }, () => {
       this.showAttributesListDialog();
     });
   };
 
   attributesListDialogItemPress = (child: object) => {
-
-    let attributes = this.props.product.attributes || {};
-
-    if (attributes) {
-      let attribute = attributes.find(attribute => child.parent_id);
-
-      let childrenIDs = attribute.children.map(child => child.id);
-
-      let activeAttributeChildIDs = this.state.attribute_child_ids[child.parent_id];
-
-      let excludedChildrenIDs = [];
-      if(activeAttributeChildIDs) {
-        excludedChildrenIDs = Object.keys(activeAttributeChildIDs).filter(id => !childrenIDs.includes(id));
-      }
-
-      let newState = excludedChildrenIDs.concat(child.id);
-
-      this.setState({
-        attribute_child_ids: {
-          ...this.state.attribute_child_ids,
-          [child.parent_id]: newState
+    this.setState({
+      attribute_child_ids: {
+        ...this.state.attribute_child_ids,
+        [child.parent_id]: {
+          parent_id: child.parent_id,
+          child_id: child.id,
         }
-      });
-    }
-
+      }
+    });
   };
 
-  //   attributesListDialogSavePress = () => {
-  //
-  //   let {product} = this.props;
-  //   let cartProducts = this.props.cart.products;
-  //
-  //   Object.keys(this.state.attribute_child_ids).map(parentID => product.attributes[parentID]).map(attribute => {
-  //
-  //       // let child =
-  //
-  //       // let parentAttributeID = child.parent_id;
-  //       let cartProduct = cartProducts[product.id] || {};
-  //       // console.log('cartProduct',cartProduct);
-  //
-  //       let attributes;
-  //
-  //       if(cartProduct && cartProduct.attributes) {
-  //         // console.log('wa');
-  //         attributes = {
-  //           ...cartProduct.attributes,
-  //           [attribute.parent_id] : {
-  //             parent_id:attribute.parent_id,
-  //             child_id:attribute.child_id
-  //           }
-  //         }
-  //       } else {
-  //         attributes = {
-  //           [attribute.parent_id] : {
-  //             parent_id:attribute.parent_id,
-  //             child_id:attribute.child_id
-  //           }
-  //         }
-  //       }
-  //
-  //       let params = {
-  //         product_id:product.id,
-  //         attributes: attributes
-  //       };
-  //
-  //       this.props.dispatch(PRODUCT_ACTIONS.setCartItem(params));
-  //   });
-  //
-  //   this.hideAttributesListDialog();
-  //
-  // };
+  setCartItem = () => {
+
+    let {product} = this.props;
+    let {attribute_child_ids} = this.state;
+
+    Object.keys(attribute_child_ids).map(parentID => attribute_child_ids[parentID]).map(attribute => {
+      let parentAttribute = {
+        [attribute.parent_id]: {
+          parent_id: attribute.parent_id,
+          child_id: attribute.child_id
+        }
+      };
+      this.props.dispatch(PRODUCT_ACTIONS.setCartItem({
+        product_id: product.id,
+        attributes: parentAttribute
+      }));
+    });
+    this.hideAttributesListDialog();
+    this.loadCartScene();
+  };
 
   attributesListDialogSavePress = () => {
     this.hideAttributesListDialog();
@@ -150,17 +104,24 @@ class ProductDetail extends Component {
     });
   };
 
-  render() {
-    let {product, cart} = this.props;
-    let {attributesListDialogVisible, attributes_list, attribute_child_ids} = this.state;
-    console.log('attribute_child_ids', attribute_child_ids);
-    // let activeChildrenIDs = [];
-    // let attributes = cart.products[product.id] ? cart.products[product.id].attributes : {};
-    //
-    // if (attributes) {
-    //   activeChildrenIDs = Object.keys(attributes).map(attributeID => attributes[attributeID].child_id);
-    // }
 
+  onAddToCartPress = () => {
+    this.setCartItem();
+    // this.props.navigation.navigate('Cart');
+  };
+
+
+  render() {
+    let {product} = this.props;
+    let {attributesListDialogVisible, attribute_child_ids, activeParentID} = this.state;
+
+    let attribute_list_items = [];
+    if (activeParentID) {
+      let attribute = product.attributes.find(attribute => attribute.id === activeParentID);
+      if (attribute) {
+        attribute_list_items = attribute.children || [];
+      }
+    }
     return (
       <ScrollView style={{flex: 1}} contentContainerStyle={{paddingBottom: 50}}>
 
@@ -172,13 +133,29 @@ class ProductDetail extends Component {
 
           <Divider/>
 
-          <ProductAttributesList
-            items={product.attributes}
-            onItemPress={this.onProductAttributesListItemPress}
-            activeChildrenIDs={attribute_child_ids}
-          />
+          {
+            product.show_attributes &&
+            <View>
+              <ProductAttributesList
+                items={product.attributes}
+                onItemPress={this.onProductAttributesListItemPress}
+                activeChildrenIDs={attribute_child_ids}
+              />
 
-          <Divider/>
+              <AttributesListDialog
+                visible={attributesListDialogVisible}
+                close={this.hideAttributesListDialog}
+                save={this.attributesListDialogSavePress}
+                onItemPress={this.attributesListDialogItemPress}
+                items={attribute_list_items}
+                activeIDs={attribute_child_ids}
+              />
+
+              <Divider/>
+
+            </View>
+          }
+
 
           <Button primary raised dark title={I18n.t('buy_now').toUpperCase()}
                   onPress={() => this.onAddToCartPress(product)}/>
@@ -187,14 +164,6 @@ class ProductDetail extends Component {
 
           <ProductDescription text={product.description}/>
 
-          <AttributesListDialog
-            visible={attributesListDialogVisible}
-            close={this.hideAttributesListDialog}
-            save={this.attributesListDialogSavePress}
-            onItemPress={this.attributesListDialogItemPress}
-            items={attributes_list}
-            activeIDs={attribute_child_ids}
-          />
 
         </View>
 
@@ -213,9 +182,14 @@ function mapStateToProps(state) {
       },
       title: 'Offer 1',
       description: 'Offer Description Offer Description  Offer Description Offer Description Offer Description Offer Description Offer Description',
-      offerPercentage: 50,
-      oldPrice: 60,
+      offer_percentage: 50,
+      offer_percentage_formatted: '50%',
+      price_old: 60,
+      price_old_formatted: '60 KD',
       price: 30,
+      price_formatted: '30 KD',
+      show_attributes: true,
+      time_remaining_formatted:'10:00:00 hrs',
       images: [
         'http://ibooky.test/uploads/dental-clinic1.jpg',
         'http://ibooky.test/uploads/dental-clinic2.jpg',

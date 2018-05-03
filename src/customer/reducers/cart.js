@@ -63,7 +63,7 @@ export function reducer(state = initialState, action = {}) {
           [productID]: {
             ...state.products[productID],
             attributes:{
-              // ...state.products[productID].attributes,
+              ...state.products[productID] && state.products[productID].attributes,
               ...action.params.attributes
             }
           }

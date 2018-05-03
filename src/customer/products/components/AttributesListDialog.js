@@ -35,7 +35,7 @@ export default class extends Component {
     save: PropTypes.func.isRequired,
     close: PropTypes.func.isRequired,
     onItemPress:PropTypes.func.isRequired,
-    activeIDs:PropTypes.array.isRequired
+    activeIDs:PropTypes.object.isRequired
   };
 
   render() {
@@ -49,11 +49,13 @@ export default class extends Component {
               {
                 items.map((item,i) => {
                   let activeItem = activeIDs[item.parent_id];
+                  // console.log('item.id',item);
+                  // console.log('activeItem',activeItem);
                   return (
                     <TouchableRipple onPress={() => onItemPress(item)} key={i}>
                       <View style={styles.row}>
                         <View pointerEvents="none">
-                          <RadioButton value="normal" checked={activeItem ? activeItem.includes(item.id) : false}/>
+                          <RadioButton value="normal" checked={activeItem ? activeItem.child_id === item.id : false}/>
                         </View>
                         <Subheading style={styles.text}>{item.name}</Subheading>
                       </View>

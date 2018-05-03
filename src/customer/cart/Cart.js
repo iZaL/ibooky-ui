@@ -27,11 +27,9 @@ class Cart extends PureComponent {
   };
 
   onCheckoutPress = () => {
-
   };
 
   onShoppingContinuePress = () => {
-
   };
 
   render() {

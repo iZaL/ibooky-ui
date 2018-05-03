@@ -18,7 +18,12 @@ export default class extends Component {
 
   renderRow = ({item}) => {
     let {onItemPress, activeChildrenIDs} = this.props;
-    let activeChildIDs = activeChildrenIDs[item.id];
+
+    let selectedChild = {};
+
+    if(activeChildrenIDs[item.id]) {
+      selectedChild = item.children.find(child => child.id === activeChildrenIDs[item.id].child_id);
+    }
 
     return (
       <TouchableRipple onPress={() => onItemPress(item)}>
@@ -26,12 +31,7 @@ export default class extends Component {
           <Text style={styles.name}>{item.name.toUpperCase()}</Text>
           <Text style={styles.value}>
             {
-              activeChildIDs && activeChildIDs.map(childID => {
-                let child = item.children.find(child => child.id === childID);
-                if(child) {
-                  return child.name.toUpperCase();
-                }
-              })
+              selectedChild.id && selectedChild.name.toUpperCase()
             }
             </Text>
         </View>

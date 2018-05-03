@@ -28,23 +28,22 @@ export default class extends Component {
     return (
 
       <View style={styles.container}>
-        <Title> {item.title}</Title>
+        <Title>{item.title}</Title>
         <Subheading>
-          {' '}
-          {I18n.t('save')} {item.offerPercentage}{' '}
+          {I18n.t('save')} {item.offer_percentage_formatted}
         </Subheading>
 
         <Divider style={{marginVertical: 10}}/>
 
         <View style={styles.itemInfoContainer}>
           <View style={styles.itemContent}>
-            <Text style={styles.label}>{item.oldPrice}</Text>
-            <Text style={styles.value}>{item.price}</Text>
+            <Text style={styles.label}>{item.price_old_formatted}</Text>
+            <Text style={styles.value}>{item.price_formatted}</Text>
           </View>
 
           <View style={styles.itemContent}>
             <Text style={styles.label}>{I18n.t('time_remaining')}</Text>
-            <Text style={styles.value}>{item.price}</Text>
+            <Text style={styles.value}>{item.time_remaining_formatted}</Text>
           </View>
 
           <IconFactory
@@ -71,7 +70,7 @@ export default class extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    paddingVertical:5
+    paddingVertical: 5
   },
   swiper: {
     backgroundColor: colors.error,

@@ -15,12 +15,17 @@ export default class extends Component {
 
   static propTypes = {
     text: PropTypes.string,
-    total:PropTypes.number
+    total:PropTypes.number,
+    setQuantity:PropTypes.func.isRequired
   };
 
   // shouldComponentUpdate(nextProps) {
   //   return false
   // }
+
+  setQuantity = (quantity:number) => {
+    this.props.setQuantity(this.props.item,quantity);
+  };
 
   render() {
     let {item} = this.props;
@@ -30,7 +35,7 @@ export default class extends Component {
 
         <ProductInfo item={item}/>
 
-        <ProductQuantity selected={item.cart.quantity} />
+        <ProductQuantity selected={item.cart.quantity || 1} onPress={this.setQuantity}/>
 
         <Divider style={{marginVertical:5}}/>
 

@@ -17,20 +17,19 @@ export default class extends Component {
   };
 
   shouldComponentUpdate(nextProps) {
-    return false
+    return nextProps.item !== this.props.item;
   }
 
   render() {
     let {item} = this.props;
 
     return (
-
       <View style={styles.container}>
-        <Image source={{uri: item.images[0]}} style={styles.image}/>
-        <View style={{flex:1}}>
+        <Image source={{uri: item.featured_image}} style={styles.image}/>
+        <View style={{flex: 1}}>
           <Title> {item.title}</Title>
           <Caption
-            style={{paddingHorizontal:5}}
+            style={{paddingHorizontal: 5}}
           >{item.description}</Caption>
         </View>
       </View>
@@ -40,9 +39,9 @@ export default class extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex:1,
+    flex: 1,
     flexDirection: 'row',
-    alignItems:'center',
+    alignItems: 'center',
   },
   image: {
     height: 75,

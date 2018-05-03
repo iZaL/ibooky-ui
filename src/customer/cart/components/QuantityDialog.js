@@ -18,44 +18,38 @@ export default class extends Component {
 
   static propTypes = {
     visible: PropTypes.bool.isRequired,
-    item: PropTypes.shape({
-      children:PropTypes.array.isRequired
-    }),
+    item: PropTypes.object,
+    items: PropTypes.array,
     save: PropTypes.func.isRequired,
-    onItemPress:PropTypes.func.isRequired,
-    activeIDs:PropTypes.array
+    onItemPress: PropTypes.func.isRequired,
+    selected: PropTypes.number.isRequired
   };
 
   render() {
-    const {visible, close, save, onItemPress, item, activeIDs} = this.props;
+    const {visible, save, onItemPress, item, items, selected} = this.props;
 
     return (
       <Dialog visible={visible}>
-        <DialogTitle>{`${I18n.t('select')} `}</DialogTitle>
+        <DialogTitle>{`${I18n.t('select')} ${I18n.t('quantity')} `}</DialogTitle>
         <DialogScrollArea style={{maxHeight: 170, paddingHorizontal: 0}}>
           <ScrollView>
             <View>
               {
-                item.children.map((item,i) => {
-                  return (
-                    <TouchableRipple onPress={() => onItemPress(item)} key={i}>
-                      <View style={styles.row}>
-                        <View pointerEvents="none">
-                          <RadioButton value="normal" checked={activeIDs.includes(item.id)} />
-                        </View>
-                        <Subheading style={styles.text}>{item.name}</Subheading>
+                items.map((item, i) =>
+                  <TouchableRipple onPress={() => onItemPress(item)} key={i}>
+                    <View style={styles.row}>
+                      <View pointerEvents="none">
+                        <RadioButton value="normal" checked={selected === item}/>
                       </View>
-                    </TouchableRipple>
-                  )
-                })
+                      <Subheading style={styles.text}>{item}</Subheading>
+                    </View>
+                  </TouchableRipple>
+                )
               }
             </View>
           </ScrollView>
         </DialogScrollArea>
         <DialogActions>
-          {/*<Button primary onPress={close} color={colors.mediumGrey}>*/}
-            {/*{I18n.t('cancel')}*/}
-          {/*</Button>*/}
           <Button primary onPress={save}>
             {I18n.t('ok')}
           </Button>

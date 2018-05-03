@@ -71,32 +71,6 @@ class ProductDetail extends Component {
     });
   };
 
-  setCartItem = () => {
-
-    let {product} = this.props;
-    let {attributeIDs} = this.state;
-
-    // Object.keys(attributeIDs).map(parentID => attributeIDs[parentID]).map(attribute => {
-    //   let parentAttribute = {
-    //     [attribute.parent_id]: {
-    //       parent_id: attribute.parent_id,
-    //       child_id: attribute.child_id
-    //     }
-    //   };
-    //   this.props.dispatch(PRODUCT_ACTIONS.setCartItem({
-    //     product_id: product.id,
-    //     attributes: parentAttribute
-    //   }));
-    // });
-
-    this.props.dispatch(PRODUCT_ACTIONS.setCartItem({
-      product_id: product.id,
-      attributes: attributeIDs
-    }));
-
-    this.hideAttributesListDialog();
-    // this.loadCartScene();
-  };
 
   onAttributesListDialogSavePress = () => {
     this.hideAttributesListDialog();
@@ -120,6 +94,19 @@ class ProductDetail extends Component {
     // this.props.navigation.navigate('Cart');
   };
 
+  setCartItem = () => {
+
+    let {product} = this.props;
+    let {attributeIDs} = this.state;
+
+    this.props.dispatch(PRODUCT_ACTIONS.setCartItem({
+      product_id: product.id,
+      attributes: attributeIDs
+    }));
+
+    this.hideAttributesListDialog();
+    this.loadCartScene();
+  };
 
   render() {
     let {product,cart} = this.props;
@@ -158,7 +145,6 @@ class ProductDetail extends Component {
 
               <AttributeDialog
                 visible={attributesListDialogVisible}
-                // close={this.hideAttributesListDialog}
                 save={this.onAttributesListDialogSavePress}
                 onItemPress={this.onAttributeDialogItemPress}
                 item={product.attributes.find(attribute => attribute.id === activeParentID) || {children:[]}}

@@ -8,12 +8,15 @@ const schemas = state => state.entities;
 const getCartProducts = createSelector(
   [schemas, cartProducts],
   (entities, products) => {
+
     return Object.keys(products)
       .map(productID => {
         let cartProduct = products[productID];
         return {
-          ...cartProduct,
           ...denormalize(productID, Schema.products, entities),
+          cart:{
+            ...cartProduct
+          },
         };
       });
   },

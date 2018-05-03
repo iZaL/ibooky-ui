@@ -2,39 +2,19 @@ import {ACTION_TYPES} from 'customer/common/actions';
 
 const initialState = {
   products: {},
-  total: 0
+  total: 0,
+
   // products: {
   //   1: {
   //     id: 1,
-  //     quantity: 2,
   //     total: 100,
-  //     attributes: {
-  //       1:{
-  //         parent_id:1,
-  //         child_id:3,
-  //         total:1,
-  //       },
-  //       6:{
-  //         parent_id:6,
-  //         child_id:7
-  //       }
-  //     }
+  //     attributes: [3,7]
   //   },
   //   2: {
   //     id: 1,
   //     quantity: 2,
   //     total: 100,
-  //     attributes: {
-  //       1:{
-  //         parent_id:1,
-  //         child_id:2,
-  //         total:1,
-  //       },
-  //       6:{
-  //         parent_id:6,
-  //         child_id:8
-  //       }
-  //     }
+  //     attributes:[2,8]
   //   }
   // },
   // total: 100
@@ -54,17 +34,23 @@ const initialState = {
 export function reducer(state = initialState, action = {}) {
   switch (action.type) {
     case ACTION_TYPES.CART_SET_ITEM:
+
       let productID = action.params.product_id;
+      let product = state.products[productID];
+      let attributes = product ? product.attributes : [];
+
+      if(action.params.hasOwnProperty('attributes')) {
+        attributes = attributes.concat(action.params.attributes)
+      }
+
       return {
         ...state,
         products: {
           ...state.products,
           [productID]: {
-            ...state.products[productID],
-            attributes:[
-              // ...state.products[productID] && state.products[productID].attributes,
-              ...action.params.attributes
-            ]
+            ...product,
+            ...action.params,
+            attributes:attributes
           }
         }
       };

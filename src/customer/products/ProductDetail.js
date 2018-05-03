@@ -12,6 +12,10 @@ import IconFactory from "components/IconFactory";
 import AttributesList from "customer/products/components/AttributesList";
 import AttributeDialog from "customer/products/components/AttributeDialog";
 import {ACTIONS as PRODUCT_ACTIONS} from "customer/common/actions";
+import {SELECTORS as CART_SELECTORS} from "../selectors/cart";
+import {ACTION_TYPES} from "../common/actions";
+import {Schema} from "../../utils/schema";
+import {normalize} from 'normalizr';
 
 class ProductDetail extends Component {
 
@@ -37,10 +41,24 @@ class ProductDetail extends Component {
     attributeIDs: []
   };
 
+  static getDerivedStateFromProps(nextProps,prevStates) {
+
+    if(nextProps.cart.products[1]) {
+      if(nextProps.cart.products[1].attributes !== prevStates.attributes) {
+        return {
+          attributeIDs:nextProps.cart.products[1].attributes
+        }
+      }
+    }
+
+    return null;
+  }
+
   componentDidMount() {
     this.props.navigation.setParams({
       handleRightButtonPress: this.loadCartScene,
     });
+
   }
 
   loadCartScene = () => {
@@ -125,7 +143,7 @@ class ProductDetail extends Component {
     return (
       <ScrollView style={{flex: 1}} contentContainerStyle={{paddingBottom: 50}}>
 
-        <ProductImages images={product.images}/>
+        {/*<ProductImages images={product.images}/>*/}
 
         <View style={{paddingHorizontal: 10}}>
 
@@ -170,50 +188,11 @@ class ProductDetail extends Component {
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state,props) {
+  const getCartProduct = CART_SELECTORS.getCartProduct();
   return {
     cart:state.customer.cart,
-    product: {
-      id: 1,
-      category: {
-        id: 1,
-        name: 'samsung',
-      },
-      title: 'Offer 1',
-      description: 'Offer Description Offer Description  Offer Description Offer Description Offer Description Offer Description Offer Description',
-      offer_percentage: 50,
-      offer_percentage_formatted: '50%',
-      price_old: 60,
-      price_old_formatted: '60 KD',
-      price: 30,
-      price_formatted: '30 KD',
-      show_attributes: true,
-      time_remaining_formatted: '10:00:00 hrs',
-      images: [
-        'http://ibooky.test/uploads/dental-clinic1.jpg',
-        'http://ibooky.test/uploads/dental-clinic2.jpg',
-        'http://ibooky.test/uploads/dental-clinic3.jpg',
-        'http://ibooky.test/uploads/dental-clinic4.jpg',
-      ],
-      attributes: [
-        {
-          id: 1, name: 'Color', price: 13, required: false,
-          children: [
-            {id: 2, name: 'Gold', price: 15, parent_id: 1},
-            {id: 3, name: 'Black', price: 12, parent_id: 1},
-            {id: 4, name: 'Silver', price: 12, parent_id: 1},
-            {id: 5, name: 'Red', price: 10, parent_id: 1},
-          ]
-        },
-        {
-          id: 6, name: 'Type', required: true,
-          children: [
-            {id: 7, name: '1050 mAh', parent_id: 6},
-            {id: 8, name: '2680 mAh', parent_id: 6},
-          ],
-        }
-      ],
-    },
+    product: getCartProduct(state,1),
   };
 }
 

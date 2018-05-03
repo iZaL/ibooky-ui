@@ -13,12 +13,15 @@ import {
 } from 'react-native-paper';
 import PropTypes from 'prop-types';
 import I18n from 'utils/locale';
+import colors from "assets/theme/colors";
 
 export default class extends Component {
 
   static propTypes = {
     visible: PropTypes.bool.isRequired,
-    items: PropTypes.array.isRequired,
+    item: PropTypes.shape({
+      children:PropTypes.func.isRequired
+    }),
     save: PropTypes.func.isRequired,
     close: PropTypes.func.isRequired,
     onItemPress:PropTypes.func.isRequired,
@@ -26,15 +29,16 @@ export default class extends Component {
   };
 
   render() {
-    const {visible, close, save, onItemPress, items, activeIDs} = this.props;
+    const {visible, close, save, onItemPress, item, activeIDs} = this.props;
+    console.log('item',item);
     return (
       <Dialog onDismiss={close} visible={visible}>
-        <DialogTitle>Choose an option</DialogTitle>
+        <DialogTitle>{`${I18n.t('select')} `}</DialogTitle>
         <DialogScrollArea style={{maxHeight: 170, paddingHorizontal: 0}}>
           <ScrollView>
             <View>
               {
-                items.map((item,i) => {
+                item.children.map((item,i) => {
                   let activeItem = activeIDs[item.parent_id];
                   return (
                     <TouchableRipple onPress={() => onItemPress(item)} key={i}>
@@ -52,11 +56,11 @@ export default class extends Component {
           </ScrollView>
         </DialogScrollArea>
         <DialogActions>
-          <Button primary onPress={close}>
+          <Button primary onPress={close} color={colors.mediumGrey}>
             {I18n.t('cancel')}
           </Button>
           <Button primary onPress={save}>
-            {I18n.t('ok')}
+            {I18n.t('confirm')}
           </Button>
         </DialogActions>
       </Dialog>

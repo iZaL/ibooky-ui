@@ -14,15 +14,19 @@ export default class extends Component {
   static propTypes = {
     items: CategoriesProp.isRequired,
     onItemPress: PropTypes.func.isRequired,
+    activeIDs:PropTypes.shape({
+      parent_id:PropTypes.number,
+      child_id:PropTypes.number,
+    })
   };
 
   renderRow = ({item}) => {
-    let {onItemPress, activeChildrenIDs} = this.props;
+    let {onItemPress, activeIDs} = this.props;
 
     let selectedChild = {};
 
-    if(activeChildrenIDs[item.id]) {
-      selectedChild = item.children.find(child => child.id === activeChildrenIDs[item.id].child_id);
+    if(activeIDs[item.id]) {
+      selectedChild = item.children.find(child => child.id === activeIDs[item.id].child_id);
     }
 
     return (

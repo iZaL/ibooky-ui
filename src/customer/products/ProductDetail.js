@@ -95,7 +95,7 @@ class ProductDetail extends Component {
     }));
 
     this.hideAttributesListDialog();
-    this.loadCartScene();
+    // this.loadCartScene();
   };
 
   onAttributesListDialogSavePress = () => {
@@ -122,8 +122,10 @@ class ProductDetail extends Component {
 
 
   render() {
-    let {product} = this.props;
+    let {product,cart} = this.props;
     let {attributesListDialogVisible, attributeIDs, activeParentID} = this.state;
+
+    console.log('cart',cart);
 
     // let attribute_list_items = [];
     // if (activeParentID) {
@@ -184,6 +186,7 @@ class ProductDetail extends Component {
 
 function mapStateToProps(state) {
   return {
+    cart:state.customer.cart,
     product: {
       id: 1,
       category: {

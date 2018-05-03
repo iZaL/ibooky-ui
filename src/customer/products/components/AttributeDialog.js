@@ -23,7 +23,6 @@ export default class extends Component {
       children:PropTypes.array.isRequired
     }),
     save: PropTypes.func.isRequired,
-    close: PropTypes.func.isRequired,
     onItemPress:PropTypes.func.isRequired,
     activeIDs:PropTypes.array
   };

@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {ACTIONS} from 'guest/common/actions';
 import {NavigationActions} from 'react-navigation';
-import {Alert, View, Text, TouchableHighlight} from 'react-native';
+import {Text} from 'react-native';
 import I18n from 'utils/locale';
 import FormContainer from 'components/FormContainer';
 import FormContent from 'components/FormContent';
@@ -12,7 +12,6 @@ import FormTextInput from 'components/FormTextInput';
 import Button from 'components/Button';
 import colors from 'assets/theme/colors';
 import Divider from 'components/Divider';
-import BackButton from 'components/BackButton';
 import {Button as PaperButton} from 'react-native-paper';
 
 class Login extends Component {
@@ -112,24 +111,12 @@ class Login extends Component {
     this.props.navigation.dispatch(navigationAction);
   };
 
-  onSkip = () => {
-    this.props.navigation.goBack(null);
-  };
-
   render() {
     const {auth} = this.props;
     const {
       email,
       password,
-      onFieldChange,
-      handleLogin,
-      handleRegisterRoute,
-      handleForgotPasswordRoute,
-      onSkip,
-      busy,
     } = this.state;
-
-    console.log('props', this.props);
 
     return (
       <FormContainer>
@@ -155,23 +142,19 @@ class Login extends Component {
           <Button
             onPress={this.handleLogin}
             disabled={auth.login.busy}
+            primary
+            raised
+            dark
             title={auth.login.busy ? I18n.t('logging_in') : I18n.t('login')}
-            style={[{backgroundColor: colors.primary}, {marginTop: 30}]}
+            style={[{marginTop: 30}]}
           />
 
           <Divider style={{marginTop: 30}} />
 
-          <PaperButton onPress={this.handleRegisterRoute}>
-            <Text style={{textAlign: 'center'}}>
-              {I18n.t('create_account')}
-            </Text>
-          </PaperButton>
+          <Button onPress={this.handleRegisterRoute} title={I18n.t('create_account')} />
 
-          <PaperButton onPress={this.handleForgotPasswordRoute}>
-            <Text style={{textAlign: 'center'}}>
-              {I18n.t('forgot_password')}
-            </Text>
-          </PaperButton>
+          <Button onPress={this.handleForgotPasswordRoute} title={I18n.t('forgot_password')} />
+
         </FormContent>
       </FormContainer>
     );

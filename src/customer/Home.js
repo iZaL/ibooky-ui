@@ -1,16 +1,15 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import {Text, View} from 'react-native';
+import {View} from 'react-native';
 import {connect} from 'react-redux';
 import HomeMenu from 'customer/components/HomeMenu';
-import {CategoriesPropType} from 'customer/common/proptypes';
-import {ACTIONS as CUSTOMER_ACTIONS} from 'customer/common/actions';
 import ProductList from 'customer/products/components/ProductList';
-import Spinner from "components/Spinner";
+import NavButton from "components/NavButton";
+import IconFactory from "components/IconFactory";
+import {ACTIONS as CUSTOMER_ACTIONS} from 'customer/common/actions';
 import {ACTION_TYPES} from "./common/actions";
-import {Schema} from "../utils/schema";
+import {Schema} from "utils/schema";
 import {normalize} from 'normalizr';
-import {SELECTORS as CART_SELECTORS} from "./selectors/cart";
+import {SELECTORS as CART_SELECTORS} from "customer/selectors/cart";
 
 class Home extends Component {
   state = {
@@ -18,7 +17,29 @@ class Home extends Component {
     loading: true
   };
 
+  static navigationOptions = ({navigation}) => {
+    return {
+      headerRight: (
+        <NavButton
+          icon={
+            <IconFactory type="MaterialCommunityIcons" name="cart-outline" color="white" size={26}/>
+          }
+          onPress={() =>
+            navigation.state.params &&
+            navigation.state.params.handleRightButtonPress()
+          }
+        />
+      ),
+    };
+  };
+
+
   componentDidMount() {
+
+    this.props.navigation.setParams({
+      handleRightButtonPress: this.loadCartScene,
+    });
+
     this.props.dispatch(CUSTOMER_ACTIONS.fetchCategories());
 
     setTimeout(() => {
@@ -122,6 +143,11 @@ class Home extends Component {
 
   }
 
+  loadCartScene = () => {
+    alert('wa');
+    this.props.navigation.navigate('Cart');
+  };
+
   onHomeMenuItemPress = (item: object) => {
     this.setState({
       activeMenuItemID: item.id,
@@ -166,7 +192,7 @@ class Home extends Component {
             activeID={this.state.activeMenuItemID}
           />
         </View>
-        <View style={[{flex: 1,}, loading && {opacity: .3}]}>
+        <View style={[{flex: 1}]}>
           <ProductList
             items={products}
             onItemPress={this.onProductListItemPress}

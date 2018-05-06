@@ -34,6 +34,9 @@ export default class ForgotScene extends Component {
           onPress={() => onForgotPassword()}
           title={I18n.t('recover_password')}
           style={{marginTop: 50}}
+          raised
+          primary
+          dark
         />
       </View>
     );

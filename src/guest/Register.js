@@ -114,23 +114,22 @@ class Register extends Component {
           />
 
           <Button
-            onPress={() => this.handleRegister()}
+            onPress={this.handleRegister}
             disabled={busy}
+            raised
+            primary
+            dark
             title={busy ? I18n.t('signing_up') : I18n.t('create_account')}
             style={{marginTop: 50}}
           />
         </FormContent>
 
-        <Touchable onPress={this.onLoginPress}>
-          <Text
-            style={{
-              color: 'white',
-              textAlign: 'center',
-              paddingVertical: 10,
-            }}>
-            {I18n.t('have_an_account')} {I18n.t('login')}
-          </Text>
-        </Touchable>
+        <Button
+          onPress={this.onLoginPress}
+          title={`${I18n.t('have_an_account')} ${I18n.t('login')}`}
+          color='white'
+        />
+
       </FormContainer>
     );
   }

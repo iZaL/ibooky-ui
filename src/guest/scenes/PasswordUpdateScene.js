@@ -42,7 +42,10 @@ export default class PasswordUpdateScene extends Component {
         />
 
         <Button
-          onPress={() => onUpdatePassword()}
+          raised
+          primary
+          dark
+          onPress={onUpdatePassword}
           underlayColor="transparent"
           disabled={!password || !password_confirmation}
           title={I18n.t('confirm')}

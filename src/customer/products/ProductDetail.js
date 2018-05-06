@@ -13,9 +13,6 @@ import AttributesList from "customer/products/components/AttributesList";
 import AttributeDialog from "customer/products/components/AttributeDialog";
 import {ACTIONS as PRODUCT_ACTIONS} from "customer/common/actions";
 import {SELECTORS as CART_SELECTORS} from "../selectors/cart";
-import {ACTION_TYPES} from "../common/actions";
-import {Schema} from "../../utils/schema";
-import {normalize} from 'normalizr';
 
 class ProductDetail extends Component {
 
@@ -143,7 +140,7 @@ class ProductDetail extends Component {
     return (
       <ScrollView style={{flex: 1}} contentContainerStyle={{paddingBottom: 50}}>
 
-        {/*<ProductImages images={product.images}/>*/}
+        <ProductImages images={product.images}/>
 
         <View style={{paddingHorizontal: 10}}>
 

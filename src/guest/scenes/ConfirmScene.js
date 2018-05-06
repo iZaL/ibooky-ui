@@ -35,21 +35,25 @@ export default class ConfirmScene extends Component {
         />
 
         <Button
-          onPress={() => onRecoverPassword()}
+          onPress={onRecoverPassword}
           underlayColor="transparent"
           disabled={!confirmation_code}
           title={I18n.t('confirm')}
           style={{marginTop: 50}}
+          raised
+          primary
+          dark
         />
 
-        <TouchableHighlight
-          onPress={() => onForgotPassword()}
-          style={[{paddingTop: 100}]}
-          underlayColor="transparent">
-          <Text style={[styles.link]}>
-            {I18n.t('resend_confirmation_code')}
-          </Text>
-        </TouchableHighlight>
+        <Button
+          onPress={onForgotPassword}
+          underlayColor="transparent"
+          disabled={!confirmation_code}
+          title={I18n.t('resend_confirmation_code')}
+          style={{marginTop: 50}}
+          color='black'
+        />
+
       </View>
     );
   }

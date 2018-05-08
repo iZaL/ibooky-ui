@@ -6,12 +6,10 @@ import ProductList from 'customer/products/components/ProductList';
 import NavButton from "components/NavButton";
 import IconFactory from "components/IconFactory";
 import {ACTIONS as CUSTOMER_ACTIONS} from 'customer/common/actions';
-import {ACTION_TYPES} from "./common/actions";
-import {Schema} from "utils/schema";
-import {normalize} from 'normalizr';
-import {SELECTORS as CART_SELECTORS} from "customer/selectors/cart";
+import {SELECTORS as CUSTOMER_SELECTORS} from "customer/common/selectors";
 
 class Home extends Component {
+
   state = {
     activeMenuItemID: 1,
     loading: true
@@ -33,118 +31,119 @@ class Home extends Component {
     };
   };
 
-
   componentDidMount() {
 
-    this.props.navigation.setParams({
-      handleRightButtonPress: this.loadCartScene,
-    });
-
-    this.props.dispatch(CUSTOMER_ACTIONS.fetchCategories());
+    this.props.dispatch(CUSTOMER_ACTIONS.fetchCategoriesWithProducts());
 
     setTimeout(() => {
+
       this.setState({
-        loading: false
-      })
+        loading: false,
+      });
+
+      //@todo: setParams doesn't work outside of setTimeout
+      this.props.navigation.setParams({
+        handleRightButtonPress: this.loadCartScene,
+      });
+
     }, 1000);
 
-    let products = [
-      {
-        id: 1,
-        category: {
-          id: 1,
-          name: 'samsung',
-        },
-        title: 'Offer 1',
-        description: 'Offer Description Offer Description  Offer Description Offer Description Offer Description Offer Description Offer Description',
-        offer_percentage: 50,
-        offer_percentage_formatted: '50%',
-        price_old: 60,
-        price_old_formatted: '60 KD',
-        price: 30,
-        price_formatted: '30 KD',
-        show_attributes: true,
-        time_remaining_formatted: '10:00:00 hrs',
-        featured_image: 'http://ibooky.test/uploads/dental-clinic1.jpg',
-        images: [
-          'http://ibooky.test/uploads/dental-clinic1.jpg',
-          'http://ibooky.test/uploads/dental-clinic2.jpg',
-          'http://ibooky.test/uploads/dental-clinic3.jpg',
-          'http://ibooky.test/uploads/dental-clinic4.jpg',
-        ],
-        attributes: [
-          {
-            id: 1, name: 'Color', price: 13, required: false,
-            children: [
-              {id: 2, name: 'Gold', price: 15, parent_id: 1},
-              {id: 3, name: 'Black', price: 12, parent_id: 1},
-              {id: 4, name: 'Silver', price: 12, parent_id: 1},
-              {id: 5, name: 'Red', price: 10, parent_id: 1},
-            ]
-          },
-          {
-            id: 6, name: 'Type', required: true,
-            children: [
-              {id: 7, name: '1050 mAh', parent_id: 6},
-              {id: 8, name: '2680 mAh', parent_id: 6},
-            ],
-          }
-        ],
-      },
-      {
-        id: 2,
-        category: {
-          id: 1,
-          name: 'iphone',
-        },
-        title: 'Offer 1',
-        description: 'Offer Description Offer Description  Offer Description Offer Description Offer Description Offer Description Offer Description',
-        offer_percentage: 50,
-        offer_percentage_formatted: '50%',
-        price_old: 60,
-        price_old_formatted: '60 KD',
-        price: 30,
-        price_formatted: '30 KD',
-        show_attributes: true,
-        time_remaining_formatted: '10:00:00 hrs',
-        featured_image: 'http://ibooky.test/uploads/dental-clinic1.jpg',
-        images: [
-          'http://ibooky.test/uploads/dental-clinic1.jpg',
-          'http://ibooky.test/uploads/dental-clinic2.jpg',
-          'http://ibooky.test/uploads/dental-clinic3.jpg',
-          'http://ibooky.test/uploads/dental-clinic4.jpg',
-        ],
-        attributes: [
-          {
-            id: 1, name: 'Color', price: 13, required: false,
-            children: [
-              {id: 2, name: 'Gold', price: 15, parent_id: 1},
-              {id: 3, name: 'Black', price: 12, parent_id: 1},
-              {id: 4, name: 'Silver', price: 12, parent_id: 1},
-              {id: 5, name: 'Red', price: 10, parent_id: 1},
-            ]
-          },
-          {
-            id: 6, name: 'Type', required: true,
-            children: [
-              {id: 7, name: '1050 mAh', parent_id: 6},
-              {id: 8, name: '2680 mAh', parent_id: 6},
-            ],
-          }
-        ],
-      }
-    ];
+    // let products = [
+    //   {
+    //     id: 1,
+    //     category: {
+    //       id: 1,
+    //       name: 'samsung',
+    //     },
+    //     title: 'Offer 1',
+    //     description: 'Offer Description Offer Description  Offer Description Offer Description Offer Description Offer Description Offer Description',
+    //     offer_percentage: 50,
+    //     offer_percentage_formatted: '50%',
+    //     price_old: 60,
+    //     price_old_formatted: '60 KD',
+    //     price: 30,
+    //     price_formatted: '30 KD',
+    //     show_attributes: true,
+    //     time_remaining_formatted: '10:00:00 hrs',
+    //     featured_image: 'http://ibooky.test/uploads/dental-clinic1.jpg',
+    //     images: [
+    //       'http://ibooky.test/uploads/dental-clinic1.jpg',
+    //       'http://ibooky.test/uploads/dental-clinic2.jpg',
+    //       'http://ibooky.test/uploads/dental-clinic3.jpg',
+    //       'http://ibooky.test/uploads/dental-clinic4.jpg',
+    //     ],
+    //     attributes: [
+    //       {
+    //         id: 1, name: 'Color', price: 13, required: false,
+    //         children: [
+    //           {id: 2, name: 'Gold', price: 15, parent_id: 1},
+    //           {id: 3, name: 'Black', price: 12, parent_id: 1},
+    //           {id: 4, name: 'Silver', price: 12, parent_id: 1},
+    //           {id: 5, name: 'Red', price: 10, parent_id: 1},
+    //         ]
+    //       },
+    //       {
+    //         id: 6, name: 'Type', required: true,
+    //         children: [
+    //           {id: 7, name: '1050 mAh', parent_id: 6},
+    //           {id: 8, name: '2680 mAh', parent_id: 6},
+    //         ],
+    //       }
+    //     ],
+    //   },
+    //   {
+    //     id: 2,
+    //     category: {
+    //       id: 1,
+    //       name: 'iphone',
+    //     },
+    //     title: 'Offer 1',
+    //     description: 'Offer Description Offer Description  Offer Description Offer Description Offer Description Offer Description Offer Description',
+    //     offer_percentage: 50,
+    //     offer_percentage_formatted: '50%',
+    //     price_old: 60,
+    //     price_old_formatted: '60 KD',
+    //     price: 30,
+    //     price_formatted: '30 KD',
+    //     show_attributes: true,
+    //     time_remaining_formatted: '10:00:00 hrs',
+    //     featured_image: 'http://ibooky.test/uploads/dental-clinic1.jpg',
+    //     images: [
+    //       'http://ibooky.test/uploads/dental-clinic1.jpg',
+    //       'http://ibooky.test/uploads/dental-clinic2.jpg',
+    //       'http://ibooky.test/uploads/dental-clinic3.jpg',
+    //       'http://ibooky.test/uploads/dental-clinic4.jpg',
+    //     ],
+    //     attributes: [
+    //       {
+    //         id: 1, name: 'Color', price: 13, required: false,
+    //         children: [
+    //           {id: 2, name: 'Gold', price: 15, parent_id: 1},
+    //           {id: 3, name: 'Black', price: 12, parent_id: 1},
+    //           {id: 4, name: 'Silver', price: 12, parent_id: 1},
+    //           {id: 5, name: 'Red', price: 10, parent_id: 1},
+    //         ]
+    //       },
+    //       {
+    //         id: 6, name: 'Type', required: true,
+    //         children: [
+    //           {id: 7, name: '1050 mAh', parent_id: 6},
+    //           {id: 8, name: '2680 mAh', parent_id: 6},
+    //         ],
+    //       }
+    //     ],
+    //   }
+    // ];
 
-    const normalized = normalize(products, [Schema.products]);
-    this.props.dispatch({
-      type: ACTION_TYPES.FETCH_PRODUCTS_SUCCESS,
-      entities: normalized.entities
-    });
+    // const normalized = normalize(products, [Schema.products]);
+    // this.props.dispatch({
+    //   type: ACTION_TYPES.FETCH_PRODUCTS_SUCCESS,
+    //   entities: normalized.entities
+    // });
 
   }
 
   loadCartScene = () => {
-    alert('wa');
     this.props.navigation.navigate('Cart');
   };
 
@@ -167,8 +166,9 @@ class Home extends Component {
   };
 
   render() {
-    let {categories, products} = this.props;
-    let {loading} = this.state;
+    let {categories} = this.props;
+
+    console.log('categories',categories);
     return (
       <View style={{flex: 1}}>
 
@@ -192,9 +192,10 @@ class Home extends Component {
             activeID={this.state.activeMenuItemID}
           />
         </View>
+
         <View style={[{flex: 1}]}>
           <ProductList
-            items={products}
+            items={categories && categories[0] && categories[0].products || []}
             onItemPress={this.onProductListItemPress}
             onAddToCartPress={this.onAddToCartPress}
           />
@@ -207,13 +208,7 @@ class Home extends Component {
 
 function mapStateToProps(state) {
   return {
-    categories: [
-      {id: 1, name: 'Coupons'},
-      {id: 2, name: 'Samsung'},
-      {id: 3, name: 'Sumo Houseware'},
-      {id: 4, name: 'Tools'},
-    ],
-    products:CART_SELECTORS.getProducts(state),
+    categories: CUSTOMER_SELECTORS.getCategories(state),
   };
 }
 

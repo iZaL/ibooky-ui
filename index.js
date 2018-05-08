@@ -8,7 +8,6 @@ import colors from "./src/assets/theme/colors";
 
 console.disableYellowBox = true;
 
-
 const theme = {
   ...DefaultTheme,
   colors: {

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import NavigatorService from 'components/NavigatorService';
-import {createSwitchNavigator} from 'react-navigation';
+import {createStackNavigator} from 'react-navigation';
 import {Router as GuestRouter} from 'guest/components/Router';
 import {Router as CustomerRouter} from 'customer/components/Router';
 
@@ -27,7 +27,7 @@ export default class Navigator extends Component {
     let {isAuthenticated, userType, logout} = this.props;
     const screen = this.resolveScreenForUser(userType);
 
-    const AppNavigator = createSwitchNavigator(
+    const AppNavigator = createStackNavigator(
       {
         Guest: {screen: GuestRouter},
         // Admin: {screen: AdminRouter},

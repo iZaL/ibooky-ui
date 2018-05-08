@@ -63,7 +63,14 @@ const HomeStack = createStackNavigator(
       screen: Home,
       navigationOptions: ({navigation}) => ({
         ...getDrawerIcon(navigation),
-        title: I18n.t('app_name'),
+      //   headerRight: (
+      //     <NavButton
+      //       icon={
+      //         <IconFactory type="MaterialCommunityIcons" name="cart-outline" color="white" size={26}/>
+      //       }
+      //       onPress={() => navigation.navigate('Cart')}
+      //     />
+      //   ),
       }),
     },
     ProductDetail: {
@@ -78,7 +85,7 @@ const HomeStack = createStackNavigator(
       ...navOptions,
     },
     ...cardStyle,
-    // initialRouteName:'ProductDetail'
+    initialRouteName:'Home'
   },
 );
 
@@ -115,18 +122,7 @@ const DrawerRoutes = {
 export const Router = createDrawerNavigator(
   DrawerRoutes,
   {
-    gesturesEnabled: false,
     contentComponent: props => <Drawer {...props} />,
     drawerWidth: 275,
-  },
-  {
-    navigationOptions: ({navigation}) => ({
-      gesturesEnabled: false,
-      headerTintColor: colors.white,
-      headerStyle: {
-        backgroundColor: colors.primary,
-        borderBottomWidth: 0,
-      },
-    }),
   },
 );

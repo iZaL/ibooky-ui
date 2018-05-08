@@ -18,9 +18,26 @@ function* fetchCategories() {
   }
 }
 
+function* fetchCategoriesWithProducts() {
+  try {
+    const response = yield call(API.fetchCategoriesWithProducts);
+    const normalized = normalize(response.data, [Schema.categories]);
+    yield put({
+      type: ACTION_TYPES.FETCH_CATEGORIES_WITH_PRODUCTS_SUCCESS,
+      entities: normalized.entities,
+    });
+  } catch (error) {
+    yield put({type: ACTION_TYPES.FETCH_CATEGORIES_WITH_PRODUCTS_FAILURE, error});
+  }
+}
+
 // Monitoring Sagas
 function* fetchCategoriesMonitor() {
   yield takeLatest(ACTION_TYPES.FETCH_CATEGORIES_REQUEST, fetchCategories);
 }
 
-export const sagas = all([fork(fetchCategoriesMonitor)]);
+function* fetchCategoriesWithProductsMonitor() {
+  yield takeLatest(ACTION_TYPES.FETCH_CATEGORIES_WITH_PRODUCTS_REQUEST, fetchCategoriesWithProducts);
+}
+
+export const sagas = all([fork(fetchCategoriesMonitor),fork(fetchCategoriesWithProductsMonitor)]);

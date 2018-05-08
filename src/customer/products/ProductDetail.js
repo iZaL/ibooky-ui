@@ -12,7 +12,7 @@ import IconFactory from "components/IconFactory";
 import AttributesList from "customer/products/components/AttributesList";
 import AttributeDialog from "customer/products/components/AttributeDialog";
 import {ACTIONS as PRODUCT_ACTIONS} from "customer/common/actions";
-import {SELECTORS as CART_SELECTORS} from "../selectors/cart";
+import {SELECTORS as CUSTOMER_SELECTORS} from "customer/common/selectors";
 
 class ProductDetail extends Component {
 
@@ -126,8 +126,7 @@ class ProductDetail extends Component {
   render() {
     let {product,cart} = this.props;
     let {attributesListDialogVisible, attributeIDs, activeParentID} = this.state;
-
-    console.log('cart',cart);
+    console.log('this.props.navigation',this.props.navigation.state);
 
     // let attribute_list_items = [];
     // if (activeParentID) {
@@ -186,7 +185,7 @@ class ProductDetail extends Component {
 }
 
 function mapStateToProps(state,props) {
-  const getCartProduct = CART_SELECTORS.getCartProduct();
+  const getCartProduct = CUSTOMER_SELECTORS.getCartProduct();
   return {
     cart:state.customer.cart,
     product: getCartProduct(state,1),

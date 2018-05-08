@@ -15,9 +15,9 @@ export default class extends Component {
     activeID: PropTypes.number.isRequired,
   };
 
-  shouldComponentUpdate(nextProps) {
-    return nextProps.activeID !== this.props.activeID;
-  }
+  // shouldComponentUpdate(nextProps) {
+  //   return nextProps.activeID !== this.props.activeID;
+  // }
 
   state = {
     menuOffset: 0,

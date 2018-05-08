@@ -9,7 +9,7 @@ import CartItem from "customer/cart/components/CartItem";
 import colors from "assets/theme/colors";
 import Button from "components/Button";
 import I18n from 'utils/locale';
-import {SELECTORS as CART_SELECTORS} from "customer/selectors/cart";
+import {SELECTORS as CUSTOMER_SELECTORS} from "customer/common/selectors";
 import {ACTIONS} from "customer/common/actions";
 import {ACTION_TYPES} from "customer/common/actions";
 import {Schema} from "../../utils/schema";
@@ -48,8 +48,7 @@ class Cart extends PureComponent {
     let {
       products,
     } = this.props;
-
-    console.log('products',products);
+    console.log('this.props.navigation',this.props.navigation.state);
 
     if (!products.length) {
       return <CartEmpty/>;
@@ -82,7 +81,7 @@ class Cart extends PureComponent {
 
 function mapStateToProps(state) {
   return {
-    products:CART_SELECTORS.getCartProducts(state),
+    products:CUSTOMER_SELECTORS.getCartProducts(state),
     cartTotal:100,
   };
 }

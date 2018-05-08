@@ -12,6 +12,10 @@ usersSchema.define({
   orders: [ordersSchema],
 });
 
+categoriesSchema.define({
+  products:[productsSchema]
+});
+
 export const Schema = {
   categories: categoriesSchema,
   orders: ordersSchema,

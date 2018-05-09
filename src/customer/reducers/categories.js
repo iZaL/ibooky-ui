@@ -4,7 +4,7 @@ const initialState = {
   isFetching: false,
   nextPage: undefined,
   error: null,
-  activeID: 1,
+  activeCategoryID: 1,
 };
 
 export function reducer(state = initialState, action = {}) {
@@ -27,6 +27,12 @@ export function reducer(state = initialState, action = {}) {
         ...state,
         isFetching: false,
         error: action.error,
+      };
+
+    case ACTION_TYPES.CATEGORY_SET_ITEM:
+      return {
+        ...state,
+        [action.key]: action.value,
       };
     default:
       return state;

@@ -39,11 +39,11 @@ class ProductDetail extends Component {
   };
 
   static getDerivedStateFromProps(nextProps,prevStates) {
-
-    if(nextProps.cart.products[1]) {
-      if(nextProps.cart.products[1].attributes !== prevStates.attributes) {
+    let productID = nextProps.navigation.getParam('productID');
+    if(nextProps.cart.products[productID]) {
+      if(nextProps.cart.products[productID].attributes !== prevStates.attributes) {
         return {
-          attributeIDs:nextProps.cart.products[1].attributes
+          attributeIDs:nextProps.cart.products[productID].attributes
         }
       }
     }
@@ -124,9 +124,9 @@ class ProductDetail extends Component {
   };
 
   render() {
-    let {product,cart} = this.props;
+    let {product} = this.props;
+    console.log('product',product);
     let {attributesListDialogVisible, attributeIDs, activeParentID} = this.state;
-    console.log('this.props.navigation',this.props.navigation.state);
 
     // let attribute_list_items = [];
     // if (activeParentID) {
@@ -139,7 +139,8 @@ class ProductDetail extends Component {
     return (
       <ScrollView style={{flex: 1}} contentContainerStyle={{paddingBottom: 50}}>
 
-        <ProductImages images={product.images}/>
+
+        <ProductImages images={product.images.length ? product.images : [product.image]}/>
 
         <View style={{paddingHorizontal: 10}}>
 
@@ -185,10 +186,11 @@ class ProductDetail extends Component {
 }
 
 function mapStateToProps(state,props) {
-  const getCartProduct = CUSTOMER_SELECTORS.getCartProduct();
+  const getCartProduct = CUSTOMER_SELECTORS.getProduct();
+  const productID = props.navigation.getParam('productID');
   return {
     cart:state.customer.cart,
-    product: getCartProduct(state,1),
+    product: getCartProduct(state,productID),
   };
 }
 

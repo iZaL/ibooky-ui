@@ -3,6 +3,8 @@ export const ACTION_TYPES = {
   CART_SET_ITEM: '@customer/cart/SET_ITEM',
   CART_SET_TOTAL: '@customer/cart/SET_TOTAL',
 
+  CATEGORY_SET_ITEM:'@customer/category/SET_ITEM',
+
   FETCH_CATEGORIES_REQUEST: '@customer/FETCH_CATEGORIES_REQUEST',
   FETCH_CATEGORIES_SUCCESS: '@customer/FETCH_CATEGORIES_SUCCESS',
   FETCH_CATEGORIES_FAILURE: '@customer/FETCH_CATEGORIES_FAILURE',
@@ -36,8 +38,17 @@ function setCartItem(params) {
   };
 }
 
+function setCategoryItem(key, value) {
+  return {
+    type: ACTION_TYPES.CATEGORY_SET_ITEM,
+    key,
+    value,
+  };
+}
+
 export const ACTIONS = {
   fetchCategories,
   fetchCategoriesWithProducts,
   setCartItem,
+  setCategoryItem
 };

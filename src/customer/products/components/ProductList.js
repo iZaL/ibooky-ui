@@ -11,11 +11,15 @@ import ProductInfo from "customer/products/components/ProductInfo";
 import Button from "components/Button";
 import I18n from 'utils/locale';
 
-
 export default class extends Component {
+
   static propTypes = {
     items: CategoriesProp.isRequired,
   };
+
+  shouldComponentUpdate(nextProps) {
+    return nextProps.items !== this.props.items;
+  }
 
   renderRow = ({item}) => {
     let {onItemPress,onAddToCartPress} = this.props;
@@ -24,7 +28,7 @@ export default class extends Component {
         <ProductImages images={item.images}/>
 
         <TouchableRipple
-          onPress={onItemPress}
+          onPress={()=>onItemPress(item)}
           style={styles.itemContainer}
         >
           <ProductInfo item={item}/>
@@ -38,6 +42,7 @@ export default class extends Component {
 
   render() {
     let {items} = this.props;
+
     return (
       <FlatList
         data={items}

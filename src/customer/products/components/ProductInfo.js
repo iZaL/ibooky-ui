@@ -19,7 +19,7 @@ export default class extends Component {
   };
 
   shouldComponentUpdate(nextProps) {
-    return nextProps.activeID !== this.props.activeID;
+    return nextProps.item !== this.props.item;
   }
 
   render() {
@@ -28,17 +28,17 @@ export default class extends Component {
     return (
 
       <View style={styles.container}>
-        <Title>{item.title}</Title>
+        <Title>{item.name}</Title>
         <Subheading>
-          {I18n.t('save')} {item.offer_percentage_formatted}
+          {I18n.t('save')} {item.sale_percentage_formatted}
         </Subheading>
 
         <Divider style={{marginVertical: 10}}/>
 
         <View style={styles.itemInfoContainer}>
           <View style={styles.itemContent}>
-            <Text style={styles.label}>{item.price_old_formatted}</Text>
-            <Text style={styles.value}>{item.price_formatted}</Text>
+            <Text style={styles.label}>{item.price_formatted}</Text>
+            <Text style={styles.value}>{item.sale_price_formatted}</Text>
           </View>
 
           <View style={styles.itemContent}>

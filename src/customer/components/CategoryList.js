@@ -5,7 +5,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {ScrollView, StyleSheet} from 'react-native';
 import colors from 'assets/theme/colors';
-import HomeMenuItem from 'customer/components/HomeMenuItem';
+import CategoryListItem from 'customer/components/CategoryListItem';
 import {CategoriesProp} from 'customer/common/proptypes';
 
 export default class extends Component {
@@ -26,7 +26,7 @@ export default class extends Component {
   renderRow = (item, index) => {
     let {onItemPress, activeID} = this.props;
     return (
-      <HomeMenuItem
+      <CategoryListItem
         key={index}
         item={item}
         onPress={onItemPress}

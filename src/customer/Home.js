@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {View} from 'react-native';
 import {connect} from 'react-redux';
-import HomeMenu from 'customer/components/HomeMenu';
+import CategoryList from 'customer/components/CategoryList';
 import ProductList from 'customer/products/components/ProductList';
 import NavButton from "components/NavButton";
 import IconFactory from "components/IconFactory";
@@ -9,11 +9,6 @@ import {ACTIONS as CUSTOMER_ACTIONS} from 'customer/common/actions';
 import {SELECTORS as CUSTOMER_SELECTORS} from "customer/common/selectors";
 
 class Home extends Component {
-
-  state = {
-    activeMenuItemID: 1,
-    loading: true
-  };
 
   static navigationOptions = ({navigation}) => {
     return {
@@ -32,21 +27,21 @@ class Home extends Component {
   };
 
   componentDidMount() {
-
+    const {categories} = this.props;
     this.props.dispatch(CUSTOMER_ACTIONS.fetchCategoriesWithProducts());
 
     setTimeout(() => {
-
-      this.setState({
-        loading: false,
-      });
-
       //@todo: setParams doesn't work outside of setTimeout
       this.props.navigation.setParams({
         handleRightButtonPress: this.loadCartScene,
       });
-
     }, 1000);
+
+    if (categories.length) {
+      if (!this.props.categoryReducer.activeCategoryID) {
+        this.props.dispatch(CUSTOMER_ACTIONS.setCategoryItem('activeCategoryID', categories[0].id));
+      }
+    }
 
     // let products = [
     //   {
@@ -147,10 +142,8 @@ class Home extends Component {
     this.props.navigation.navigate('Cart');
   };
 
-  onHomeMenuItemPress = (item: object) => {
-    this.setState({
-      activeMenuItemID: item.id,
-    });
+  onCategoryListItemPress = (item: object) => {
+    this.props.dispatch(CUSTOMER_ACTIONS.setCategoryItem('activeCategoryID', item.id));
   };
 
   onProductListItemPress = (item: object) => {
@@ -166,9 +159,17 @@ class Home extends Component {
   };
 
   render() {
-    let {categories} = this.props;
+    let {categories, categoryReducer} = this.props;
+    let {activeCategoryID} = categoryReducer;
 
-    console.log('categories',categories);
+    let activeCategory = activeCategoryID
+      ? categories.find(item => item.id === activeCategoryID)
+      : categories.length
+        ? categories[0]
+        : {
+          id: undefined,
+          products: [],
+        };
     return (
       <View style={{flex: 1}}>
 
@@ -186,20 +187,23 @@ class Home extends Component {
         {/*</View>*/}
 
         <View>
-          <HomeMenu
+          <CategoryList
             items={categories}
-            onItemPress={this.onHomeMenuItemPress}
-            activeID={this.state.activeMenuItemID}
+            onItemPress={this.onCategoryListItemPress}
+            activeID={activeCategoryID}
           />
         </View>
 
-        <View style={[{flex: 1}]}>
-          <ProductList
-            items={categories && categories[0] && categories[0].products || []}
-            onItemPress={this.onProductListItemPress}
-            onAddToCartPress={this.onAddToCartPress}
-          />
-        </View>
+        {activeCategory && activeCategory.products &&
+        activeCategory.products.length && (
+          <View style={[{flex: 1}]}>
+            <ProductList
+              items={activeCategory.products}
+              onItemPress={this.onProductListItemPress}
+              onAddToCartPress={this.onAddToCartPress}
+            />
+          </View>
+        )}
 
       </View>
     );
@@ -209,6 +213,7 @@ class Home extends Component {
 function mapStateToProps(state) {
   return {
     categories: CUSTOMER_SELECTORS.getCategories(state),
+    categoryReducer: state.customer.categories,
   };
 }
 

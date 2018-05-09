@@ -158,6 +158,15 @@ class Home extends Component {
     });
   };
 
+  fetchMore = () => {
+    let {activeCategoryID} = this.props.categoryReducer;
+
+    this.props.dispatch(CUSTOMER_ACTIONS.fetchCategoriesWithProducts({
+      category_id:activeCategoryID
+    }));
+
+  };
+
   render() {
     let {categories, categoryReducer} = this.props;
     let {activeCategoryID} = categoryReducer;
@@ -170,6 +179,7 @@ class Home extends Component {
           id: undefined,
           products: [],
         };
+
     return (
       <View style={{flex: 1}}>
 
@@ -201,6 +211,7 @@ class Home extends Component {
               items={activeCategory.products}
               onItemPress={this.onProductListItemPress}
               onAddToCartPress={this.onAddToCartPress}
+              onEndReached={this.fetchMore}
             />
           </View>
         )}

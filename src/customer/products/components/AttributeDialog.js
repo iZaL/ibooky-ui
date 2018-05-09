@@ -36,7 +36,7 @@ export default class extends Component {
           <ScrollView>
             <View>
               {
-                item.children.map((item,i) => {
+                item && item.children && item.children.map((item,i) => {
                   return (
                     <TouchableRipple onPress={() => onItemPress(item)} key={i}>
                       <View style={styles.row}>

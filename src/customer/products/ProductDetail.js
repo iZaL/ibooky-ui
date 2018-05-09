@@ -52,6 +52,10 @@ class ProductDetail extends Component {
   }
 
   componentDidMount() {
+    this.props.dispatch(PRODUCT_ACTIONS.fetchProductDetails({
+      product_id:this.props.navigation.getParam('productID')
+    }));
+
     this.props.navigation.setParams({
       handleRightButtonPress: this.loadCartScene,
     });
@@ -77,7 +81,7 @@ class ProductDetail extends Component {
 
     let parentAttribute = productAttributes.find(attribute => attribute.id === child.parent_id);
 
-    let childrenIDs = parentAttribute.children.map(child => child.id);
+    let childrenIDs = parentAttribute && parentAttribute.children && parentAttribute.children.map(child => child.id) || [];
 
     let newState = attributeIDs.filter(id => !childrenIDs.includes(id)).concat(child.id);
 
@@ -125,16 +129,8 @@ class ProductDetail extends Component {
 
   render() {
     let {product} = this.props;
-    console.log('product',product);
-    let {attributesListDialogVisible, attributeIDs, activeParentID} = this.state;
 
-    // let attribute_list_items = [];
-    // if (activeParentID) {
-    //   let attribute = product.attributes.find(attribute => attribute.id === activeParentID);
-    //   if (attribute) {
-    //     attribute_list_items = attribute.children || [];
-    //   }
-    // }
+    let {attributesListDialogVisible, attributeIDs, activeParentID} = this.state;
 
     return (
       <ScrollView style={{flex: 1}} contentContainerStyle={{paddingBottom: 50}}>
@@ -153,7 +149,7 @@ class ProductDetail extends Component {
             <View>
 
               <AttributesList
-                items={product.attributes}
+                items={product.attributes || []}
                 onItemPress={this.onAttributesListItemPress}
                 activeIDs={attributeIDs}
               />
@@ -162,7 +158,7 @@ class ProductDetail extends Component {
                 visible={attributesListDialogVisible}
                 save={this.onAttributesListDialogSavePress}
                 onItemPress={this.onAttributeDialogItemPress}
-                item={product.attributes.find(attribute => attribute.id === activeParentID) || {children:[]}}
+                item={product.attributes ? product.attributes.find(attribute => attribute.id === activeParentID) : {children:[]}}
                 activeIDs={attributeIDs}
               />
 

@@ -6,12 +6,24 @@ function fetchCategories() {
   return request({path});
 }
 
+function fetchCategoryDetails(params) {
+  const path = `customer/categories/${params.category_id}/details`;
+  return request({path});
+}
+
 function fetchCategoriesWithProducts() {
   const path = `customer/categories`;
   return request({path});
 }
 
+function fetchProductDetails(params) {
+  const path = `customer/products/${params.product_id}/details`;
+  return request({path});
+}
+
 export const API = {
   fetchCategories,
-  fetchCategoriesWithProducts
+  fetchCategoriesWithProducts,
+  fetchProductDetails,
+  fetchCategoryDetails
 };

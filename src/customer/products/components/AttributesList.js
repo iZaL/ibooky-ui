@@ -26,7 +26,7 @@ export default class extends Component {
           <Text style={styles.name}>{item.name.toUpperCase()}</Text>
           <Text style={styles.value}>
             {
-              item.children.map(child => activeIDs.includes(child.id) ? child.name.toUpperCase() : '')
+              item && item.children && item.children.map(child => activeIDs.includes(child.id) ? child.name.toUpperCase() : '')
             }
             </Text>
         </View>

@@ -5,6 +5,7 @@ const initialState = {
   nextPage: undefined,
   error: null,
   activeCategoryID: 1,
+  products: {}
 };
 
 export function reducer(state = initialState, action = {}) {
@@ -14,7 +15,10 @@ export function reducer(state = initialState, action = {}) {
         ...state,
         isFetching: true,
         error: null,
+        // products:
       };
+
+
     case ACTION_TYPES.FETCH_CATEGORIES_SUCCESS: {
       return {
         ...state,
@@ -34,6 +38,18 @@ export function reducer(state = initialState, action = {}) {
         ...state,
         [action.key]: action.value,
       };
+
+    // case ACTION_TYPES.FETCH_CATEGORIES_WITH_PRODUCTS_SUCCESS:
+    //   return {
+    //     ...state,
+    //     isFetching: true,
+    //     error: null,
+    //     products:{
+    //       ...state.products,
+    //       ...action.products
+    //     }
+    //   };
+
     default:
       return state;
   }

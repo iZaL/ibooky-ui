@@ -41,7 +41,7 @@ export default class extends Component {
   };
 
   render() {
-    let {items} = this.props;
+    let {items,onEndReached} = this.props;
 
     return (
       <FlatList
@@ -52,6 +52,8 @@ export default class extends Component {
         keyExtractor={(item, index) => `${index}`}
         showsVerticalScrollIndicator={false}
         showsHorizontalScrollIndicator={false}
+        onEndReachedThreshold={1}
+        onEndReached={onEndReached}
       />
     );
   }

@@ -9,6 +9,14 @@ export const ACTION_TYPES = {
   FETCH_CATEGORIES_SUCCESS: '@customer/FETCH_CATEGORIES_SUCCESS',
   FETCH_CATEGORIES_FAILURE: '@customer/FETCH_CATEGORIES_FAILURE',
 
+  FETCH_CATEGORY_DETAIL_REQUEST: '@customer/FETCH_CATEGORY_DETAIL_REQUEST',
+  FETCH_CATEGORY_DETAIL_SUCCESS: '@customer/FETCH_CATEGORY_DETAIL_SUCCESS',
+  FETCH_CATEGORY_DETAIL_FAILURE: '@customer/FETCH_CATEGORY_DETAIL_FAILURE',
+
+  FETCH_PRODUCT_DETAIL_REQUEST: '@customer/FETCH_PRODUCT_DETAIL_REQUEST',
+  FETCH_PRODUCT_DETAIL_SUCCESS: '@customer/FETCH_PRODUCT_DETAIL_SUCCESS',
+  FETCH_PRODUCT_DETAIL_FAILURE: '@customer/FETCH_PRODUCT_DETAIL_FAILURE',
+
   FETCH_CATEGORIES_WITH_PRODUCTS_REQUEST: '@customer/FETCH_CATEGORIES_WITH_PRODUCTS_REQUEST',
   FETCH_CATEGORIES_WITH_PRODUCTS_SUCCESS: '@customer/FETCH_CATEGORIES_WITH_PRODUCTS_SUCCESS',
   FETCH_CATEGORIES_WITH_PRODUCTS_FAILURE: '@customer/FETCH_CATEGORIES_WITH_PRODUCTS_FAILURE',
@@ -25,9 +33,24 @@ function fetchCategories() {
   };
 }
 
-function fetchCategoriesWithProducts() {
+function fetchCategoriesWithProducts(params = {}) {
   return {
     type: ACTION_TYPES.FETCH_CATEGORIES_WITH_PRODUCTS_REQUEST,
+    params
+  };
+}
+
+function fetchProductDetails(params) {
+  return {
+    type: ACTION_TYPES.FETCH_PRODUCT_DETAIL_REQUEST,
+    params
+  };
+}
+
+function fetchCategoryDetails(params) {
+  return {
+    type: ACTION_TYPES.FETCH_CATEGORY_DETAIL_REQUEST,
+    params
   };
 }
 
@@ -50,5 +73,7 @@ export const ACTIONS = {
   fetchCategories,
   fetchCategoriesWithProducts,
   setCartItem,
-  setCategoryItem
+  setCategoryItem,
+  fetchProductDetails,
+  fetchCategoryDetails,
 };

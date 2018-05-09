@@ -8,6 +8,7 @@ const productsSchema = state => state.entities.products;
 const categoriesSchema = state => state.entities.categories;
 const getIdProp = (state, id) => id;
 
+
 const getProducts = createSelector(
   [schemas, productsSchema],
   (entities, products) => {
@@ -22,6 +23,22 @@ const getProducts = createSelector(
       })
       || []
       ;
+  },
+);
+
+const getCartProducts = createSelector(
+  [schemas, cartProducts],
+  (entities, products) => {
+    return Object.keys(products)
+      .map(productID => {
+        let cartProduct = products[productID];
+        return {
+          ...denormalize(productID, Schema.products, entities),
+          cart: {
+            ...cartProduct
+          },
+        };
+      });
   },
 );
 
@@ -63,6 +80,7 @@ const getCategories = createSelector(
 
 
 export const SELECTORS = {
+  getCartProducts,
   getProduct,
   getProducts,
   getCategories

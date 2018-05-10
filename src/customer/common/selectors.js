@@ -6,6 +6,7 @@ const cartProducts = state => state.customer.cart.products;
 const schemas = state => state.entities;
 const productsSchema = state => state.entities.products;
 const categoriesSchema = state => state.entities.categories;
+const categoryReducer = state => state.customer.categories;
 const getIdProp = (state, id) => id;
 
 
@@ -78,10 +79,44 @@ const getCategories = createSelector(
   },
 );
 
+const getCategoriesWithProducts = createSelector(
+  [schemas, categoriesSchema,categoryReducer],
+  (entities, categories,reducer) => {
+    return categories && Object.keys(categories).map(id => {
+        return {
+          ...denormalize(id, Schema.categories, entities),
+          products:reducer.activeCategoryID &&  reducer.products[reducer.activeCategoryID] && reducer.products[reducer.activeCategoryID].collection.map(id => {
+            return {
+              ...denormalize(id, Schema.products, entities),
+            };
+          })
+          || []
+
+        };
+      })
+      || []
+      ;
+  },
+);
+
+const getCategoryProducts = createSelector(
+  [schemas,categoryReducer],
+  (entities,reducer) => {
+    return reducer.activeCategoryID &&  reducer.products[reducer.activeCategoryID] && reducer.products[reducer.activeCategoryID].collection.map(id => {
+        return {
+          ...denormalize(id, Schema.products, entities),
+        };
+      })
+      || []
+      ;
+  },
+);
 
 export const SELECTORS = {
   getCartProducts,
   getProduct,
   getProducts,
-  getCategories
+  getCategories,
+  getCategoryProducts,
+  getCategoriesWithProducts,
 };

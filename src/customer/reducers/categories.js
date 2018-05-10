@@ -4,8 +4,14 @@ const initialState = {
   isFetching: false,
   nextPage: undefined,
   error: null,
-  activeCategoryID: 1,
-  products: {}
+  activeCategoryID: null,
+  products: {},
+  // products: {
+  //   [1] : {
+  //     collection:[],
+  //     nextPage:null
+  //   }
+  // }
 };
 
 export function reducer(state = initialState, action = {}) {
@@ -38,18 +44,16 @@ export function reducer(state = initialState, action = {}) {
         ...state,
         [action.key]: action.value,
       };
-
-    // case ACTION_TYPES.FETCH_CATEGORIES_WITH_PRODUCTS_SUCCESS:
-    //   return {
-    //     ...state,
-    //     isFetching: true,
-    //     error: null,
-    //     products:{
-    //       ...state.products,
-    //       ...action.products
-    //     }
-    //   };
-
+    case ACTION_TYPES.FETCH_CATEGORY_DETAIL_SUCCESS:
+      return {
+        ...state,
+        isFetching: true,
+        error: null,
+        products:{
+          ...state.products,
+          ...action.products
+        }
+      };
     default:
       return state;
   }

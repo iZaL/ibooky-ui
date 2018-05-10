@@ -48,7 +48,6 @@ class Cart extends PureComponent {
     let {
       products,
     } = this.props;
-    console.log('this.props.navigation',this.props.navigation.state);
 
     if (!products.length) {
       return <CartEmpty/>;

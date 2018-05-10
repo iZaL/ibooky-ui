@@ -47,7 +47,6 @@ class Register extends Component {
   };
 
   onFieldChange = (field, value) => {
-    console.log('field', field);
     this.setState({[field]: value});
   };
 

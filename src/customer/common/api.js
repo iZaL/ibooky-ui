@@ -8,7 +8,7 @@ function fetchCategories() {
 
 function fetchCategoryDetails(params) {
   const path = `customer/categories/${params.category_id}/details`;
-  return request({path});
+  return request({path,params:params});
 }
 
 function fetchCategoriesWithProducts() {

@@ -4,6 +4,7 @@ import {API} from 'customer/common/api';
 import {Schema} from 'utils/schema';
 import {normalize} from 'normalizr';
 import I18n from 'utils/locale';
+import union from 'lodash/union';
 
 function* fetchCategories() {
   try {
@@ -18,110 +19,70 @@ function* fetchCategories() {
   }
 }
 
-
-// function* fetchUpcomingOrders(action) {
-//   try {
-//     const state = yield select();
-//
-//     const {nextPage} = state.company.upcoming_orders;
-//
-//     if (nextPage === null && !action.params.force) {
-//       yield put({
-//         type: ACTION_TYPES.FETCH_UPCOMING_ORDERS_FAILURE,
-//         error: I18n.t('no_more_records'),
-//       });
-//     } else {
-//       const params = {
-//         paginated: !!nextPage,
-//         paginatedUrl: nextPage,
-//       };
-//
-//       const response = yield call(API.fetchUpcomingOrders, params);
-//
-//       const normalized = normalize(response.data, [Schema.orders]);
-//       const {entities, result} = normalized;
-//
-//       yield put({
-//         type: ACTION_TYPES.FETCH_UPCOMING_ORDERS_SUCCESS,
-//         entities: entities,
-//         result: result,
-//         nextPage: (response.links && response.links.next) || null,
-//       });
-//     }
-//   } catch (error) {
-//     yield put({type: ACTION_TYPES.FETCH_UPCOMING_ORDERS_FAILURE, error});
-//   }
-// }
-
 function* fetchCategoriesWithProducts(action) {
+  const {resolve, reject} = action.params;
   try {
-
-    // const state = yield select();
-    // let nextPage;
-    // if (action.params.categoryID) {
-    //   let {nextPage} = state.customer.categories.products.find(product => product.categoryID === action.params.categoryID);
-    //   if (nextPage === null && !action.params.force) {
-    //     return yield put({
-    //       type: ACTION_TYPES.FETCH_CATEGORIES_WITH_PRODUCTS_FAILURE,
-    //       error: I18n.t('no_more_records'),
-    //     });
-    //   }
-    // }
-    // const params = {
-    //   category_id: action.params.category_id,
-    //   paginated: !!nextPage,
-    //   paginatedUrl: nextPage,
-    // };
-
     const response = yield call(API.fetchCategoriesWithProducts, action.params);
-
-    // const products = response.products[0];
-
-    // let normalizedCategories = [];
-    //
-    // const productCategories = Object.keys(products).map(categoryID => {
-    //
-    //   let productsPaginated = products[categoryID];
-    //
-    //   normalizedCategories = response.categories.map(category => {
-    //     console.log('category',productsPaginated.data);
-    //     return {
-    //         ...category,
-    //         products: productsPaginated.data
-    //       }
-    //     }
-    //   );
-    //
-    //   console.log('normalizedCategories',normalizedCategories);
-    //
-    //   return {
-    //     categoryID: categoryID,
-    //     nextPage: productsPaginated.next_page_url,
-    //     collection: productsPaginated.data.map(product => product.id)
-    //   }
-    // });
-    //
-
     const normalized = normalize(response.categories, [Schema.categories]);
     yield put({
       type: ACTION_TYPES.FETCH_CATEGORIES_WITH_PRODUCTS_SUCCESS,
       entities: normalized.entities,
     });
+    yield resolve(response.categories);
   } catch (error) {
     yield put({type: ACTION_TYPES.FETCH_CATEGORIES_WITH_PRODUCTS_FAILURE, error});
+    yield reject(error);
   }
 }
 
 function* fetchCategoryDetails(action) {
   try {
-    const response = yield call(API.fetchCategoryDetails, action.params);
-    const normalized = normalize(response.data, Schema.categories);
+    const state = yield select();
+    let nextPage = undefined;
+    let categoryReducerInfo = state.customer.categories.products[action.params.category_id];
+    if (categoryReducerInfo) {
+      nextPage = categoryReducerInfo.nextPage;
+    }
+    if (nextPage === null && !action.params.force) {
+      return yield put({
+        type: ACTION_TYPES.FETCH_CATEGORY_DETAIL_FAILURE,
+        error: I18n.t('no_more_records'),
+      });
+    }
+    const params = {
+      category_id: action.params.category_id,
+      paginated: !!nextPage,
+      paginatedUrl: nextPage,
+    };
+    const response = yield call(API.fetchCategoryDetails, params);
+    const products = response.data;
+    const category = response.category;
+    const productIDs = response.productIDs;
+
+    const normalizedResponse = {
+      ...category,
+      products: products
+    };
+
+    const oldCollection = categoryReducerInfo && categoryReducerInfo.collection || [];
+
+    const productPayload = {
+      [category.id]: {
+        nextPage: response.links.next,
+        collection: union(oldCollection,productIDs)
+      }
+    };
+
+    const normalized = normalize(normalizedResponse, Schema.categories);
     yield put({
       type: ACTION_TYPES.FETCH_CATEGORY_DETAIL_SUCCESS,
       entities: normalized.entities,
+      products: productPayload
     });
-  } catch (error) {
-    yield put({type: ACTION_TYPES.FETCH_PRODUCT_DETAIL_FAILURE, error});
+
+  }
+  catch(error) {
+    yield put({type: ACTION_TYPES.FETCH_CATEGORY_DETAIL_FAILURE, error});
   }
 }
 

@@ -3,10 +3,11 @@
  */
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {ScrollView, StyleSheet} from 'react-native';
+import {ScrollView, StyleSheet, View} from 'react-native';
 import colors from 'assets/theme/colors';
 import CategoryListItem from 'customer/components/CategoryListItem';
 import {CategoriesProp} from 'customer/common/proptypes';
+import ProductList from "../products/components/ProductList";
 
 export default class extends Component {
   static propTypes = {
@@ -24,7 +25,8 @@ export default class extends Component {
   };
 
   renderRow = (item, index) => {
-    let {onItemPress, activeID} = this.props;
+    let {onItemPress, activeID,} = this.props;
+
     return (
       <CategoryListItem
         key={index}

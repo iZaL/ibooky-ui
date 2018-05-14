@@ -5,12 +5,10 @@ import PropTypes from 'prop-types';
 import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {ACTIONS} from './common/actions';
-import {Text, View} from 'react-native';
+import {ACTIONS} from 'guest/common/actions';
 import FormTextInput from 'components/FormTextInput';
 import Button from 'components/Button';
 import I18n from 'utils/locale';
-import Touchable from 'react-native-platform-touchable';
 import FormContainer from 'components/FormContainer';
 import FormContent from 'components/FormContent';
 

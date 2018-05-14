@@ -12,6 +12,10 @@ import Home from 'customer/Home';
 import Settings from 'customer/Settings';
 import ProductDetail from 'customer/products/ProductDetail';
 import Cart from 'customer/cart/Cart';
+import Checkout from 'customer/cart/Checkout';
+import Payment from 'customer/cart/Payment';
+import PastOrdersScene from 'customer/orders/PastOrdersScene';
+import OrderDetailScene from 'customer/orders/OrderDetailScene';
 
 const getDrawerIcon = navigation => {
   return {
@@ -63,29 +67,56 @@ const HomeStack = createStackNavigator(
       screen: Home,
       navigationOptions: ({navigation}) => ({
         ...getDrawerIcon(navigation),
-      //   headerRight: (
-      //     <NavButton
-      //       icon={
-      //         <IconFactory type="MaterialCommunityIcons" name="cart-outline" color="white" size={26}/>
-      //       }
-      //       onPress={() => navigation.navigate('Cart')}
-      //     />
-      //   ),
+        //   headerRight: (
+        //     <NavButton
+        //       icon={
+        //         <IconFactory type="MaterialCommunityIcons" name="cart-outline" color="white" size={26}/>
+        //       }
+        //       onPress={() => navigation.navigate('Cart')}
+        //     />
+        //   ),
       }),
     },
     ProductDetail: {
       screen: ProductDetail,
     },
-    Cart:{
-      screen:Cart
-    }
+    Cart: {
+      screen: Cart,
+    },
+    Checkout: {
+      screen: Checkout,
+    },
+    Payment: {
+      screen: Payment,
+    },
   },
   {
     navigationOptions: {
       ...navOptions,
     },
     ...cardStyle,
-    initialRouteName:'Home'
+    initialRouteName: 'Home',
+  },
+);
+
+const PastOrdersStack = createStackNavigator(
+  {
+    PastOrders: {
+      screen: PastOrdersScene,
+      navigationOptions: ({navigation}) => {
+        return {
+          ...getDrawerIcon(navigation),
+          title: I18n.t('past_orders'),
+        };
+      },
+    },
+    OrderDetail: {screen: OrderDetailScene},
+  },
+  {
+    // initialRouteName:'WorkingOrders'
+    navigationOptions: ({navigation}) => ({
+      ...navOptions,
+    }),
   },
 );
 
@@ -111,6 +142,9 @@ const DrawerRoutes = {
   HomeStack: {
     screen: HomeStack,
   },
+  PastOrdersStack: {
+    screen: PastOrdersStack,
+  },
   SettingStack: {
     screen: SettingStack,
   },
@@ -119,10 +153,8 @@ const DrawerRoutes = {
   },
 };
 
-export const Router = createDrawerNavigator(
-  DrawerRoutes,
-  {
-    contentComponent: props => <Drawer {...props} />,
-    drawerWidth: 275,
-  },
-);
+export const Router = createDrawerNavigator(DrawerRoutes, {
+  contentComponent: props => <Drawer {...props} />,
+  drawerWidth: 275,
+  // initialRouteName: 'PastOrdersStack',
+});

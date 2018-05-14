@@ -148,5 +148,7 @@
 
   "buy_now" : "Buy Now",
   "checkout_proceed" : "Proceed to Checkout",
-  "shopping_continue" : "Continue Shopping"
+  "payment_proceed" : "Proceed to Payment",
+  "shopping_continue" : "Continue Shopping",
+  "checkout_as_guest" : "Checkout as guest"
 }

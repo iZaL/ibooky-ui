@@ -5,16 +5,15 @@ import React, {Component} from 'react';
 import {FlatList, StyleSheet, Text, View} from 'react-native';
 import Divider from 'components/Divider';
 import {CategoriesProp} from 'customer/common/proptypes';
-import {ListItem, TouchableRipple} from "react-native-paper";
+import {ListItem, TouchableRipple} from 'react-native-paper';
 import PropTypes from 'prop-types';
-import colors from "assets/theme/colors";
+import colors from 'assets/theme/colors';
 
 export default class extends Component {
-
   static propTypes = {
     items: CategoriesProp.isRequired,
     onItemPress: PropTypes.func.isRequired,
-    activeIDs:PropTypes.array
+    activeIDs: PropTypes.array,
   };
 
   renderRow = ({item}) => {
@@ -25,10 +24,13 @@ export default class extends Component {
         <View style={styles.itemContainer}>
           <Text style={styles.name}>{item.name.toUpperCase()}</Text>
           <Text style={styles.value}>
-            {
-              item && item.children && item.children.map(child => activeIDs.includes(child.id) ? child.name.toUpperCase() : '')
-            }
-            </Text>
+            {item &&
+              item.children &&
+              item.children.map(
+                child =>
+                  activeIDs.includes(child.id) ? child.name.toUpperCase() : '',
+              )}
+          </Text>
         </View>
       </TouchableRipple>
     );
@@ -41,7 +43,7 @@ export default class extends Component {
         data={items}
         style={styles.listContainer}
         renderItem={this.renderRow}
-        ItemSeparatorComponent={() => <Divider/>}
+        ItemSeparatorComponent={() => <Divider />}
         keyExtractor={(item, index) => `${index}`}
         showsVerticalScrollIndicator={false}
         showsHorizontalScrollIndicator={false}
@@ -62,6 +64,6 @@ const styles = StyleSheet.create({
   value: {
     paddingHorizontal: 10,
     fontWeight: '900',
-    color: colors.primary
-  }
+    color: colors.primary,
+  },
 });

@@ -24,7 +24,6 @@ export function reducer(state = initialState, action = {}) {
         // products:
       };
 
-
     case ACTION_TYPES.FETCH_CATEGORIES_SUCCESS: {
       return {
         ...state,
@@ -49,10 +48,10 @@ export function reducer(state = initialState, action = {}) {
         ...state,
         isFetching: true,
         error: null,
-        products:{
+        products: {
           ...state.products,
-          ...action.products
-        }
+          ...action.products,
+        },
       };
     default:
       return state;

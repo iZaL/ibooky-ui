@@ -2,11 +2,10 @@ import React, {Component} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import I18n from 'utils/locale';
 import colors from 'assets/theme/colors';
-import IconFactory from "components/IconFactory";
-import {Title} from "react-native-paper";
+import IconFactory from 'components/IconFactory';
+import {Title} from 'react-native-paper';
 
 export default class extends Component {
-
   shouldComponentUpdate(nextProps) {
     return false;
   }

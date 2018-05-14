@@ -39,6 +39,14 @@ export default class Drawer extends Component {
         />
 
         <DrawerItem
+          label={I18n.t('past_orders')}
+          routeName="PastOrdersStack"
+          onItemPress={this.onItemPress}
+          iconProps={{name: 'timelapse', type: 'MaterialIcons'}}
+          active={activeRoute === 'PastOrdersStack'}
+        />
+
+        <DrawerItem
           label={I18n.t('settings')}
           routeName="Settings"
           onItemPress={this.onItemPress}

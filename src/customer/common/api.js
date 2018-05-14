@@ -1,4 +1,3 @@
-import isNull from 'lodash/isNull';
 import {request} from 'utils/network';
 
 function fetchCategories() {
@@ -8,7 +7,7 @@ function fetchCategories() {
 
 function fetchCategoryDetails(params) {
   const path = `customer/categories/${params.category_id}/details`;
-  return request({path,params:params});
+  return request({path, params: params});
 }
 
 function fetchCategoriesWithProducts() {
@@ -21,9 +20,33 @@ function fetchProductDetails(params) {
   return request({path});
 }
 
+function fetchOrderDetails(params) {
+  const path = `customer/orders/${params.order_id}/details`;
+  return request({path});
+}
+
+function createOrder(params) {
+  const path = `customer/orders`;
+
+  let requestParams = {
+    path,
+    params,
+    method: 'POST',
+  };
+  return request(requestParams);
+}
+
+function fetchPastOrders(params = {}) {
+  const path = `customer/orders/past`;
+  return request({path, params});
+}
+
 export const API = {
   fetchCategories,
   fetchCategoriesWithProducts,
   fetchProductDetails,
-  fetchCategoryDetails
+  fetchOrderDetails,
+  fetchCategoryDetails,
+  fetchPastOrders,
+  createOrder,
 };

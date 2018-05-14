@@ -15,14 +15,13 @@ import PropTypes from 'prop-types';
 import I18n from 'utils/locale';
 
 export default class extends Component {
-
   static propTypes = {
     visible: PropTypes.bool.isRequired,
     item: PropTypes.object,
     items: PropTypes.array,
     save: PropTypes.func.isRequired,
     onItemPress: PropTypes.func.isRequired,
-    selected: PropTypes.number.isRequired
+    selected: PropTypes.number.isRequired,
   };
 
   render() {
@@ -30,22 +29,22 @@ export default class extends Component {
 
     return (
       <Dialog visible={visible}>
-        <DialogTitle>{`${I18n.t('select')} ${I18n.t('quantity')} `}</DialogTitle>
+        <DialogTitle>{`${I18n.t('select')} ${I18n.t(
+          'quantity',
+        )} `}</DialogTitle>
         <DialogScrollArea style={{maxHeight: 170, paddingHorizontal: 0}}>
           <ScrollView>
             <View>
-              {
-                items.map((item, i) =>
-                  <TouchableRipple onPress={() => onItemPress(item)} key={i}>
-                    <View style={styles.row}>
-                      <View pointerEvents="none">
-                        <RadioButton value="normal" checked={selected === item}/>
-                      </View>
-                      <Subheading style={styles.text}>{item}</Subheading>
+              {items.map((item, i) => (
+                <TouchableRipple onPress={() => onItemPress(item)} key={i}>
+                  <View style={styles.row}>
+                    <View pointerEvents="none">
+                      <RadioButton value="normal" checked={selected === item} />
                     </View>
-                  </TouchableRipple>
-                )
-              }
+                    <Subheading style={styles.text}>{item}</Subheading>
+                  </View>
+                </TouchableRipple>
+              ))}
             </View>
           </ScrollView>
         </DialogScrollArea>

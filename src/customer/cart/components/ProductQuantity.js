@@ -4,37 +4,39 @@
 import React, {Component} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import PropTypes from 'prop-types';
-import {Caption, Subheading} from "react-native-paper";
+import {Caption, Subheading} from 'react-native-paper';
 import I18n from 'utils/locale';
-import colors from "assets/theme/colors";
-import IconFactory from "components/IconFactory";
+import colors from 'assets/theme/colors';
+import IconFactory from 'components/IconFactory';
 import Touchable from 'react-native-platform-touchable';
-import QuantityDialog from "customer/cart/components/QuantityDialog";
+import QuantityDialog from 'customer/cart/components/QuantityDialog';
 
 export default class extends Component {
-
   static propTypes = {
     selected: PropTypes.number,
-    onPress: PropTypes.func.isRequired
+    onPress: PropTypes.func.isRequired,
   };
 
   state = {
-    quantityDialogVisible: false
+    quantityDialogVisible: false,
   };
 
-  shouldComponentUpdate(nextProps,prevState) {
-    return nextProps.selected !== this.props.selected || prevState.quantityDialogVisible !== this.state.quantityDialogVisible;
+  shouldComponentUpdate(nextProps, prevState) {
+    return (
+      nextProps.selected !== this.props.selected ||
+      prevState.quantityDialogVisible !== this.state.quantityDialogVisible
+    );
   }
 
   showQuantityDialog = () => {
     this.setState({
-      quantityDialogVisible: true
+      quantityDialogVisible: true,
     });
   };
 
   hideQuantityDialog = () => {
     this.setState({
-      quantityDialogVisible: false
+      quantityDialogVisible: false,
     });
   };
 
@@ -42,7 +44,7 @@ export default class extends Component {
     this.hideQuantityDialog();
   };
 
-  onQuantityDialogItemPress = (quantity:number) => {
+  onQuantityDialogItemPress = (quantity: number) => {
     this.props.onPress(quantity);
   };
 
@@ -52,13 +54,12 @@ export default class extends Component {
 
     return (
       <View style={styles.container}>
-
         <Subheading style={{flex: 1}}>{I18n.t('quantity')}</Subheading>
 
         <Touchable onPress={this.showQuantityDialog}>
           <View style={styles.selectBox}>
             <Caption style={{color: colors.darkGrey}}>{selected}</Caption>
-            <IconFactory type="MaterialIcons" name="arrow-drop-down"/>
+            <IconFactory type="MaterialIcons" name="arrow-drop-down" />
           </View>
         </Touchable>
 
@@ -67,9 +68,8 @@ export default class extends Component {
           save={this.onQuantityDialogSavePress}
           onItemPress={this.onQuantityDialogItemPress}
           selected={selected}
-          items={[1,2,3]}
+          items={[1, 2, 3]}
         />
-
       </View>
     );
   }
@@ -80,15 +80,15 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    paddingTop: 10
+    paddingTop: 10,
   },
   selectBox: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    borderWidth: .5,
+    borderWidth: 0.5,
     borderColor: colors.darkGrey,
     paddingHorizontal: 5,
-    borderRadius: 5
-  }
+    borderRadius: 5,
+  },
 });

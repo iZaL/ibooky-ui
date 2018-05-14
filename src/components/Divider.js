@@ -8,7 +8,7 @@ class Divider extends Component {
 
   render() {
     let {style, inset} = this.props;
-    return <PaperDivider style={[{marginVertical:10},style]} inset={inset} />;
+    return <PaperDivider style={[{marginVertical: 10}, style]} inset={inset} />;
   }
 }
 

@@ -5,7 +5,8 @@ export function reducer(
     users: {},
     categories: {},
     products: {},
-    attributes:{}
+    attributes: {},
+    orders: {},
   },
   action = {},
 ) {

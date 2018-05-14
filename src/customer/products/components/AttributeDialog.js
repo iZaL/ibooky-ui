@@ -15,15 +15,14 @@ import PropTypes from 'prop-types';
 import I18n from 'utils/locale';
 
 export default class extends Component {
-
   static propTypes = {
     visible: PropTypes.bool.isRequired,
     item: PropTypes.shape({
-      children:PropTypes.array.isRequired
+      children: PropTypes.array.isRequired,
     }),
     save: PropTypes.func.isRequired,
-    onItemPress:PropTypes.func.isRequired,
-    activeIDs:PropTypes.array
+    onItemPress: PropTypes.func.isRequired,
+    activeIDs: PropTypes.array,
   };
 
   render() {
@@ -35,26 +34,29 @@ export default class extends Component {
         <DialogScrollArea style={{maxHeight: 170, paddingHorizontal: 0}}>
           <ScrollView>
             <View>
-              {
-                item && item.children && item.children.map((item,i) => {
+              {item &&
+                item.children &&
+                item.children.map((item, i) => {
                   return (
                     <TouchableRipple onPress={() => onItemPress(item)} key={i}>
                       <View style={styles.row}>
                         <View pointerEvents="none">
-                          <RadioButton value="normal" checked={activeIDs.includes(item.id)} />
+                          <RadioButton
+                            value="normal"
+                            checked={activeIDs.includes(item.id)}
+                          />
                         </View>
                         <Subheading style={styles.text}>{item.name}</Subheading>
                       </View>
                     </TouchableRipple>
-                  )
-                })
-              }
+                  );
+                })}
             </View>
           </ScrollView>
         </DialogScrollArea>
         <DialogActions>
           {/*<Button primary onPress={close} color={colors.mediumGrey}>*/}
-            {/*{I18n.t('cancel')}*/}
+          {/*{I18n.t('cancel')}*/}
           {/*</Button>*/}
           <Button primary onPress={save}>
             {I18n.t('ok')}

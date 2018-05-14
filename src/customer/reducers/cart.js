@@ -20,7 +20,6 @@ const initialState = {
   // total: 100
 };
 
-
 //CART_SET_ITEM
 /**
  * payload
@@ -34,13 +33,12 @@ const initialState = {
 export function reducer(state = initialState, action = {}) {
   switch (action.type) {
     case ACTION_TYPES.CART_SET_ITEM:
-
       let productID = action.params.product_id;
       let product = state.products[productID];
       let attributes = product ? product.attributes : [];
 
-      if(action.params.hasOwnProperty('attributes')) {
-        attributes = attributes.concat(action.params.attributes)
+      if (action.params.hasOwnProperty('attributes')) {
+        attributes = attributes.concat(action.params.attributes);
       }
 
       return {
@@ -50,14 +48,14 @@ export function reducer(state = initialState, action = {}) {
           [productID]: {
             ...product,
             ...action.params,
-            attributes:attributes
-          }
-        }
+            attributes: attributes,
+          },
+        },
       };
     case ACTION_TYPES.CART_SET_TOTAL:
       return {
         ...state,
-        total: action.params.total
+        total: action.params.total,
       };
 
     default:

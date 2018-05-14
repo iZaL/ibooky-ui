@@ -126,9 +126,8 @@ class Register extends Component {
         <Button
           onPress={this.onLoginPress}
           title={`${I18n.t('have_an_account')} ${I18n.t('login')}`}
-          color='white'
+          color="white"
         />
-
       </FormContainer>
     );
   }

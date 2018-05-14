@@ -51,9 +51,8 @@ export default class ConfirmScene extends Component {
           disabled={!confirmation_code}
           title={I18n.t('resend_confirmation_code')}
           style={{marginTop: 50}}
-          color='black'
+          color="black"
         />
-
       </View>
     );
   }

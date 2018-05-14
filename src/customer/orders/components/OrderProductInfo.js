@@ -12,7 +12,7 @@ import Swiper from 'react-native-swiper';
 import I18n from 'utils/locale';
 import IconFactory from 'components/IconFactory';
 import Divider from 'components/Divider';
-import CountdownTimer from './CountdownTimer';
+import CountdownTimer from "../../products/components/CountdownTimer";
 
 export default class extends Component {
   static propTypes = {
@@ -25,31 +25,26 @@ export default class extends Component {
 
   render() {
     let {item, total} = this.props;
-
     return (
       <View style={styles.container}>
         <Title>{item.name}</Title>
-        <Subheading>
-          {I18n.t('save')} {item.sale_percentage_formatted}
-        </Subheading>
 
         <Divider style={{marginVertical: 10}} />
 
         <View style={styles.itemInfoContainer}>
           <View style={styles.itemContent}>
-            <Text style={styles.label}>{item.price_formatted}</Text>
-            <Text style={styles.value}>{item.sale_price_formatted}</Text>
+            <Text style={styles.value}>{total}</Text>
           </View>
 
           <View style={styles.itemContent}>
             <Text style={styles.label}>{I18n.t('time_remaining')}</Text>
+
             <CountdownTimer
               targetDate={new Date(item.bid_end_at)} startDelay={2000}
               interval={1000}
               timeSeparator={':'}
               leadingZero
             />
-            <Text style={styles.value}>{item.time_remaining_formatted}</Text>
           </View>
 
           <IconFactory

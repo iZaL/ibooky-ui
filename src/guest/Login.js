@@ -43,7 +43,6 @@ class Login extends Component {
     let {redirectRoute} = this.props.navigation.state.params || {};
 
     return new Promise((resolve, reject) => {
-
       const credentials = {
         email: this.state.email,
         password: this.state.password,
@@ -51,10 +50,8 @@ class Login extends Component {
 
       this.props.actions.login({credentials, resolve, reject, redirectRoute});
     })
-      .then(user => {
-      })
-      .catch(e => {
-      });
+      .then(user => {})
+      .catch(e => {});
   };
 
   handleRegisterRoute = () => {
@@ -102,10 +99,7 @@ class Login extends Component {
 
   render() {
     const {auth} = this.props;
-    const {
-      email,
-      password,
-    } = this.state;
+    const {email, password} = this.state;
 
     return (
       <FormContainer>
@@ -140,10 +134,15 @@ class Login extends Component {
 
           <Divider style={{marginTop: 30}} />
 
-          <Button onPress={this.handleRegisterRoute} title={I18n.t('create_account')} />
+          <Button
+            onPress={this.handleRegisterRoute}
+            title={I18n.t('create_account')}
+          />
 
-          <Button onPress={this.handleForgotPasswordRoute} title={I18n.t('forgot_password')} />
-
+          <Button
+            onPress={this.handleForgotPasswordRoute}
+            title={I18n.t('forgot_password')}
+          />
         </FormContent>
       </FormContainer>
     );

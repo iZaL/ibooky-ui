@@ -19,7 +19,7 @@ export default class extends Component {
   };
 
   shouldComponentUpdate(nextProps) {
-    return false
+    return false;
   }
 
   render() {
@@ -31,8 +31,7 @@ export default class extends Component {
         autoPlay={false}
         showsButtons={false}
         removeClippedSubviews={false}
-        loop={false}
-      >
+        loop={false}>
         {images.map((image, i) => {
           return (
             <Image

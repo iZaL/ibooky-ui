@@ -11,7 +11,6 @@ import IconFactory from 'components/IconFactory';
 import Divider from 'components/Divider';
 
 export default class extends Component {
-
   static propTypes = {
     item: ProductProp.isRequired,
   };
@@ -25,12 +24,10 @@ export default class extends Component {
 
     return (
       <View style={styles.container}>
-        <Image source={{uri: item.featured_image}} style={styles.image}/>
+        <Image source={{uri: item.featured_image}} style={styles.image} />
         <View style={{flex: 1}}>
           <Title> {item.title}</Title>
-          <Caption
-            style={{paddingHorizontal: 5}}
-          >{item.description}</Caption>
+          <Caption style={{paddingHorizontal: 5}}>{item.description}</Caption>
         </View>
       </View>
     );
@@ -46,6 +43,6 @@ const styles = StyleSheet.create({
   image: {
     height: 75,
     width: 100,
-    borderRadius: 10
+    borderRadius: 10,
   },
 });

@@ -7,7 +7,7 @@ import I18n from 'utils/locale';
 
 function* fetchProductDetails(action) {
   try {
-    const response = yield call(API.fetchProductDetails,action.params);
+    const response = yield call(API.fetchProductDetails, action.params);
     const normalized = normalize(response.data, Schema.products);
     yield put({
       type: ACTION_TYPES.FETCH_PRODUCT_DETAIL_SUCCESS,
@@ -19,7 +19,10 @@ function* fetchProductDetails(action) {
 }
 
 function* fetchProductDetailsMonitor() {
-  yield takeLatest(ACTION_TYPES.FETCH_PRODUCT_DETAIL_REQUEST, fetchProductDetails);
+  yield takeLatest(
+    ACTION_TYPES.FETCH_PRODUCT_DETAIL_REQUEST,
+    fetchProductDetails,
+  );
 }
 
 export const sagas = all([fork(fetchProductDetailsMonitor)]);

@@ -3,19 +3,23 @@ import {View} from 'react-native';
 import {connect} from 'react-redux';
 import CategoryList from 'customer/components/CategoryList';
 import ProductList from 'customer/products/components/ProductList';
-import NavButton from "components/NavButton";
-import IconFactory from "components/IconFactory";
+import NavButton from 'components/NavButton';
+import IconFactory from 'components/IconFactory';
 import {ACTIONS as CUSTOMER_ACTIONS} from 'customer/common/actions';
-import {SELECTORS as CUSTOMER_SELECTORS} from "customer/common/selectors";
+import {SELECTORS as CUSTOMER_SELECTORS} from 'customer/common/selectors';
 
 class Home extends Component {
-
   static navigationOptions = ({navigation}) => {
     return {
       headerRight: (
         <NavButton
           icon={
-            <IconFactory type="MaterialCommunityIcons" name="cart-outline" color="white" size={26}/>
+            <IconFactory
+              type="MaterialCommunityIcons"
+              name="cart-outline"
+              color="white"
+              size={26}
+            />
           }
           onPress={() =>
             navigation.state.params &&
@@ -27,22 +31,29 @@ class Home extends Component {
   };
 
   componentDidMount() {
-
     new Promise((resolve, reject) => {
-      this.props.dispatch(CUSTOMER_ACTIONS.fetchCategoriesWithProducts({resolve, reject}));
+      this.props.dispatch(
+        CUSTOMER_ACTIONS.fetchCategoriesWithProducts({resolve, reject}),
+      );
     })
       .then(categories => {
         if (categories[0]) {
+          this.props.dispatch(
+            CUSTOMER_ACTIONS.fetchCategoryDetails({
+              category_id: categories[0].id,
+            }),
+          );
 
-          this.props.dispatch(CUSTOMER_ACTIONS.fetchCategoryDetails({
-            category_id: categories[0].id
-          }));
-
-          this.props.dispatch(CUSTOMER_ACTIONS.setCategoryItem('activeCategoryID', categories[0].id));
+          this.props.dispatch(
+            CUSTOMER_ACTIONS.setCategoryItem(
+              'activeCategoryID',
+              categories[0].id,
+            ),
+          );
         }
       })
       .catch(e => {
-
+        console.log('rekect', e);
       });
 
     setTimeout(() => {
@@ -51,7 +62,6 @@ class Home extends Component {
         handleRightButtonPress: this.loadCartScene,
       });
     }, 1000);
-
   }
 
   loadCartScene = () => {
@@ -59,12 +69,14 @@ class Home extends Component {
   };
 
   onCategoryListItemPress = (item: object) => {
-    this.props.dispatch(CUSTOMER_ACTIONS.setCategoryItem('activeCategoryID', item.id));
-
-    this.props.dispatch(CUSTOMER_ACTIONS.fetchCategoryDetails({
-      category_id: item.id
-    }));
-
+    this.props.dispatch(
+      CUSTOMER_ACTIONS.setCategoryItem('activeCategoryID', item.id),
+    );
+    this.props.dispatch(
+      CUSTOMER_ACTIONS.fetchCategoryDetails({
+        category_id: item.id,
+      }),
+    );
   };
 
   onProductListItemPress = (item: object) => {
@@ -80,10 +92,13 @@ class Home extends Component {
   };
 
   fetchMore = () => {
+    console.log('fetchMore');
     let {activeCategoryID} = this.props.categoryReducer;
-    this.props.dispatch(CUSTOMER_ACTIONS.fetchCategoryDetails({
-      category_id: activeCategoryID
-    }));
+    this.props.dispatch(
+      CUSTOMER_ACTIONS.fetchCategoryDetails({
+        category_id: activeCategoryID,
+      }),
+    );
   };
 
   render() {
@@ -92,8 +107,7 @@ class Home extends Component {
 
     return (
       <View style={{flex: 1}}>
-        {
-          activeCategoryID &&
+        {activeCategoryID && (
           <View>
             <CategoryList
               items={categories}
@@ -108,8 +122,7 @@ class Home extends Component {
               onEndReached={this.fetchMore}
             />
           </View>
-        }
-
+        )}
       </View>
     );
   }

@@ -30,7 +30,10 @@ function* fetchCategoriesWithProducts(action) {
     });
     yield resolve(response.categories);
   } catch (error) {
-    yield put({type: ACTION_TYPES.FETCH_CATEGORIES_WITH_PRODUCTS_FAILURE, error});
+    yield put({
+      type: ACTION_TYPES.FETCH_CATEGORIES_WITH_PRODUCTS_FAILURE,
+      error,
+    });
     yield reject(error);
   }
 }
@@ -39,7 +42,8 @@ function* fetchCategoryDetails(action) {
   try {
     const state = yield select();
     let nextPage = undefined;
-    let categoryReducerInfo = state.customer.categories.products[action.params.category_id];
+    let categoryReducerInfo =
+      state.customer.categories.products[action.params.category_id];
     if (categoryReducerInfo) {
       nextPage = categoryReducerInfo.nextPage;
     }
@@ -61,27 +65,26 @@ function* fetchCategoryDetails(action) {
 
     const normalizedResponse = {
       ...category,
-      products: products
+      products: products,
     };
 
-    const oldCollection = categoryReducerInfo && categoryReducerInfo.collection || [];
+    const oldCollection =
+      (categoryReducerInfo && categoryReducerInfo.collection) || [];
 
     const productPayload = {
       [category.id]: {
         nextPage: response.links.next,
-        collection: union(oldCollection,productIDs)
-      }
+        collection: union(oldCollection, productIDs),
+      },
     };
 
     const normalized = normalize(normalizedResponse, Schema.categories);
     yield put({
       type: ACTION_TYPES.FETCH_CATEGORY_DETAIL_SUCCESS,
       entities: normalized.entities,
-      products: productPayload
+      products: productPayload,
     });
-
-  }
-  catch(error) {
+  } catch (error) {
     yield put({type: ACTION_TYPES.FETCH_CATEGORY_DETAIL_FAILURE, error});
   }
 }
@@ -92,11 +95,21 @@ function* fetchCategoriesMonitor() {
 }
 
 function* fetchCategoriesWithProductsMonitor() {
-  yield takeLatest(ACTION_TYPES.FETCH_CATEGORIES_WITH_PRODUCTS_REQUEST, fetchCategoriesWithProducts);
+  yield takeLatest(
+    ACTION_TYPES.FETCH_CATEGORIES_WITH_PRODUCTS_REQUEST,
+    fetchCategoriesWithProducts,
+  );
 }
 
 function* fetchCategoryDetailsMonitor() {
-  yield takeLatest(ACTION_TYPES.FETCH_CATEGORY_DETAIL_REQUEST, fetchCategoryDetails);
+  yield takeLatest(
+    ACTION_TYPES.FETCH_CATEGORY_DETAIL_REQUEST,
+    fetchCategoryDetails,
+  );
 }
 
-export const sagas = all([fork(fetchCategoriesMonitor), fork(fetchCategoryDetailsMonitor), fork(fetchCategoriesWithProductsMonitor)]);
+export const sagas = all([
+  fork(fetchCategoriesMonitor),
+  fork(fetchCategoryDetailsMonitor),
+  fork(fetchCategoriesWithProductsMonitor),
+]);

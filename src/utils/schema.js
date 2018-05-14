@@ -7,7 +7,7 @@ const usersSchema = new schema.Entity('users');
 
 ordersSchema.define({
   products: [productsSchema],
-  attributes:[attributesSchema],
+  attributes: [attributesSchema],
   product: productsSchema,
 });
 
@@ -20,7 +20,7 @@ categoriesSchema.define({
 });
 
 productsSchema.define({
-  attributes:[attributesSchema]
+  attributes: [attributesSchema],
 });
 
 export const Schema = {

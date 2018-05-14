@@ -12,7 +12,7 @@ import Swiper from 'react-native-swiper';
 import I18n from 'utils/locale';
 import IconFactory from 'components/IconFactory';
 import Divider from 'components/Divider';
-import CountdownTimer from "../../products/components/CountdownTimer";
+import CountdownTimer from '../../products/components/CountdownTimer';
 
 export default class extends Component {
   static propTypes = {
@@ -40,7 +40,8 @@ export default class extends Component {
             <Text style={styles.label}>{I18n.t('time_remaining')}</Text>
 
             <CountdownTimer
-              targetDate={new Date(item.bid_end_at)} startDelay={2000}
+              targetDate={new Date(item.bid_end_at)}
+              startDelay={2000}
               interval={1000}
               timeSeparator={':'}
               leadingZero

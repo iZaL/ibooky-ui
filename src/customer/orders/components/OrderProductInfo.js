@@ -2,17 +2,14 @@
  * @flow
  */
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import {StyleSheet, Text, View, Dimensions} from 'react-native';
-import {Title, TouchableRipple, Subheading} from 'react-native-paper';
+import {Dimensions, StyleSheet, Text, View} from 'react-native';
+import {Title} from 'react-native-paper';
 import colors from 'assets/theme/colors';
 import {CategoryProp} from 'customer/common/proptypes';
-import Image from 'react-native-image-progress';
-import Swiper from 'react-native-swiper';
 import I18n from 'utils/locale';
 import IconFactory from 'components/IconFactory';
 import Divider from 'components/Divider';
-import CountdownTimer from '../../products/components/CountdownTimer';
+import CountdownTimer from 'customer/products/components/CountdownTimer';
 
 export default class extends Component {
   static propTypes = {

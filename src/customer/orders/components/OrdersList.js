@@ -1,17 +1,11 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {FlatList, StyleSheet, Text, View} from 'react-native';
-import Touchable from 'react-native-platform-touchable';
+import {FlatList, StyleSheet, View} from 'react-native';
 import colors from 'assets/theme/colors';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import I18n from 'utils/locale';
-import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import Divider from 'components/Divider';
-import ProductList from '../../products/components/ProductList';
-import ProductImages from '../../products/components/ProductImages';
+import ProductImages from 'customer/products/components/ProductImages';
 import {TouchableRipple} from 'react-native-paper';
-import ProductInfo from '../../cart/components/ProductInfo';
-import OrderProductInfo from './OrderProductInfo';
+import OrderProductInfo from 'customer/orders/components/OrderProductInfo';
 
 export default class OrdersList extends Component {
   static propTypes = {

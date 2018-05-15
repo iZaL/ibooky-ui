@@ -150,5 +150,10 @@
   "checkout_proceed" : "Proceed to Checkout",
   "payment_proceed" : "Proceed to Payment",
   "shopping_continue" : "Continue Shopping",
-  "checkout_as_guest" : "Checkout as guest"
+  "checkout_as_guest" : "Checkout as guest",
+  "order_success" : "Order has been confirmed",
+  "payment_success" : "Payment Success",
+  "payment_failed" : "Payment Failed",
+  "order_failed" : "Order failed",
+  "qr_code" : "QR Code"
 }

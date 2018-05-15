@@ -22,6 +22,7 @@ export default class CountdownTimer extends Component {
     interval: 1000,
     startDelay: 0,
     format: {
+      day: true,
       hour: 'HH',
       minute: 'MM',
       second: 'SS',
@@ -60,6 +61,7 @@ export default class CountdownTimer extends Component {
 
   calculateRemainingTime = () => {
     return -1 * moment().diff(this.props.targetDate);
+    // return -1 * moment().diff(this.props.targetDate);
   };
 
   addLeadingZero = value => {
@@ -96,11 +98,15 @@ export default class CountdownTimer extends Component {
       if (leadingZero) {
         days = this.addLeadingZero(days);
       }
-      html.push(
-        <Text className="react-cntdwn-day" key="day">
-          {days}
-        </Text>,
-      );
+
+      if (days !== '00') {
+        html.push(
+          <Text className="react-cntdwn-day" key="day">
+            {days}
+            {timeSeparator}
+          </Text>,
+        );
+      }
     }
 
     if (format.hour) {

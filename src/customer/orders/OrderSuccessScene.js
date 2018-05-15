@@ -6,16 +6,10 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {SELECTORS as ORDER_SELECTORS} from 'customer/common/selectors';
 import {ScrollView, View} from 'react-native';
-import OrderItems from 'customer/orders/components/OrderItems';
-import OrderBasicInfo from 'customer/orders/components/OrderBasicInfo';
-import OrderTotal from 'customer/orders/components/OrderTotal';
 import {bindActionCreators} from 'redux';
 import {ACTIONS} from 'customer/common/actions';
-import SectionHeading from 'components/SectionHeading';
-import I18n from 'utils/locale';
-import Button from 'components/Button';
 
-class OrderDetailScene extends Component {
+class OrderSuccessScene extends Component {
   static propTypes = {
     navigation: PropTypes.shape({
       state: PropTypes.shape({
@@ -26,10 +20,13 @@ class OrderDetailScene extends Component {
     }),
   };
 
+  static defaultProps = {
+    orderID: 0,
+  };
+
   componentDidMount() {
     this.props.actions.fetchOrderDetails({
-      order_id: 10,
-      // order_id: this.props.navigation.getParam('orderID'),
+      order_id: this.props.navigation.getParam('orderID'),
     });
   }
 
@@ -47,22 +44,25 @@ class OrderDetailScene extends Component {
           <ScrollView
             style={{flex: 1}}
             contentContainerStyle={{paddingBottom: 30}}>
-            <OrderBasicInfo item={order}/>
-            <OrderItems order={order}/>
-            <OrderTotal total={order.total}/>
+            {/*<OrderBasicInfo item={order} />*/}
+            {/*<OrderItems order={order} />*/}
+            {/*<OrderTotal total={order.total} />*/}
 
-
-            <View>
-              <SectionHeading title={I18n.t('qr_code')}/>
-
-              {/*<Button*/}
-                {/*onPress={this.trackOrder}*/}
-                {/*primary*/}
-                {/*raised*/}
-                {/*dark*/}
-                {/*title={I18n.t('track')}*/}
-              {/*/>*/}
-            </View>
+            {/*{order.job &&*/}
+            {/*order.job.driver &&*/}
+            {/*order.job.driver.user && (*/}
+            {/*<View>*/}
+            {/*<SectionHeading title={I18n.t('driver_info')} />*/}
+            {/*<DriverInfo driver={order.job.driver} />*/}
+            {/*<Button*/}
+            {/*onPress={this.trackOrder}*/}
+            {/*primary*/}
+            {/*raised*/}
+            {/*dark*/}
+            {/*title={I18n.t('track')}*/}
+            {/*/>*/}
+            {/*</View>*/}
+            {/*)}*/}
           </ScrollView>
         )}
       </View>
@@ -79,15 +79,13 @@ function mapDispatchToProps(dispatch) {
 const makeMapStateToProps = () => {
   const getOrderByID = ORDER_SELECTORS.getOrderByID();
   const mapStateToProps = (state, props) => {
-    const orderID = 10;
-    // const orderID = props.navigation.state.params.orderID;
     return {
-      order: getOrderByID(state, orderID),
+      order: getOrderByID(state, props.navigation.state.params.orderID),
     };
   };
   return mapStateToProps;
 };
 
 export default connect(makeMapStateToProps, mapDispatchToProps)(
-  OrderDetailScene,
+  OrderSuccessScene,
 );

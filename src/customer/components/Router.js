@@ -89,13 +89,14 @@ const HomeStack = createStackNavigator(
     Payment: {
       screen: Payment,
     },
+    OrderDetail: {screen: OrderDetailScene},
   },
   {
     navigationOptions: {
       ...navOptions,
     },
     ...cardStyle,
-    initialRouteName: 'Home',
+    initialRouteName: 'Payment',
   },
 );
 

@@ -13,7 +13,7 @@ import {bindActionCreators} from 'redux';
 import {ACTIONS} from 'customer/common/actions';
 import SectionHeading from 'components/SectionHeading';
 import I18n from 'utils/locale';
-import Button from 'components/Button';
+import QRCode from "react-native-qrcode-svg";
 
 class OrderDetailScene extends Component {
   static propTypes = {
@@ -28,8 +28,8 @@ class OrderDetailScene extends Component {
 
   componentDidMount() {
     this.props.actions.fetchOrderDetails({
-      order_id: 10,
-      // order_id: this.props.navigation.getParam('orderID'),
+      // order_id: 10,
+      order_id: this.props.navigation.getParam('orderID'),
     });
   }
 
@@ -41,6 +41,7 @@ class OrderDetailScene extends Component {
 
   render() {
     let {order} = this.props;
+    console.log('orderID',this.props.navigation.getParam('orderID'));
     return (
       <View style={{flex: 1}}>
         {order && (
@@ -51,17 +52,15 @@ class OrderDetailScene extends Component {
             <OrderItems order={order}/>
             <OrderTotal total={order.total}/>
 
-
             <View>
               <SectionHeading title={I18n.t('qr_code')}/>
 
-              {/*<Button*/}
-                {/*onPress={this.trackOrder}*/}
-                {/*primary*/}
-                {/*raised*/}
-                {/*dark*/}
-                {/*title={I18n.t('track')}*/}
-              {/*/>*/}
+              <View style={{alignItems: 'center', padding: 20,}}>
+                <QRCode
+                  value={`${this.props.order.id}`}
+                />
+              </View>
+
             </View>
           </ScrollView>
         )}
@@ -79,8 +78,8 @@ function mapDispatchToProps(dispatch) {
 const makeMapStateToProps = () => {
   const getOrderByID = ORDER_SELECTORS.getOrderByID();
   const mapStateToProps = (state, props) => {
-    const orderID = 10;
-    // const orderID = props.navigation.state.params.orderID;
+    // const orderID = 10;
+    const orderID = props.navigation.state.params.orderID;
     return {
       order: getOrderByID(state, orderID),
     };

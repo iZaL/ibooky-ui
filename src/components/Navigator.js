@@ -3,6 +3,7 @@ import NavigatorService from 'components/NavigatorService';
 import {createStackNavigator} from 'react-navigation';
 import {Router as GuestRouter} from 'guest/components/Router';
 import {Router as CustomerRouter} from 'customer/components/Router';
+import {Router as CompanyRouter} from 'company/components/Router';
 
 export default class Navigator extends Component {
   shouldComponentUpdate(nextProps) {
@@ -15,7 +16,7 @@ export default class Navigator extends Component {
   resolveScreenForUser = userType => {
     switch (userType) {
       case 10:
-        return 'Driver';
+        return 'Company';
       case 100:
         return 'Admin';
       default:
@@ -33,6 +34,7 @@ export default class Navigator extends Component {
         // Admin: {screen: AdminRouter},
         // Driver: {screen: DriverRouter},
         Customer: {screen: CustomerRouter},
+        Company: {screen: CompanyRouter},
       },
       {
         headerMode: 'none',

@@ -5,6 +5,13 @@ const attributesSchema = new schema.Entity('attributes');
 const ordersSchema = new schema.Entity('orders');
 const usersSchema = new schema.Entity('users');
 
+// const profileSchema = new schema.Union(
+//   {
+//     companies: companiesSchema,
+//   },
+//   input => input.schema,
+// );
+
 ordersSchema.define({
   products: [productsSchema],
   attributes: [attributesSchema],

@@ -38,6 +38,8 @@ export default class extends Component {
             <Text style={styles.value}>{item.sale_price_formatted}</Text>
           </View>
 
+          {
+            !item.bid_expired &&
           <View style={styles.itemContent}>
             <Text style={styles.label}>{I18n.t('time_remaining')}</Text>
             <CountdownTimer
@@ -49,6 +51,7 @@ export default class extends Component {
             />
             <Text style={styles.value}>{item.time_remaining_formatted}</Text>
           </View>
+          }
 
           <IconFactory
             type="MaterialCommunityIcons"

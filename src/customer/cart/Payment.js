@@ -28,14 +28,14 @@ class Payment extends Component {
   };
 
   state = {
-    scene:'success',
+    scene:'payment',
   };
 
   componentDidMount() {
     this.props.dispatch(
       ACTIONS.fetchOrderDetails({
-        order_id: 10,
-        // order_id: this.props.navigation.getParam('orderID'),
+        // order_id: 10,
+        order_id: this.props.navigation.getParam('orderID'),
       }),
     );
 
@@ -111,8 +111,8 @@ class Payment extends Component {
 }
 
 function mapStateToProps(state, props) {
-  // const orderID = props.navigation.getParam('orderID');
-  const orderID = 10;
+  const orderID = props.navigation.getParam('orderID');
+  // const orderID = 10;
   const getOrderByID = CUSTOMER_SELECTORS.getOrderByID();
   return {
     user: USER_SELECTORS.getAuthUser(state),

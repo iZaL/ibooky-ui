@@ -25,9 +25,9 @@ const getDrawerIcon = navigation => {
 
 const navOptions = {
   gesturesEnabled: false,
-  headerTintColor: colors.white,
+  headerTintColor: colors.primary,
   headerStyle: {
-    backgroundColor: colors.primary,
+    backgroundColor: colors.white,
     borderBottomWidth: 0,
   },
 };
@@ -96,7 +96,7 @@ const HomeStack = createStackNavigator(
       ...navOptions,
     },
     ...cardStyle,
-    initialRouteName: 'Payment',
+    // initialRouteName: 'Payment',
   },
 );
 

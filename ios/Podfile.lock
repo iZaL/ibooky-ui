@@ -36,6 +36,14 @@ PODS:
     - GoogleMaps/Base
   - React (0.55.2):
     - React/Core (= 0.55.2)
+  - react-native-camera (1.1.2):
+    - React
+    - react-native-camera/RCT (= 1.1.2)
+    - react-native-camera/RN (= 1.1.2)
+  - react-native-camera/RCT (1.1.2):
+    - React
+  - react-native-camera/RN (1.1.2):
+    - React
   - react-native-google-maps (0.21.0):
     - Google-Maps-iOS-Utils (= 2.1.0)
     - GoogleMaps (= 2.5.0)
@@ -72,6 +80,8 @@ PODS:
     - React/RCTBlob
   - RNI18n (2.0.12):
     - React
+  - RNSVG (6.3.1):
+    - React
   - RNVectorIcons (4.6.0):
     - React
   - yoga (0.55.2.React)
@@ -79,6 +89,7 @@ PODS:
 DEPENDENCIES:
   - CodePush (from `../node_modules/react-native-code-push`)
   - GoogleMaps
+  - react-native-camera (from `../node_modules/react-native-camera`)
   - react-native-google-maps (from `../node_modules/react-native-maps`)
   - react-native-maps (from `../node_modules/react-native-maps`)
   - React/Core (from `../node_modules/react-native`)
@@ -93,6 +104,7 @@ DEPENDENCIES:
   - React/RCTVibration (from `../node_modules/react-native`)
   - React/RCTWebSocket (from `../node_modules/react-native`)
   - RNI18n (from `../node_modules/react-native-i18n`)
+  - RNSVG (from `../node_modules/react-native-svg`)
   - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
   - yoga (from `../node_modules/react-native/ReactCommon/yoga/yoga.podspec`)
 
@@ -101,12 +113,16 @@ EXTERNAL SOURCES:
     :path: ../node_modules/react-native-code-push
   React:
     :path: ../node_modules/react-native
+  react-native-camera:
+    :path: ../node_modules/react-native-camera
   react-native-google-maps:
     :path: ../node_modules/react-native-maps
   react-native-maps:
     :path: ../node_modules/react-native-maps
   RNI18n:
     :path: ../node_modules/react-native-i18n
+  RNSVG:
+    :path: ../node_modules/react-native-svg
   RNVectorIcons:
     :path: ../node_modules/react-native-vector-icons
   yoga:
@@ -117,12 +133,14 @@ SPEC CHECKSUMS:
   Google-Maps-iOS-Utils: c32891ff472eaaa1fca032beedafa1a013af7875
   GoogleMaps: c087b8e5dfe87ca6ebf59adb9b4894a4146bec4f
   React: 35618ff86985ccc5a8a17d3ca0dd76fd47e0c690
+  react-native-camera: ab22041dcf0403d88f2ae4b9ea3ed2644e680423
   react-native-google-maps: 2cfe3b01f8422c7dae51d8764139fd70f888cfce
   react-native-maps: 066c2afcc89e18726377bcc685315f989ca22449
   RNI18n: db9be06a40336f04d136f24dd5de3f5eb9f3207c
+  RNSVG: 6252323c0312735f0af5f58b5adf2965b6a9ffbf
   RNVectorIcons: c0dbfbf6068fefa240c37b0f71bd03b45dddac44
   yoga: a23273df0088bf7f2bb7e5d7b00044ea57a2a54a
 
-PODFILE CHECKSUM: e08dbd393e3e987263c82d6f87c0530e4b45efdc
+PODFILE CHECKSUM: c8b0c7075a313ef1d05049c6c1d929bc73c81722
 
 COCOAPODS: 1.4.0

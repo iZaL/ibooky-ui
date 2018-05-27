@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View} from 'react-native';
+import {Text, View} from 'react-native';
 import {connect} from 'react-redux';
 import CategoryList from 'customer/components/CategoryList';
 import ProductList from 'customer/products/components/ProductList';
@@ -7,10 +7,12 @@ import NavButton from 'components/NavButton';
 import IconFactory from 'components/IconFactory';
 import {ACTIONS as CUSTOMER_ACTIONS} from 'customer/common/actions';
 import {SELECTORS as CUSTOMER_SELECTORS} from 'customer/common/selectors';
+import {Title} from "react-native-paper";
 
 class Home extends Component {
   static navigationOptions = ({navigation}) => {
     return {
+      title:<Text style={{color:'black'}}>iBooky</Text>,
       headerRight: (
         <NavButton
           icon={

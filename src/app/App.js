@@ -62,7 +62,7 @@ class App extends Component {
 
     return (
       <View style={{flex: 1, backgroundColor: colors.primary}}>
-        <StatusBar barStyle="light-content" backgroundColor={colors.primary} />
+        <StatusBar barStyle="dark-content" backgroundColor={colors.primary} />
 
         <Notification
           {...notifications}

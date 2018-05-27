@@ -102,7 +102,6 @@ class Login extends Component {
     const {email, password} = this.state;
 
     return (
-      <FormContainer>
         <FormContent>
           <FormTextInput
             onValueChange={this.onFieldChange}
@@ -144,7 +143,6 @@ class Login extends Component {
             title={I18n.t('forgot_password')}
           />
         </FormContent>
-      </FormContainer>
     );
   }
 }

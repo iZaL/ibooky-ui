@@ -11,6 +11,7 @@ import Button from 'components/Button';
 import I18n from 'utils/locale';
 import FormContainer from 'components/FormContainer';
 import FormContent from 'components/FormContent';
+import {View} from "react-native";
 
 type State = {
   name: string,
@@ -64,7 +65,7 @@ class Register extends Component {
     } = this.state;
 
     return (
-      <FormContainer>
+      <View>
         <FormContent>
           <FormTextInput
             onValueChange={this.onFieldChange}
@@ -126,7 +127,7 @@ class Register extends Component {
           title={`${I18n.t('have_an_account')} ${I18n.t('login')}`}
           color="white"
         />
-      </FormContainer>
+      </View>
     );
   }
 }

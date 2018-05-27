@@ -12,23 +12,23 @@ import {Title} from "react-native-paper";
 class Home extends Component {
   static navigationOptions = ({navigation}) => {
     return {
-      title:<Text style={{color:'black'}}>iBooky</Text>,
-      headerRight: (
-        <NavButton
-          icon={
-            <IconFactory
-              type="MaterialCommunityIcons"
-              name="cart-outline"
-              color="white"
-              size={26}
-            />
-          }
-          onPress={() =>
-            navigation.state.params &&
-            navigation.state.params.handleRightButtonPress()
-          }
-        />
-      ),
+      headerTitle:<Text style={{color:'black'}}>iBooky</Text>,
+      // headerRight: (
+      //   <NavButton
+      //     icon={
+      //       <IconFactory
+      //         type="MaterialCommunityIcons"
+      //         name="cart-outline"
+      //         color="white"
+      //         size={26}
+      //       />
+      //     }
+      //     onPress={() =>
+      //       navigation.state.params &&
+      //       navigation.state.params.handleRightButtonPress()
+      //     }
+      //   />
+      // ),
     };
   };
 
@@ -58,12 +58,12 @@ class Home extends Component {
         console.log('rekect', e);
       });
 
-    setTimeout(() => {
-      //@todo: setParams doesn't work outside of setTimeout
-      this.props.navigation.setParams({
-        handleRightButtonPress: this.loadCartScene,
-      });
-    }, 1000);
+    // setTimeout(() => {
+    //   //@todo: setParams doesn't work outside of setTimeout
+    //   this.props.navigation.setParams({
+    //     handleRightButtonPress: this.loadCartScene,
+    //   });
+    // }, 1000);
   }
 
   loadCartScene = () => {

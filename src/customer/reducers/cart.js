@@ -32,8 +32,7 @@ const initialState = {
 export function reducer(state = initialState, action = {}) {
   switch (action.type) {
     case ACTION_TYPES.CART_SET_ITEM:
-
-      let {product_id,quantity,total} = action.params;
+      let {product_id, quantity, total} = action.params;
 
       let product = state.products[product_id];
       let attributes = product ? product.attributes : [];
@@ -43,8 +42,11 @@ export function reducer(state = initialState, action = {}) {
       }
 
       let cartTotal = Object.keys(state.products)
-        .filter(id => id != product_id)
-        .map(prodID => state.products[prodID].total * state.products[prodID].quantity)
+        .filter(id => id != product_id) //@bug: do not use strict comparison
+        .map(
+          prodID =>
+            state.products[prodID].total * state.products[prodID].quantity,
+        )
         .reduce((acc, val) => acc + val, 0);
 
       return {
@@ -57,7 +59,7 @@ export function reducer(state = initialState, action = {}) {
             attributes: attributes,
           },
         },
-        total: cartTotal + (total * quantity)
+        total: cartTotal + total * quantity,
       };
     case ACTION_TYPES.CART_SET_TOTAL:
       return {

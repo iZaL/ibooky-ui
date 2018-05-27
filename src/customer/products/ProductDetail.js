@@ -132,19 +132,21 @@ class ProductDetail extends Component {
   };
 
   setCartItem = () => {
-    let {product,cart} = this.props;
+    let {product, cart} = this.props;
     let {attributeIDs} = this.state;
 
-    let cartProduct = Object.keys(cart.products).map(productID => cart.products[productID]).find(prod => prod.product_id === product.id);
+    let cartProduct = Object.keys(cart.products)
+      .map(productID => cart.products[productID])
+      .find(prod => prod.product_id === product.id);
 
-    console.log('cartProduct',cartProduct);
+    console.log('cartProduct', cartProduct);
 
     this.props.dispatch(
       PRODUCT_ACTIONS.setCartItem({
         product_id: product.id,
         attributes: attributeIDs,
         total: product.price,
-        quantity:cartProduct ? cartProduct.quantity + 1 : 1
+        quantity: cartProduct ? cartProduct.quantity + 1 : 1,
       }),
     );
 

@@ -21,14 +21,13 @@ export default class extends Component {
 
   render() {
     let {item} = this.props;
-    console.log('item', item);
 
     return (
       <View style={styles.container}>
         <Image source={{uri: item.image}} style={styles.image} />
-        <View style={{flex: 1}}>
+        <View style={{flex: 1, paddingHorizontal: 10}}>
           <Title>{item.name}</Title>
-          <Caption style={{paddingHorizontal: 5}}>{item.description}</Caption>
+          <Caption>{item.description}</Caption>
         </View>
       </View>
     );

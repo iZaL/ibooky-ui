@@ -82,6 +82,13 @@ function setCartItem(params) {
   };
 }
 
+function setCartTotal(total) {
+  return {
+    type: ACTION_TYPES.CART_SET_TOTAL,
+    total: total,
+  };
+}
+
 function createOrder(params) {
   return {
     type: ACTION_TYPES.CREATE_ORDER_REQUEST,
@@ -114,6 +121,7 @@ export const ACTIONS = {
   fetchCategories,
   fetchCategoriesWithProducts,
   setCartItem,
+  setCartTotal,
   createOrder,
   setCategoryItem,
   fetchProductDetails,

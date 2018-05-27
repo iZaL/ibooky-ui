@@ -12,7 +12,7 @@ const rootReducer = combineReducers({
   notifications,
   user,
   customer,
-  company
+  company,
 });
 
 export default rootReducer;

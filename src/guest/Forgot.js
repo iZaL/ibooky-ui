@@ -96,9 +96,7 @@ class Forgot extends Component {
       );
     }
 
-    return (
-        <FormContent>{renderingComponent}</FormContent>
-    );
+    return <FormContent>{renderingComponent}</FormContent>;
   }
 }
 

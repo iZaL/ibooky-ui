@@ -7,12 +7,12 @@ import NavButton from 'components/NavButton';
 import IconFactory from 'components/IconFactory';
 import {ACTIONS as CUSTOMER_ACTIONS} from 'customer/common/actions';
 import {SELECTORS as CUSTOMER_SELECTORS} from 'customer/common/selectors';
-import {Title} from "react-native-paper";
+import {Title} from 'react-native-paper';
 
 class Home extends Component {
   static navigationOptions = ({navigation}) => {
     return {
-      headerTitle:<Text style={{color:'black'}}>iBooky</Text>,
+      headerTitle: <Text style={{color: 'black'}}>iBooky</Text>,
       // headerRight: (
       //   <NavButton
       //     icon={
@@ -84,12 +84,14 @@ class Home extends Component {
   onProductListItemPress = (item: object) => {
     this.props.navigation.navigate('ProductDetail', {
       productID: item.id,
+      headerTitle: item.name,
     });
   };
 
   onAddToCartPress = (item: object) => {
     this.props.navigation.navigate('ProductDetail', {
       productID: item.id,
+      headerTitle: item.name,
     });
   };
 

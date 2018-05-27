@@ -5,7 +5,7 @@ import {sagas as COMPANY_SAGA} from 'company/sagas';
 import {all} from 'redux-saga/effects';
 
 const rootSaga = function* rootSaga() {
-  yield all([APP_SAGA, AUTH_SAGA, CUSTOMER_SAGA,COMPANY_SAGA]);
+  yield all([APP_SAGA, AUTH_SAGA, CUSTOMER_SAGA, COMPANY_SAGA]);
 };
 
 export default rootSaga;

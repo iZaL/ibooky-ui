@@ -31,33 +31,28 @@ const OrderBasicInfo = ({item, onPress, style}) => {
 
         <View style={styles.content}>
           <Text style={styles.label}>{I18n.t('date')}</Text>
-          <Text style={styles.value}>
-            {item.date}
-          </Text>
+          <Text style={styles.value}>{item.date}</Text>
         </View>
 
         <Divider style={{marginVertical: 5}} />
 
         {/*<View style={styles.content}>*/}
-          {/*<Text style={styles.label}>{I18n.t('address')}</Text>*/}
+        {/*<Text style={styles.label}>{I18n.t('address')}</Text>*/}
 
-          {/*<AddressInfo*/}
-            {/*address={item.address}*/}
-            {/*style={{flex: 1, textAlign: 'right'}}*/}
-          {/*/>*/}
+        {/*<AddressInfo*/}
+        {/*address={item.address}*/}
+        {/*style={{flex: 1, textAlign: 'right'}}*/}
+        {/*/>*/}
         {/*</View>*/}
 
-
         {/*<View style={styles.content}>*/}
-          {/*<Text style={styles.label}>{I18n.t('payment_mode')}</Text>*/}
-          {/*<Text style={[styles.value]}>{item.payment_mode}</Text>*/}
+        {/*<Text style={styles.label}>{I18n.t('payment_mode')}</Text>*/}
+        {/*<Text style={[styles.value]}>{item.payment_mode}</Text>*/}
         {/*</View>*/}
 
         <View style={styles.content}>
           <Text style={styles.label}>{I18n.t('order_status')}</Text>
-          <Text style={[styles.value]}>
-            {item.status}
-          </Text>
+          <Text style={[styles.value]}>{item.status}</Text>
         </View>
       </View>
     </View>

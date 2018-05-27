@@ -40,7 +40,7 @@ export default class extends Component {
 
         <Divider style={{marginVertical: 5}} />
 
-        <CartTotal total={item.cart.total} />
+        <CartTotal total={item.cart.total} hideTitle={true} />
       </View>
     );
   }

@@ -25,7 +25,7 @@ export default class OrderItems extends Component {
         {products.map((product, index) => (
           <View style={styles.itemContainer} key={product.id}>
             {/*<Text style={styles.categoryTitle}>*/}
-              {/*{product.category.name}*/}
+            {/*{product.category.name}*/}
             {/*</Text>*/}
 
             <View style={styles.packageItemContainer}>
@@ -45,7 +45,9 @@ export default class OrderItems extends Component {
                       <Divider style={{marginVertical: 10}} />
 
                       <View style={styles.serviceListContainer}>
-                        <Text style={styles.packageTitle}>{attribute.name} </Text>
+                        <Text style={styles.packageTitle}>
+                          {attribute.name}{' '}
+                        </Text>
                         <Text style={styles.packagePrice}>
                           {attribute.price} KD
                         </Text>

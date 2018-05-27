@@ -102,47 +102,47 @@ class Login extends Component {
     const {email, password} = this.state;
 
     return (
-        <FormContent>
-          <FormTextInput
-            onValueChange={this.onFieldChange}
-            value={email}
-            field="email"
-            maxLength={40}
-            label={I18n.t('email')}
-            keyboardType="email-address"
-          />
+      <FormContent>
+        <FormTextInput
+          onValueChange={this.onFieldChange}
+          value={email}
+          field="email"
+          maxLength={40}
+          label={I18n.t('email')}
+          keyboardType="email-address"
+        />
 
-          <FormTextInput
-            onValueChange={this.onFieldChange}
-            value={password}
-            field="password"
-            maxLength={40}
-            label={I18n.t('password')}
-            secureTextEntry={true}
-          />
+        <FormTextInput
+          onValueChange={this.onFieldChange}
+          value={password}
+          field="password"
+          maxLength={40}
+          label={I18n.t('password')}
+          secureTextEntry={true}
+        />
 
-          <Button
-            onPress={this.handleLogin}
-            disabled={auth.login.busy}
-            primary
-            raised
-            dark
-            title={auth.login.busy ? I18n.t('logging_in') : I18n.t('login')}
-            style={[{marginTop: 30}]}
-          />
+        <Button
+          onPress={this.handleLogin}
+          disabled={auth.login.busy}
+          primary
+          raised
+          dark
+          title={auth.login.busy ? I18n.t('logging_in') : I18n.t('login')}
+          style={[{marginTop: 30}]}
+        />
 
-          <Divider style={{marginTop: 30}} />
+        <Divider style={{marginTop: 30}} />
 
-          <Button
-            onPress={this.handleRegisterRoute}
-            title={I18n.t('create_account')}
-          />
+        <Button
+          onPress={this.handleRegisterRoute}
+          title={I18n.t('create_account')}
+        />
 
-          <Button
-            onPress={this.handleForgotPasswordRoute}
-            title={I18n.t('forgot_password')}
-          />
-        </FormContent>
+        <Button
+          onPress={this.handleForgotPasswordRoute}
+          title={I18n.t('forgot_password')}
+        />
+      </FormContent>
     );
   }
 }

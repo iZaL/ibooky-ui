@@ -17,14 +17,19 @@ export default class extends Component {
     return nextProps.total !== this.props.total;
   }
 
+  static defaultProps = {
+    hideTitle: false,
+  };
+
   render() {
-    let {total} = this.props;
+    let {total, style, hideTitle} = this.props;
 
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, style]}>
         <Subheading style={{flex: 1, color: colors.primary, fontSize: 17}}>
-          {I18n.t('total')}
+          {hideTitle ? '' : I18n.t('total')}
         </Subheading>
+
         <Caption
           style={{color: colors.primary, fontWeight: '500', fontSize: 17}}>
           {total} KD

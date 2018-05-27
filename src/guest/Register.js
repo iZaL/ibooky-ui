@@ -11,7 +11,7 @@ import Button from 'components/Button';
 import I18n from 'utils/locale';
 import FormContainer from 'components/FormContainer';
 import FormContent from 'components/FormContent';
-import {View} from "react-native";
+import {View} from 'react-native';
 
 type State = {
   name: string,

@@ -76,7 +76,6 @@ class Home extends PureComponent {
             onRefresh={this._onRefresh.bind(this)}
           />
         }>
-
         <SectionHeading
           title={I18n.t('upcoming_orders')}
           buttonTitle={I18n.t('view_all')}

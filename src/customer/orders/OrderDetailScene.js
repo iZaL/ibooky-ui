@@ -13,7 +13,7 @@ import {bindActionCreators} from 'redux';
 import {ACTIONS} from 'customer/common/actions';
 import SectionHeading from 'components/SectionHeading';
 import I18n from 'utils/locale';
-import QRCode from "react-native-qrcode-svg";
+import QRCode from 'react-native-qrcode-svg';
 
 class OrderDetailScene extends Component {
   static propTypes = {
@@ -41,26 +41,23 @@ class OrderDetailScene extends Component {
 
   render() {
     let {order} = this.props;
-    console.log('orderID',this.props.navigation.getParam('orderID'));
+    console.log('orderID', this.props.navigation.getParam('orderID'));
     return (
       <View style={{flex: 1}}>
         {order && (
           <ScrollView
             style={{flex: 1}}
             contentContainerStyle={{paddingBottom: 30}}>
-            <OrderBasicInfo item={order}/>
-            <OrderItems order={order}/>
-            <OrderTotal total={order.total}/>
+            <OrderBasicInfo item={order} />
+            <OrderItems order={order} />
+            <OrderTotal total={order.total} />
 
             <View>
-              <SectionHeading title={I18n.t('qr_code')}/>
+              <SectionHeading title={I18n.t('qr_code')} />
 
-              <View style={{alignItems: 'center', padding: 20,}}>
-                <QRCode
-                  value={`${this.props.order.id}`}
-                />
+              <View style={{alignItems: 'center', padding: 20}}>
+                <QRCode value={`${this.props.order.id}`} />
               </View>
-
             </View>
           </ScrollView>
         )}

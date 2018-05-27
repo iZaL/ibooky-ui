@@ -15,9 +15,7 @@ import Register from 'guest/Register';
 
 const getDrawerIcon = navigation => {
   return {
-    headerLeft: (
-      <DrawerIcon onPress={() => navigation.openDrawer()} />
-    ),
+    headerLeft: <DrawerIcon onPress={() => navigation.openDrawer()} />,
   };
 };
 
@@ -51,7 +49,7 @@ const HomeStack = createStackNavigator(
         title: I18n.t('upcoming_orders'),
       }),
     },
-     },
+  },
   {
     // initialRouteName:'TrackDetail',
     navigationOptions: ({navigation}) => ({

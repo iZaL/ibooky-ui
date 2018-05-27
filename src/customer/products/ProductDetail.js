@@ -13,17 +13,19 @@ import AttributesList from 'customer/products/components/AttributesList';
 import AttributeDialog from 'customer/products/components/AttributeDialog';
 import {ACTIONS as PRODUCT_ACTIONS} from 'customer/common/actions';
 import {SELECTORS as CUSTOMER_SELECTORS} from 'customer/common/selectors';
+import colors from '../../assets/theme/colors';
 
 class ProductDetail extends Component {
   static navigationOptions = ({navigation}) => {
     return {
+      headerTitle: navigation.getParam('headerTitle').toUpperCase(),
       headerRight: (
         <NavButton
           icon={
             <IconFactory
               type="MaterialCommunityIcons"
               name="cart-outline"
-              color="white"
+              color={colors.primary}
               size={26}
             />
           }
@@ -76,7 +78,7 @@ class ProductDetail extends Component {
   onAttributesListItemPress = (item: object) => {
     this.setState(
       {
-        activeParentID: item.id || [],
+        activeParentID: item.id || null,
       },
       () => {
         this.showAttributesListDialog();
@@ -130,13 +132,19 @@ class ProductDetail extends Component {
   };
 
   setCartItem = () => {
-    let {product} = this.props;
+    let {product,cart} = this.props;
     let {attributeIDs} = this.state;
+
+    let cartProduct = Object.keys(cart.products).map(productID => cart.products[productID]).find(prod => prod.product_id === product.id);
+
+    console.log('cartProduct',cartProduct);
 
     this.props.dispatch(
       PRODUCT_ACTIONS.setCartItem({
         product_id: product.id,
         attributes: attributeIDs,
+        total: product.price,
+        quantity:cartProduct ? cartProduct.quantity + 1 : 1
       }),
     );
 

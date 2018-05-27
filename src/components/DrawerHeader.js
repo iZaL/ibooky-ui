@@ -22,12 +22,12 @@ export default class DrawerHeader extends Component {
   }
 
   static defaultProps = {
-    user:{}
+    user: {},
   };
 
   render() {
     let {user} = this.props;
-    console.log('user',user);
+    console.log('user', user);
     return (
       <View style={styles.container}>
         <Title style={{color: colors.fadedWhite}}>{user.name}</Title>

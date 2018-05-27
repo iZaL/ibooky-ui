@@ -3,7 +3,10 @@
  */
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {ACTIONS as DRIVER_ACTIONS, ACTIONS as ORDER_ACTIONS,} from 'company/common/actions';
+import {
+  ACTIONS as DRIVER_ACTIONS,
+  ACTIONS as ORDER_ACTIONS,
+} from 'company/common/actions';
 import {SELECTORS as ORDER_SELECTORS} from 'company/common/selectors';
 import {ScrollView} from 'react-native';
 import OrderItems from 'customer/orders/components/OrderItems';

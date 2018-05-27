@@ -57,7 +57,6 @@ export default class Drawer extends Component {
           active={activeRoute === 'QRScan'}
         />
 
-
         <DrawerItem
           label={I18n.t('upcoming_orders')}
           routeName="UpcomingOrdersStack"

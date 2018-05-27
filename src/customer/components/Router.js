@@ -79,6 +79,9 @@ const HomeStack = createStackNavigator(
     },
     ProductDetail: {
       screen: ProductDetail,
+      // navigationOptions:({navigation})=>({
+      //   headerTitle:'Product'
+      // })
     },
     Cart: {
       screen: Cart,

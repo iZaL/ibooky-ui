@@ -13,6 +13,7 @@ import {SELECTORS as CUSTOMER_SELECTORS} from 'customer/common/selectors';
 import {ACTIONS} from 'customer/common/actions';
 import {SELECTORS as USER_SELECTORS} from 'guest/common/selectors';
 import Dialog from 'components/Dialog';
+import CartTotal from './components/CartTotal';
 
 type State = {
   loginDialogVisible: boolean,
@@ -53,7 +54,6 @@ class Cart extends PureComponent {
       this.props.dispatch(ACTIONS.createOrder({item, resolve, reject}));
     })
       .then(res => {
-        console.log('res', res);
         this.props.navigation.navigate('Checkout', {
           orderID: res.id,
         });
@@ -82,6 +82,7 @@ class Cart extends PureComponent {
       ACTIONS.setCartItem({
         product_id: product.id,
         quantity: quantity,
+        total: product.price,
       }),
     );
   };
@@ -93,7 +94,7 @@ class Cart extends PureComponent {
   };
 
   render() {
-    let {products} = this.props;
+    let {products, cart} = this.props;
 
     if (!products.length) {
       return <CartEmpty />;
@@ -112,6 +113,11 @@ class Cart extends PureComponent {
             />
           );
         })}
+
+        <CartTotal
+          total={cart.total}
+          style={{backgroundColor: 'white', padding: 10}}
+        />
 
         <Button
           primary

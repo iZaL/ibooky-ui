@@ -3,14 +3,17 @@
  */
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {ACTIONS as DRIVER_ACTIONS, ACTIONS as ORDER_ACTIONS,} from 'company/common/actions';
+import {
+  ACTIONS as DRIVER_ACTIONS,
+  ACTIONS as ORDER_ACTIONS,
+} from 'company/common/actions';
 import {SELECTORS as ORDER_SELECTORS} from 'company/common/selectors';
 import {ScrollView, View} from 'react-native';
 import OrderItems from 'customer/orders/components/OrderItems';
 import OrderBasicInfo from 'customer/orders/components/OrderBasicInfo';
 import PropTypes from 'prop-types';
 import OrderTotal from 'customer/orders/components/OrderTotal';
-import { RNCamera } from 'react-native-camera';
+import {RNCamera} from 'react-native-camera';
 class QRScan extends Component {
   static propTypes = {
     navigation: PropTypes.shape({
@@ -23,7 +26,7 @@ class QRScan extends Component {
   };
 
   state = {
-    scanResultVisible:false
+    scanResultVisible: false,
   };
 
   componentDidMount() {
@@ -43,11 +46,11 @@ class QRScan extends Component {
     }
   }
 
-  onBarCodeRead = (code) => {
+  onBarCodeRead = code => {
     const orderID = code.data;
 
-    this.props.navigation.navigate('OrderDetail',{
-      orderID:orderID
+    this.props.navigation.navigate('OrderDetail', {
+      orderID: orderID,
     });
 
     // return this.showScanResult();
@@ -55,20 +58,17 @@ class QRScan extends Component {
 
   showScanResult = () => {
     this.setState({
-      scanResultVisible:true
+      scanResultVisible: true,
     });
   };
 
   hideScanResult = () => {
     this.setState({
-      scanResultVisible:false
+      scanResultVisible: false,
     });
   };
 
-
-
   render() {
-
     let {scanResultVisible} = this.state;
 
     return (
@@ -77,7 +77,7 @@ class QRScan extends Component {
           ref={ref => {
             this.camera = ref;
           }}
-          style = {{
+          style={{
             flex: 1,
             // justifyContent: 'flex-end',
             // alignItems: 'center'
@@ -85,7 +85,9 @@ class QRScan extends Component {
           type={RNCamera.Constants.Type.back}
           flashMode={RNCamera.Constants.FlashMode.on}
           permissionDialogTitle={'Permission to use camera'}
-          permissionDialogMessage={'We need your permission to use your camera to scan QR Code'}
+          permissionDialogMessage={
+            'We need your permission to use your camera to scan QR Code'
+          }
           onBarCodeRead={this.onBarCodeRead}
         />
       </View>
@@ -96,8 +98,7 @@ class QRScan extends Component {
 const makeMapStateToProps = () => {
   const getOrderByID = ORDER_SELECTORS.getOrderByID();
   const mapStateToProps = (state, props) => {
-    return {
-    };
+    return {};
   };
   return mapStateToProps;
 };

@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import {Caption, Subheading} from 'react-native-paper';
 import I18n from 'utils/locale';
 import colors from 'assets/theme/colors';
+import Dialog from "../../../components/Dialog";
 
 export default class extends Component {
   static propTypes = {
@@ -34,6 +35,7 @@ export default class extends Component {
           style={{color: colors.primary, fontWeight: '500', fontSize: 17}}>
           {total} KD
         </Caption>
+
       </View>
     );
   }

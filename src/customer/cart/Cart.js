@@ -13,7 +13,7 @@ import {SELECTORS as CUSTOMER_SELECTORS} from 'customer/common/selectors';
 import {ACTIONS} from 'customer/common/actions';
 import {SELECTORS as USER_SELECTORS} from 'guest/common/selectors';
 import Dialog from 'components/Dialog';
-import CartTotal from './components/CartTotal';
+import CartTotal from 'customer/cart/components/CartTotal';
 
 type State = {
   loginDialogVisible: boolean,
@@ -93,6 +93,15 @@ class Cart extends PureComponent {
     });
   };
 
+
+  onDeleteCartItem = (item) => {
+    this.props.dispatch(
+      ACTIONS.removeCartItem({
+        product_id: item.id,
+      }),
+    );
+  };
+
   render() {
     let {products, cart} = this.props;
 
@@ -110,6 +119,7 @@ class Cart extends PureComponent {
               key={index}
               item={product}
               setQuantity={this.setQuantity}
+              onDelete={this.onDeleteCartItem}
             />
           );
         })}

@@ -13,7 +13,7 @@ import AttributesList from 'customer/products/components/AttributesList';
 import AttributeDialog from 'customer/products/components/AttributeDialog';
 import {ACTIONS as PRODUCT_ACTIONS} from 'customer/common/actions';
 import {SELECTORS as CUSTOMER_SELECTORS} from 'customer/common/selectors';
-import colors from '../../assets/theme/colors';
+import colors from 'assets/theme/colors';
 
 class ProductDetail extends Component {
   static navigationOptions = ({navigation}) => {

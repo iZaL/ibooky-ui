@@ -2,13 +2,9 @@
  * @flow
  */
 import React, {Component} from 'react';
-import {Dimensions, Image, StyleSheet, Text, View} from 'react-native';
-import {Caption, Paragraph, Subheading, Title} from 'react-native-paper';
-import colors from 'assets/theme/colors';
+import {Image, StyleSheet, View} from 'react-native';
+import {Caption, Title} from 'react-native-paper';
 import {ProductProp} from 'customer/common/proptypes';
-import I18n from 'utils/locale';
-import IconFactory from 'components/IconFactory';
-import Divider from 'components/Divider';
 
 export default class extends Component {
   static propTypes = {

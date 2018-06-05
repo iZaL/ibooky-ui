@@ -66,7 +66,28 @@ export function reducer(state = initialState, action = {}) {
         ...state,
         total: action.total,
       };
+    case ACTION_TYPES.CART_REMOVE_ITEM:
+      let deletingItem = state.products[action.params.product_id];
 
+      // let s = Object.keys(state.products)
+      //   .filter(productID => productID != deletingItem.id)
+      //   .reduce((obj, key) => {
+      //     obj[key] = state.products[key];
+      //     return obj;
+      //   }, {});
+      //
+      // console.log('s',s);
+
+      return {
+        ...state,
+        products:Object.keys(state.products)
+          .filter(productID => productID != action.params.product_id)
+          .reduce((obj, key) => {
+            obj[key] = state.products[key];
+            return obj;
+          }, {}),
+        total:state.total - deletingItem.total
+      };
     default:
       return state;
   }

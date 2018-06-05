@@ -9,24 +9,19 @@ import I18n from 'utils/locale';
 
 function* createOrder(action) {
   const {item, resolve, reject} = action.params;
-
   try {
     const params = {
       body: {
         ...item,
       },
     };
-
     const response = yield call(API.createOrder, params);
-
     const normalized = normalize(response.data, Schema.orders);
-
     yield put({
       type: ACTION_TYPES.CREATE_ORDER_SUCCESS,
       entities: normalized.entities,
       payload: response.data,
     });
-
     yield resolve(response.data);
   } catch (error) {
     yield put({type: ACTION_TYPES.CREATE_ORDER_FAILURE, error});

@@ -27,7 +27,6 @@ function fetchOrderDetails(params) {
 
 function createOrder(params) {
   const path = `customer/orders`;
-
   let requestParams = {
     path,
     params,

@@ -34,28 +34,25 @@ class Payment extends Component {
   componentDidMount() {
     this.props.dispatch(
       ACTIONS.fetchOrderDetails({
-        // order_id: 10,
         order_id: this.props.navigation.getParam('orderID'),
       }),
     );
-
-    let navUrl =
-      'http://ibooky.test/payment/s?ref=205152018014300730&result=SUCCESS&payid=216304&crdtype=KNET&trackid=5afab8b356fa1&amt=24&crd=&hash=34ce6a9a71410d0f18ce59605425d459086608b07fd9bbab4330037c4231862a';
-
-    if (navUrl.includes('result=SUCCESS')) {
-      console.log('result=SUCCESS');
-    }
   }
 
   onNavigationStateChange = navState => {
     const successUrl = `${PAYMENT_ENDPOINT}/success`;
     const failureUrl = `${PAYMENT_ENDPOINT}/failure`;
 
-    console.log('navState', navState);
     if (navState.url.includes('result=SUCCESS')) {
+
       this.setState({
         scene: 'success',
       });
+
+      this.props.dispatch(ACTIONS.paymentSuccess({
+        order_id:this.props.navigation.getParam('orderID')
+      }));
+
     } else if (navState.url === failureUrl) {
       this.setState({
         scene: 'failed',

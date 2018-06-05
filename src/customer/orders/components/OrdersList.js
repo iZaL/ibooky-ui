@@ -34,7 +34,10 @@ export default class OrdersList extends Component {
     let {product} = item;
     return (
       <View style={styles.container}>
-        <ProductImages images={product.images} />
+        {
+          product.images &&
+          <ProductImages images={product.images} />
+        }
 
         <TouchableRipple
           onPress={() => onItemPress(item)}

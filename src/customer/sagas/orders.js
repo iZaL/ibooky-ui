@@ -37,6 +37,33 @@ function* createOrder(action) {
   }
 }
 
+function* setPaymentSuccess(action) {
+  // const {item} = action.params;
+  try {
+    const params = {
+      body: {
+        ...action.params,
+      },
+    };
+    const response = yield call(API.setPaymentSuccess, params);
+    const normalized = normalize(response.data, Schema.orders);
+    yield put({
+      type: ACTION_TYPES.SET_PAYMENT_SUCCESS_SUCCESS,
+      entities: normalized.entities,
+      payload: response.data,
+    });
+  } catch (error) {
+    yield put({type: ACTION_TYPES.SET_PAYMENT_SUCCESS_FAILURE, error});
+
+    // yield put(
+    //   APP_ACTIONS.setNotification({
+    //     message: error,
+    //     type: 'error',
+    //   }),
+    // );
+  }
+}
+
 function* fetchOrderDetails(action) {
   try {
     const response = yield call(API.fetchOrderDetails, action.params);
@@ -93,8 +120,13 @@ function* fetchPastOrdersMonitor() {
   yield takeLatest(ACTION_TYPES.FETCH_PAST_ORDERS_REQUEST, fetchPastOrders);
 }
 
+function* setPaymentSuccessMonitor() {
+  yield takeLatest(ACTION_TYPES.SET_PAYMENT_SUCCESS_REQUEST, setPaymentSuccess);
+}
+
 export const sagas = all([
   fork(createOrderMonitor),
   fork(fetchOrderDetailsMonitor),
   fork(fetchPastOrdersMonitor),
+  fork(setPaymentSuccessMonitor),
 ]);

@@ -38,6 +38,7 @@ class PastOrdersScene extends PureComponent {
   render() {
     const {orders, isFetching} = this.props;
 
+    console.log('orders',orders);
     return (
       <OrdersList
         items={orders}

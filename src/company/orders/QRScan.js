@@ -48,12 +48,9 @@ class QRScan extends Component {
 
   onBarCodeRead = code => {
     const orderID = code.data;
-
     this.props.navigation.navigate('OrderDetail', {
       orderID: orderID,
     });
-
-    // return this.showScanResult();
   };
 
   showScanResult = () => {

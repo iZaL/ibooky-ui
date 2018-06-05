@@ -48,6 +48,10 @@ export const ACTION_TYPES = {
   FETCH_PAST_ORDERS_FAILURE: '@customer/FETCH_PAST_ORDERS_FAILURE',
   FETCH_PAST_ORDERS_REFRESH_REQUEST:
     '@customer/FETCH_PAST_ORDERS_REFRESH_REQUEST',
+
+  SET_PAYMENT_SUCCESS_REQUEST: '@customer/SET_PAYMENT_SUCCESS_REQUEST',
+  SET_PAYMENT_SUCCESS_FAILURE: '@customer/SET_PAYMENT_SUCCESS_FAILURE',
+  SET_PAYMENT_SUCCESS_SUCCESS: '@customer/SET_PAYMENT_SUCCESS_SUCCESS',
 };
 
 function fetchCategories() {
@@ -146,6 +150,13 @@ function checkout(params) {
   };
 }
 
+function paymentSuccess(params) {
+  return {
+    type: ACTION_TYPES.SET_PAYMENT_SUCCESS_REQUEST,
+    params
+  };
+}
+
 
 export const ACTIONS = {
   fetchCategories,
@@ -160,5 +171,6 @@ export const ACTIONS = {
   fetchPastOrdersRefresh,
   fetchCategoryDetails,
   favoriteProduct,
-  checkout
+  checkout,
+  paymentSuccess
 };

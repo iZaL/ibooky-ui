@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Text, View} from 'react-native';
+import {Text, View,InteractionManager} from 'react-native';
 import {connect} from 'react-redux';
 import CategoryList from 'customer/components/CategoryList';
 import ProductList from 'customer/products/components/ProductList';
@@ -63,9 +63,12 @@ class Home extends Component {
 
     setTimeout(() => {
       //@todo: setParams doesn't work outside of setTimeout
-      this.props.navigation.setParams({
-        handleRightButtonPress: this.loadCartScene,
+      InteractionManager.runAfterInteractions(() => {
+        this.props.navigation.setParams({
+          handleRightButtonPress: this.loadCartScene,
+        });
       });
+
     }, 1000);
   }
 

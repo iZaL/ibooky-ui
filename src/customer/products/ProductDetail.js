@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {ScrollView, View} from 'react-native';
+import {ScrollView, View,InteractionManager} from 'react-native';
 import {connect} from 'react-redux';
 import ProductDescription from 'customer/products/components/ProductDescription';
 import ProductImages from 'customer/products/components/ProductImages';
@@ -66,9 +66,15 @@ class ProductDetail extends Component {
       }),
     );
 
-    this.props.navigation.setParams({
-      handleRightButtonPress: this.loadCartScene,
-    });
+    setTimeout(() => {
+      //@todo: setParams doesn't work outside of setTimeout
+      InteractionManager.runAfterInteractions(() => {
+        this.props.navigation.setParams({
+          handleRightButtonPress: this.loadCartScene,
+        });
+      });
+
+    }, 1000);
   }
 
   loadCartScene = () => {

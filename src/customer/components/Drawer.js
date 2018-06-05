@@ -46,16 +46,16 @@ export default class Drawer extends Component {
           active={activeRoute === 'PastOrdersStack'}
         />
 
-        <DrawerItem
-          label={I18n.t('settings')}
-          routeName="Settings"
-          onItemPress={this.onItemPress}
-          iconProps={{
-            name: 'settings',
-            type: 'MaterialCommunityIcons',
-          }}
-          active={activeRoute === 'Settings'}
-        />
+        {/*<DrawerItem*/}
+          {/*label={I18n.t('settings')}*/}
+          {/*routeName="Settings"*/}
+          {/*onItemPress={this.onItemPress}*/}
+          {/*iconProps={{*/}
+            {/*name: 'settings',*/}
+            {/*type: 'MaterialCommunityIcons',*/}
+          {/*}}*/}
+          {/*active={activeRoute === 'Settings'}*/}
+        {/*/>*/}
 
         {isAuthenticated ? (
           <DrawerItem

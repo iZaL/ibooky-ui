@@ -1,7 +1,5 @@
 export const ACTION_TYPES = {
   CART_SET_ITEM: '@customer/cart/SET_ITEM',
-  CART_SET_TOTAL: '@customer/cart/SET_TOTAL',
-
   CART_REMOVE_ITEM:'@customer/cart/REMOVE_ITEM',
 
   CATEGORY_SET_ITEM: '@customer/category/SET_ITEM',
@@ -130,7 +128,6 @@ export const ACTIONS = {
   fetchCategoriesWithProducts,
   setCartItem,
   removeCartItem,
-  setCartTotal,
   createOrder,
   setCategoryItem,
   fetchProductDetails,

@@ -46,7 +46,6 @@ export function reducer(state = initialState, action = {}) {
         .map(
           prodID =>
             state.products[prodID].total,
-            // state.products[prodID].total * state.products[prodID].quantity,
         )
         .reduce((acc, val) => acc + val, 0);
 
@@ -63,11 +62,6 @@ export function reducer(state = initialState, action = {}) {
         },
         total: cartTotal + total * quantity,
       };
-    // case ACTION_TYPES.CART_SET_TOTAL:
-    //   return {
-    //     ...state,
-    //     total: action.total,
-    //   };
     case ACTION_TYPES.CART_REMOVE_ITEM:
       let deletingItem = state.products[action.params.product_id];
       return {

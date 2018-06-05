@@ -75,7 +75,9 @@ class Cart extends PureComponent {
     });
   };
 
-  onShoppingContinuePress = () => {};
+  onShoppingContinuePress = () => {
+    this.props.navigation.navigate('Home');
+  };
 
   setQuantity = (product: object, quantity: number) => {
     this.props.dispatch(

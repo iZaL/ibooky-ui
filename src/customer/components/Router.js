@@ -34,7 +34,7 @@ const navOptions = {
 
 const cardStyle = {
   cardStyle: {
-    backgroundColor: colors.white,
+    backgroundColor: colors.lightGrey,
   },
 };
 
@@ -65,8 +65,8 @@ const HomeStack = createStackNavigator(
   {
     Home: {
       screen: Home,
-      navigationOptions: ({navigation}) => ({
-        ...getDrawerIcon(navigation),
+      // navigationOptions: ({navigation}) => ({
+        // ...getDrawerIcon(navigation),
         //   headerRight: (
         //     <NavButton
         //       icon={
@@ -75,7 +75,7 @@ const HomeStack = createStackNavigator(
         //       onPress={() => navigation.navigate('Cart')}
         //     />
         //   ),
-      }),
+      // }),
     },
     ProductDetail: {
       screen: ProductDetail,

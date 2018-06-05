@@ -8,27 +8,30 @@ import IconFactory from 'components/IconFactory';
 import {ACTIONS as CUSTOMER_ACTIONS} from 'customer/common/actions';
 import {SELECTORS as CUSTOMER_SELECTORS} from 'customer/common/selectors';
 import {Title} from 'react-native-paper';
+import DrawerIcon from "../components/DrawerIcon";
+import colors from "../assets/theme/colors";
 
 class Home extends Component {
   static navigationOptions = ({navigation}) => {
     return {
       headerTitle: <Text style={{color: 'black'}}>iBooky</Text>,
-      // headerRight: (
-      //   <NavButton
-      //     icon={
-      //       <IconFactory
-      //         type="MaterialCommunityIcons"
-      //         name="cart-outline"
-      //         color="white"
-      //         size={26}
-      //       />
-      //     }
-      //     onPress={() =>
-      //       navigation.state.params &&
-      //       navigation.state.params.handleRightButtonPress()
-      //     }
-      //   />
-      // ),
+      headerLeft: <DrawerIcon onPress={() => navigation.openDrawer()} />,
+      headerRight: (
+        <NavButton
+          icon={
+            <IconFactory
+              type="MaterialCommunityIcons"
+              name="cart-outline"
+              color={colors.primary}
+              size={26}
+            />
+          }
+          onPress={() =>
+            navigation.state.params &&
+            navigation.state.params.handleRightButtonPress()
+          }
+        />
+      ),
     };
   };
 
@@ -58,12 +61,12 @@ class Home extends Component {
         console.log('rekect', e);
       });
 
-    // setTimeout(() => {
-    //   //@todo: setParams doesn't work outside of setTimeout
-    //   this.props.navigation.setParams({
-    //     handleRightButtonPress: this.loadCartScene,
-    //   });
-    // }, 1000);
+    setTimeout(() => {
+      //@todo: setParams doesn't work outside of setTimeout
+      this.props.navigation.setParams({
+        handleRightButtonPress: this.loadCartScene,
+      });
+    }, 1000);
   }
 
   loadCartScene = () => {

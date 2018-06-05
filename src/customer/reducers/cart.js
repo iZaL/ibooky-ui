@@ -68,16 +68,6 @@ export function reducer(state = initialState, action = {}) {
       };
     case ACTION_TYPES.CART_REMOVE_ITEM:
       let deletingItem = state.products[action.params.product_id];
-
-      // let s = Object.keys(state.products)
-      //   .filter(productID => productID != deletingItem.id)
-      //   .reduce((obj, key) => {
-      //     obj[key] = state.products[key];
-      //     return obj;
-      //   }, {});
-      //
-      // console.log('s',s);
-
       return {
         ...state,
         products:Object.keys(state.products)

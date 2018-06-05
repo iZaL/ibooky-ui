@@ -121,6 +121,7 @@ const PastOrdersStack = createStackNavigator(
     navigationOptions: ({navigation}) => ({
       ...navOptions,
     }),
+    ...cardStyle,
   },
 );
 

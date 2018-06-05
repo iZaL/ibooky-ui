@@ -17,7 +17,6 @@ import I18n from 'utils/locale';
 export default class extends Component {
   static propTypes = {
     visible: PropTypes.bool.isRequired,
-    item: PropTypes.object,
     items: PropTypes.array,
     save: PropTypes.func.isRequired,
     onItemPress: PropTypes.func.isRequired,
@@ -25,7 +24,7 @@ export default class extends Component {
   };
 
   render() {
-    const {visible, save, onItemPress, item, items, selected} = this.props;
+    const {visible, save, onItemPress, items, selected} = this.props;
 
     return (
       <Dialog visible={visible}>

@@ -63,7 +63,6 @@ class Cart extends PureComponent {
         }
       })
       .catch(e => {
-        console.log('e', e);
       });
   };
 
@@ -78,13 +77,11 @@ class Cart extends PureComponent {
       this.props.dispatch(ACTIONS.checkout({order_id:order.id,attributes:{}, resolve, reject}));
     })
       .then(res => {
-        console.log('res',res);
         return this.props.navigation.navigate('Payment', {
           orderID: res.id,
         });
       })
       .catch(e => {
-        console.log('e', e);
       });
   };
 

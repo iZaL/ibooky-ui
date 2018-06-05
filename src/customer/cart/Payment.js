@@ -52,7 +52,6 @@ class Payment extends Component {
     const failureUrl = `${PAYMENT_ENDPOINT}/failure`;
 
     console.log('navState', navState);
-
     if (navState.url.includes('result=SUCCESS')) {
       this.setState({
         scene: 'success',
@@ -67,12 +66,17 @@ class Payment extends Component {
   };
 
   paymentSuccessDialogPress = () => {
-    this.props.navigation.replace('OrderDetail', {
+    this.props.navigation.replace('Home');
+    this.props.navigation.navigate('OrderDetail', {
       orderID: this.props.order.id,
     });
   };
 
   paymentFailedDialogPress = () => {};
+
+  goToHome = () => {
+    this.props.navigation.replace('Home');
+  };
 
   render() {
     let {order} = this.props;
@@ -98,6 +102,9 @@ class Payment extends Component {
               title={I18n.t('payment_success')}
               description={I18n.t('order_success')}
               rightPress={this.paymentSuccessDialogPress}
+              leftPress={this.goToHome}
+              leftText={I18n.t('go_home')}
+              rightText={I18n.t('view_order')}
               visible={true}
             />
           );

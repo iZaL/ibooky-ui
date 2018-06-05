@@ -25,6 +25,28 @@ function fetchOrderDetails(params) {
   return request({path});
 }
 
+function favoriteProduct(params) {
+  console.log('params',params);
+  const path = `customer/products/favorite`;
+  let requestParams = {
+    path,
+    params,
+    method: 'POST',
+  };
+  return request(requestParams);
+}
+
+function checkout(params) {
+  console.log('params',params);
+  const path = `customer/orders/checkout`;
+  let requestParams = {
+    path,
+    params,
+    method: 'POST',
+  };
+  return request(requestParams);
+}
+
 function createOrder(params) {
   const path = `customer/orders`;
   let requestParams = {
@@ -36,7 +58,7 @@ function createOrder(params) {
 }
 
 function fetchPastOrders(params = {}) {
-  const path = `customer/orders/past`;
+  const path = `customer/orders`;
   return request({path, params});
 }
 
@@ -48,4 +70,6 @@ export const API = {
   fetchCategoryDetails,
   fetchPastOrders,
   createOrder,
+  favoriteProduct,
+  checkout,
 };

@@ -31,9 +31,17 @@ export const ACTION_TYPES = {
   FETCH_PRODUCTS_SUCCESS: '@customer/FETCH_PRODUCTS_SUCCESS',
   FETCH_PRODUCTS_FAILURE: '@customer/FETCH_PRODUCTS_FAILURE',
 
+  PRODUCT_FAVORITE_REQUEST: '@customer/PRODUCT_FAVORITE_REQUEST',
+  PRODUCT_FAVORITE_SUCCESS: '@customer/PRODUCT_FAVORITE_SUCCESS',
+  PRODUCT_FAVORITE_FAILURE: '@customer/PRODUCT_FAVORITE_FAILURE',
+
   CREATE_ORDER_REQUEST: '@customer/CREATE_ORDER_REQUEST',
   CREATE_ORDER_SUCCESS: '@customer/CREATE_ORDER_SUCCESS',
   CREATE_ORDER_FAILURE: '@customer/CREATE_ORDER_FAILURE',
+
+  CHECKOUT_REQUEST: '@customer/CHECKOUT_REQUEST',
+  CHECKOUT_SUCCESS: '@customer/CHECKOUT_SUCCESS',
+  CHECKOUT_FAILURE: '@customer/CHECKOUT_FAILURE',
 
   FETCH_PAST_ORDERS_REQUEST: '@customer/FETCH_PAST_ORDERS_REQUEST',
   FETCH_PAST_ORDERS_SUCCESS: '@customer/FETCH_PAST_ORDERS_SUCCESS',
@@ -123,6 +131,22 @@ function fetchPastOrdersRefresh(params) {
     params,
   };
 }
+
+function favoriteProduct(params) {
+  return {
+    type: ACTION_TYPES.PRODUCT_FAVORITE_REQUEST,
+    params
+  };
+}
+
+function checkout(params) {
+  return {
+    type: ACTION_TYPES.CHECKOUT_REQUEST,
+    params
+  };
+}
+
+
 export const ACTIONS = {
   fetchCategories,
   fetchCategoriesWithProducts,
@@ -135,4 +159,6 @@ export const ACTIONS = {
   fetchPastOrders,
   fetchPastOrdersRefresh,
   fetchCategoryDetails,
+  favoriteProduct,
+  checkout
 };

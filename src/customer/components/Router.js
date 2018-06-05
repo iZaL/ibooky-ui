@@ -28,7 +28,7 @@ const navOptions = {
   headerTintColor: colors.primary,
   headerStyle: {
     backgroundColor: colors.white,
-    borderBottomWidth: 0,
+    // borderBottomWidth: 0,
   },
 };
 
@@ -65,23 +65,9 @@ const HomeStack = createStackNavigator(
   {
     Home: {
       screen: Home,
-      // navigationOptions: ({navigation}) => ({
-        // ...getDrawerIcon(navigation),
-        //   headerRight: (
-        //     <NavButton
-        //       icon={
-        //         <IconFactory type="MaterialCommunityIcons" name="cart-outline" color="white" size={26}/>
-        //       }
-        //       onPress={() => navigation.navigate('Cart')}
-        //     />
-        //   ),
-      // }),
     },
     ProductDetail: {
       screen: ProductDetail,
-      // navigationOptions:({navigation})=>({
-      //   headerTitle:'Product'
-      // })
     },
     Cart: {
       screen: Cart,
@@ -114,7 +100,7 @@ const PastOrdersStack = createStackNavigator(
         };
       },
     },
-    OrderDetail: {screen: OrderDetailScene},
+    // OrderDetail: {screen: OrderDetailScene},
   },
   {
     // initialRouteName:'WorkingOrders'

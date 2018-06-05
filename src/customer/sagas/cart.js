@@ -5,41 +5,80 @@ import {API} from 'customer/common/api';
 import {Schema} from 'utils/schema';
 import {normalize} from 'normalizr';
 import flatten from 'lodash/flatten';
+import {ACTIONS as APP_ACTIONS} from "app/common/actions";
 
-function* fetchCartItems() {
+function* checkout(action) {
+
+  const {order_id, attributes, resolve, reject} = action.params;
+  // try {
+  //   const params = {
+  //     body: {
+  //       ...item,
+  //     },
+  //   };
+  //   const response = yield call(API.createOrder, params);
+  //   const normalized = normalize(response.data, Schema.orders);
+  //   yield put({
+  //     type: ACTION_TYPES.CREATE_ORDER_SUCCESS,
+  //     entities: normalized.entities,
+  //     payload: response.data,
+  //   });
+  //   yield resolve(response.data);
+  // } catch (error) {
+  //   yield put({type: ACTION_TYPES.CREATE_ORDER_FAILURE, error});
+  //
+  //   yield put(
+  //     APP_ACTIONS.setNotification({
+  //       message: error,
+  //       type: 'error',
+  //     }),
+  //   );
+  //
+  //   yield reject(error);
+  // }
+
   try {
-    const state = yield select();
-    const {items} = state.customer.cart;
-    let cartItems = Object.keys(items).map(item => items[item]);
-
-    let categories = cartItems.map(item => item.category).join();
-    let packages = cartItems.map(item => item.package).join();
-    let services = flatten(
-      cartItems.map(item => item.services).map(service => service),
-    ).join();
-
-    let params = {
-      query: Qs.stringify({
-        categories,
-        packages,
-        services,
-      }),
+    const params = {
+      body: {
+        ...attributes,
+        order_id:order_id
+      },
     };
+    const response = yield call(API.checkout, params);
+    const normalized = normalize(response.data, Schema.orders);
 
-    const response = yield call(API.fetchCartItems, params);
-    const normalized = normalize(response.data, [Schema.categories]);
     yield put({
-      type: ACTION_TYPES.CART_FETCH_ITEMS_SUCCESS,
-      entities: normalized.entities,
+      type: ACTION_TYPES.CHECKOUT_SUCCESS,
+      entities:normalized.entities
     });
+
+    yield resolve(response.data);
+
   } catch (error) {
-    yield put({type: ACTION_TYPES.CART_FETCH_ITEMS_FAILURE, error});
+
+    yield put({type: ACTION_TYPES.CHECKOUT_FAILURE, error});
+
+    yield put(
+      APP_ACTIONS.setNotification({
+        message: error,
+        type: 'error',
+      }),
+    );
+
+    yield reject(error);
+
   }
+
 }
 
-// Monitoring Sagas
-function* fetchCartItemsMonitor() {
-  yield takeLatest(ACTION_TYPES.CART_FETCH_ITEMS_REQUEST, fetchCartItems);
+
+
+function* checkoutMonitor() {
+  yield takeLatest(
+    ACTION_TYPES.CHECKOUT_REQUEST,
+    checkout,
+  );
 }
 
-export const sagas = all([fork(fetchCartItemsMonitor)]);
+
+export const sagas = all([fork(checkoutMonitor)]);

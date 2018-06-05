@@ -7,9 +7,8 @@ import NavButton from 'components/NavButton';
 import IconFactory from 'components/IconFactory';
 import {ACTIONS as CUSTOMER_ACTIONS} from 'customer/common/actions';
 import {SELECTORS as CUSTOMER_SELECTORS} from 'customer/common/selectors';
-import {Title} from 'react-native-paper';
-import DrawerIcon from "../components/DrawerIcon";
-import colors from "../assets/theme/colors";
+import DrawerIcon from "components/DrawerIcon";
+import colors from "assets/theme/colors";
 
 class Home extends Component {
   static navigationOptions = ({navigation}) => {
@@ -111,6 +110,12 @@ class Home extends Component {
     );
   };
 
+  favoriteProduct = (product) => {
+    this.props.dispatch(CUSTOMER_ACTIONS.favoriteProduct({
+      product_id:product.id
+    }));
+  };
+
   render() {
     let {categories, categoryReducer, products} = this.props;
     let {activeCategoryID} = categoryReducer;
@@ -130,6 +135,7 @@ class Home extends Component {
               onItemPress={this.onProductListItemPress}
               onAddToCartPress={this.onAddToCartPress}
               onEndReached={this.fetchMore}
+              favorite={this.favoriteProduct}
             />
           </View>
         )}

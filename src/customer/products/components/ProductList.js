@@ -21,7 +21,7 @@ export default class extends Component {
   }
 
   renderRow = ({item}) => {
-    let {onItemPress, onAddToCartPress} = this.props;
+    let {onItemPress, onAddToCartPress,favorite} = this.props;
     return (
       <View style={styles.container}>
         <ProductImages images={item.images} />
@@ -29,7 +29,7 @@ export default class extends Component {
         <TouchableRipple
           onPress={() => onItemPress(item)}
           style={styles.itemContainer}>
-          <ProductInfo item={item} />
+          <ProductInfo item={item} favorite={favorite}/>
         </TouchableRipple>
 
         <Button

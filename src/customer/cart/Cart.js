@@ -32,15 +32,15 @@ class Cart extends PureComponent {
     if (!this.props.user.id) {
       return this.showLoginDialog();
     }
-    this.checkout();
+    this.createOrder();
   };
 
   onGuestCheckoutPress = () => {
     this.hideLoginDialog();
-    this.checkout();
+    this.createOrder();
   };
 
-  checkout = () => {
+  createOrder = () => {
     const {user, cart} = this.props;
     const {products, total} = cart;
 
@@ -53,10 +53,14 @@ class Cart extends PureComponent {
     new Promise((resolve, reject) => {
       this.props.dispatch(ACTIONS.createOrder({item, resolve, reject}));
     })
-      .then(res => {
-        this.props.navigation.navigate('Checkout', {
-          orderID: res.id,
-        });
+      .then(order => {
+        if (!this.props.user.id) {
+          return this.props.navigation.navigate('Checkout', {
+            orderID: order.id,
+          });
+        } else {
+          this.checkout(order);
+        }
       })
       .catch(e => {
         console.log('e', e);
@@ -67,6 +71,21 @@ class Cart extends PureComponent {
     this.setState({
       loginDialogVisible: true,
     });
+  };
+
+  checkout = (order) => {
+    new Promise((resolve, reject) => {
+      this.props.dispatch(ACTIONS.checkout({order_id:order.id,attributes:{}, resolve, reject}));
+    })
+      .then(res => {
+        console.log('res',res);
+        return this.props.navigation.navigate('Payment', {
+          orderID: res.id,
+        });
+      })
+      .catch(e => {
+        console.log('e', e);
+      });
   };
 
   hideLoginDialog = () => {

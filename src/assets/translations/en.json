@@ -158,5 +158,8 @@
   "qr_code" : "QR Code",
   "qr_code_scan" : "Scan QR Code",
   "delete" : "Delete",
-  "cart_delete_item?" : "Remove item from the cart ?"
+  "cart_delete_item?" : "Remove item from the cart ?",
+
+  "view_order": "View Order",
+  "go_home" : "Go to Home"
 }

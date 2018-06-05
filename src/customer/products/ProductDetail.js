@@ -145,8 +145,6 @@ class ProductDetail extends Component {
       .map(productID => cart.products[productID])
       .find(prod => prod.product_id === product.id);
 
-    console.log('cartProduct', cartProduct);
-
     this.props.dispatch(
       PRODUCT_ACTIONS.setCartItem({
         product_id: product.id,

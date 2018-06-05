@@ -19,6 +19,7 @@ type State = {
 };
 
 class Checkout extends PureComponent {
+
   static propTypes = {
     navigation: PropTypes.shape({
       state: PropTypes.shape({
@@ -36,14 +37,15 @@ class Checkout extends PureComponent {
     mobile: null,
   };
 
-  static getDerivedStateFromProps(nextProps, prevState) {
-    let {order} = nextProps;
-    return {
-      name: order.name,
-      email: order.email,
-      mobile: order.mobile,
-    };
-  }
+  // static getDerivedStateFromProps(nextProps, prevState) {
+  //   let {order} = nextProps;
+  //   return {
+  //     name: order.name,
+  //     email: order.email,
+  //     mobile: order.mobile,
+  //   };
+  // }
+  //
   static defaultProps = {
     order: {},
   };
@@ -57,40 +59,25 @@ class Checkout extends PureComponent {
   }
 
   onCheckoutPress = () => {
-    this.props.navigation.navigate('Payment', {
-      orderID: this.props.order.id,
-    });
-  };
 
-  checkout = () => {};
+    let {order} = this.props;
 
-  showLoginDialog = () => {
-    this.setState({
-      loginDialogVisible: true,
-    });
-  };
+    let attributes = {
+      ...this.state
+    };
 
-  hideLoginDialog = () => {
-    this.setState({
-      loginDialogVisible: false,
-    });
-  };
+    new Promise((resolve, reject) => {
+      this.props.dispatch(ACTIONS.checkout({order_id:order.id,attributes, resolve, reject}));
+    })
+      .then(res => {
+          return this.props.navigation.navigate('Payment', {
+            orderID: res.id,
+          });
+      })
+      .catch(e => {
+        console.log('e', e);
+      });
 
-  onShoppingContinuePress = () => {};
-
-  setQuantity = (product: object, quantity: number) => {
-    this.props.dispatch(
-      ACTIONS.setCartItem({
-        product_id: product.id,
-        quantity: quantity,
-      }),
-    );
-  };
-
-  onLoginPress = () => {
-    this.props.navigation.navigate('Login', {
-      redirectRoute: 'Cart',
-    });
   };
 
   onFieldChange = (field, value) => {
@@ -139,14 +126,6 @@ class Checkout extends PureComponent {
           style={{marginTop: 20}}
         />
 
-        <Dialog
-          leftPress={this.checkout}
-          rightPress={this.onLoginPress}
-          leftText={I18n.t('checkout_as_guest')}
-          rightText={I18n.t('login')}
-          title={I18n.t('checkout')}
-          visible={this.state.loginDialogVisible}
-        />
       </ScrollView>
     );
   }

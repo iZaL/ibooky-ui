@@ -3,17 +3,18 @@
  */
 import React, {Component} from 'react';
 import {Dimensions, StyleSheet, Text, View} from 'react-native';
-import {Subheading, Title} from 'react-native-paper';
+import {Subheading, Title, TouchableRipple} from 'react-native-paper';
 import colors from 'assets/theme/colors';
 import {CategoryProp} from 'customer/common/proptypes';
 import I18n from 'utils/locale';
 import IconFactory from 'components/IconFactory';
 import Divider from 'components/Divider';
 import CountdownTimer from 'customer/products/components/CountdownTimer';
-
+import PropTypes from 'prop-types';
 export default class extends Component {
   static propTypes = {
     item: CategoryProp.isRequired,
+    favorite:PropTypes.func
   };
 
   shouldComponentUpdate(nextProps) {
@@ -21,7 +22,9 @@ export default class extends Component {
   }
 
   render() {
-    let {item, total} = this.props;
+    let {item, favorite} = this.props;
+
+    console.log('item',item);
 
     return (
       <View style={styles.container}>
@@ -54,12 +57,14 @@ export default class extends Component {
             </View>
           )}
 
-          <IconFactory
-            type="MaterialCommunityIcons"
-            name="heart"
-            color={colors.error}
-            size={24}
-          />
+          <TouchableRipple onPress={()=>favorite(item)}>
+            <IconFactory
+              type="MaterialCommunityIcons"
+              name={item.favorited ? 'heart' : 'heart-outline'}
+              color={item.favorited ? colors.error : colors.darkGrey}
+              size={24}
+            />
+          </TouchableRipple>
 
           <View style={styles.itemContent}>
             <Text style={styles.label}>{I18n.t('share')}</Text>

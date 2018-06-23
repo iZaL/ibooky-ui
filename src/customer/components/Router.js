@@ -16,6 +16,7 @@ import Checkout from 'customer/cart/Checkout';
 import Payment from 'customer/cart/Payment';
 import PastOrdersScene from 'customer/orders/PastOrdersScene';
 import OrderDetailScene from 'customer/orders/OrderDetailScene';
+import LanguageSelect from "../../app/LanguageSelect";
 
 const getDrawerIcon = navigation => {
   return {
@@ -78,7 +79,10 @@ const HomeStack = createStackNavigator(
     Payment: {
       screen: Payment,
     },
-    OrderDetail: {screen: OrderDetailScene},
+    OrderDetail: {screen: OrderDetailScene}, LanguageSelect: {
+    screen: LanguageSelect,
+  },
+
   },
   {
     navigationOptions: {

@@ -46,6 +46,17 @@ export default class Drawer extends Component {
           active={activeRoute === 'PastOrdersStack'}
         />
 
+        <DrawerItem
+          label={I18n.t('change_language')}
+          routeName="LanguageSelect"
+          onItemPress={this.onItemPress}
+          iconProps={{
+            name: 'md-globe',
+            type: 'Ionicons',
+          }}
+          active={this.state.activeRoute === 'LanguageSelect'}
+        />
+
         {/*<DrawerItem*/}
           {/*label={I18n.t('settings')}*/}
           {/*routeName="Settings"*/}

@@ -57,7 +57,7 @@ class App extends Component {
     if (!app.booted) return null;
 
     if (!app.installed) {
-      return <LanguageSelectScene onItemPress={this.onLanguageSelect} />;
+      return <LanguageSelectScene onPress={this.onLanguageSelect} />;
     }
 
     return (

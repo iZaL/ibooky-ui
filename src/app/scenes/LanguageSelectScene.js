@@ -2,18 +2,18 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import {StyleSheet, Text, TouchableHighlight, View} from 'react-native';
 
-const LanguageSelectScene = ({onItemPress}) => {
+const LanguageSelectScene = ({onPress}) => {
   return (
     <View style={[styles.container]}>
       <TouchableHighlight
-        onPress={() => onItemPress('en')}
+        onPress={() => onPress('en')}
         style={styles.selectLanguageWrapper}
         underlayColor="transparent"
         activeOpacity={0.6}>
         <Text style={styles.languageTitle}> English </Text>
       </TouchableHighlight>
       <TouchableHighlight
-        onPress={() => onItemPress('ar')}
+        onPress={() => onPress('ar')}
         style={styles.selectLanguageWrapper}
         underlayColor="transparent"
         activeOpacity={0.6}>
@@ -24,7 +24,7 @@ const LanguageSelectScene = ({onItemPress}) => {
 };
 
 LanguageSelectScene.propTypes = {
-  onItemPress: PropTypes.func.isRequired,
+  onPress: PropTypes.func.isRequired,
 };
 
 const styles = StyleSheet.create({

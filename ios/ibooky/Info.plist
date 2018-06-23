@@ -47,12 +47,6 @@
 	</dict>
 	<key>CodePushDeploymentKey</key>
 	<string>GNEorxPaWc7l6vW-rx2uhgUf89iR687af85f-1654-43d6-b735-3ff7e4bf4cd7</string>
-
-	<key>UIAppFonts</key>
-    <array>
-    	<string>remote-notification</string>
-    </array>
-
 	<key>UIAppFonts</key>
 	<array>
 		<string>Entypo.ttf</string>
@@ -77,14 +71,10 @@
 		<string>comgooglemaps</string>
 	</array>
 	<key>NSCameraUsageDescription</key>
-    <string>Needs Camera to Scan QR Code</string>
-
-    <!-- Include this only if you are planning to use the camera roll -->
-    <key>NSPhotoLibraryUsageDescription</key>
-    <string>Needs access to photo library</string>
-
-    <!-- Include this only if you are planning to use the microphone for video recording -->
-    <key>NSMicrophoneUsageDescription</key>
-    <string>Needs access to microphone</string>
+	<string>Needs Camera to Scan QR Code</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Needs access to photo library</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Needs access to microphone</string>
 </dict>
 </plist>

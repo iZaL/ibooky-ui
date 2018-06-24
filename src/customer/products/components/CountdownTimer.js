@@ -27,7 +27,7 @@ export default class CountdownTimer extends Component {
       minute: 'MM',
       second: 'SS',
     },
-    timeSeparator: ' ',
+    timeSeparator: ':',
     leadingZero: false,
   };
 
@@ -41,6 +41,7 @@ export default class CountdownTimer extends Component {
   }
 
   componentDidMount = () => {
+
     setTimeout(() => {
       let timer = setInterval(() => {
         this.tick();
@@ -61,7 +62,6 @@ export default class CountdownTimer extends Component {
 
   calculateRemainingTime = () => {
     return -1 * moment().diff(this.props.targetDate);
-    // return -1 * moment().diff(this.props.targetDate);
   };
 
   addLeadingZero = value => {
@@ -95,15 +95,14 @@ export default class CountdownTimer extends Component {
 
     if (format.day) {
       let days = moment.duration(remainingTime).get('days');
-      if (leadingZero) {
-        days = this.addLeadingZero(days);
-      }
+      // if (leadingZero) {
+      //   days = this.addLeadingZero(days);
+      // }
 
       if (days !== '00') {
         html.push(
-          <Text className="react-cntdwn-day" key="day">
-            {days}
-            {timeSeparator}
+          <Text key="d">
+            {days}d {' '}
           </Text>,
         );
       }
@@ -115,9 +114,8 @@ export default class CountdownTimer extends Component {
         hours = this.addLeadingZero(hours);
       }
       html.push(
-        <Text className="react-cntdwn-hour" key="hour">
-          {hours}
-          {timeSeparator}
+        <Text key="h">
+          {hours}h{' '}
         </Text>,
       );
     }
@@ -128,9 +126,8 @@ export default class CountdownTimer extends Component {
         minutes = this.addLeadingZero(minutes);
       }
       html.push(
-        <Text className="react-cntdwn-minute" key="minute">
-          {minutes}
-          {timeSeparator}
+        <Text key="m">
+          {minutes}m {' '}
         </Text>,
       );
     }
@@ -141,8 +138,8 @@ export default class CountdownTimer extends Component {
         seconds = this.addLeadingZero(seconds);
       }
       html.push(
-        <Text className="react-cntdwn-second" key="second">
-          {seconds}
+        <Text key="s">
+          {seconds}s
         </Text>,
       );
     }
@@ -152,9 +149,8 @@ export default class CountdownTimer extends Component {
 
   render = () => {
     if (this.state.status !== COUNTDOWN_NOT_STARTED) {
-      return <Text>{this.renderRemainingTime()}</Text>;
+      return <Text style={{fontSize:13,fontWeight:'500',letterSpacing:-0.5,}}>{this.renderRemainingTime()}</Text>;
     }
-
     return null;
   };
 }

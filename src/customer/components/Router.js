@@ -17,7 +17,7 @@ import Payment from 'customer/cart/Payment';
 import PastOrdersScene from 'customer/orders/PastOrdersScene';
 import OrderDetailScene from 'customer/orders/OrderDetailScene';
 import LanguageSelect from 'app/LanguageSelect';
-import Favorites from "../products/Favorites";
+import Favorites from "customer/products/Favorites";
 
 const getDrawerIcon = navigation => {
   return {
@@ -80,10 +80,7 @@ const HomeStack = createStackNavigator(
     Payment: {
       screen: Payment,
     },
-    OrderDetail: {
-      screen: OrderDetailScene,
-      path: 'products/:id',
-    },
+
     LanguageSelect: {
       screen: LanguageSelect,
     },
@@ -114,13 +111,6 @@ const FavoritesStack = createStackNavigator(
     Payment: {
       screen: Payment,
     },
-    OrderDetail: {
-      screen: OrderDetailScene,
-      path: 'products/:id',
-    },
-    LanguageSelect: {
-      screen: LanguageSelect,
-    },
   },
   {
     navigationOptions: {
@@ -142,7 +132,10 @@ const PastOrdersStack = createStackNavigator(
         };
       },
     },
-    // OrderDetail: {screen: OrderDetailScene},
+    OrderDetail: {
+      screen: OrderDetailScene,
+      path: 'products/:id',
+    },
   },
   {
     // initialRouteName:'WorkingOrders'

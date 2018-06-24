@@ -24,6 +24,7 @@ export default class extends Component {
     let {onItemPress, onAddToCartPress, favorite} = this.props;
     return (
       <View style={styles.container}>
+
         <ProductImages images={item.images} />
 
         <TouchableRipple
@@ -38,6 +39,7 @@ export default class extends Component {
           dark
           title={I18n.t('buy_now').toUpperCase()}
           onPress={() => onAddToCartPress(item)}
+          disabled={!item.bid_valid}
         />
       </View>
     );

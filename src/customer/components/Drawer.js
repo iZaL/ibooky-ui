@@ -41,7 +41,7 @@ export default class Drawer extends Component {
           routeName="FavoritesStack"
           onItemPress={this.onItemPress}
           iconProps={{name: 'heart', type: 'MaterialCommunityIcons'}}
-          active={activeRoute === 'PastOrdersStack'}
+          active={activeRoute === 'FavoritesStack'}
         />
 
 

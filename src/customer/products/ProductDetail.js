@@ -217,6 +217,7 @@ class ProductDetail extends Component {
             dark
             title={I18n.t('buy_now').toUpperCase()}
             onPress={() => this.onAddToCartPress(product)}
+            disabled={!product.bid_valid}
           />
 
           <Divider />

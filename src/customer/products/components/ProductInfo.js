@@ -43,17 +43,12 @@ export default class extends Component {
             <Text style={styles.value}>{item.price_formatted}</Text>
           </View>
 
-          {!item.bid_expired && (
-            <View style={styles.itemContent}>
+          {item.bid_valid && (
+            <View style={[styles.itemContent]}>
               <Text style={styles.label}>{I18n.t('time_remaining')}</Text>
               <CountdownTimer
                 targetDate={new Date(item.bid_end_at)}
-                startDelay={2000}
-                interval={1000}
-                timeSeparator={':'}
-                leadingZero
               />
-              <Text style={styles.value}>{item.time_remaining_formatted}</Text>
             </View>
           )}
 
@@ -124,6 +119,7 @@ const styles = StyleSheet.create({
   },
   itemContent: {
     alignItems: 'center',
+    justifyContent: 'center',
   },
   value: {
     color: colors.primary,

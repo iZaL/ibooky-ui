@@ -3,7 +3,7 @@
  */
 import React, {Component} from 'react';
 import {Dimensions, StyleSheet, Text, View} from 'react-native';
-import {Title} from 'react-native-paper';
+import {Title, TouchableRipple} from 'react-native-paper';
 import colors from 'assets/theme/colors';
 import {CategoryProp} from 'customer/common/proptypes';
 import I18n from 'utils/locale';
@@ -21,7 +21,7 @@ export default class extends Component {
   }
 
   render() {
-    let {item, total} = this.props;
+    let {item, total,favorite} = this.props;
     return (
       <View style={styles.container}>
         <Title>{item.name}</Title>
@@ -33,23 +33,14 @@ export default class extends Component {
             <Text style={styles.value}>{total}</Text>
           </View>
 
-          <View style={styles.itemContent}>
-            <Text style={styles.label}>{I18n.t('time_remaining')}</Text>
-            <CountdownTimer
-              targetDate={new Date(item.bid_end_at)}
-              startDelay={2000}
-              interval={1000}
-              timeSeparator={':'}
-              leadingZero
+          <TouchableRipple onPress={() => favorite(item)}>
+            <IconFactory
+              type="MaterialCommunityIcons"
+              name={item.favorited ? 'heart' : 'heart-outline'}
+              color={item.favorited ? colors.error : colors.darkGrey}
+              size={24}
             />
-          </View>
-
-          <IconFactory
-            type="MaterialCommunityIcons"
-            name="heart"
-            color={colors.error}
-            size={24}
-          />
+          </TouchableRipple>
 
           <View style={styles.itemContent}>
             <Text style={styles.label}>{I18n.t('share')}</Text>

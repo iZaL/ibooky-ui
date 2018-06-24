@@ -29,8 +29,7 @@ export default class OrdersList extends Component {
   }
 
   renderItem = ({item}) => {
-    const {onItemPress} = this.props;
-
+    const {onItemPress,favorite} = this.props;
     let {product} = item;
     return (
       <View style={styles.container}>
@@ -39,7 +38,7 @@ export default class OrdersList extends Component {
         <TouchableRipple
           onPress={() => onItemPress(item)}
           style={styles.itemContainer}>
-          <OrderProductInfo item={product} total={item.total_formatted} />
+          <OrderProductInfo item={product} total={item.total_formatted} favorite={favorite} />
         </TouchableRipple>
       </View>
     );

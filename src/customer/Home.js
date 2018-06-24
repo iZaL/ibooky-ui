@@ -111,7 +111,6 @@ class Home extends Component {
   };
 
   favoriteProduct = product => {
-
     if(!this.props.isAuthenticated) {
       return this.props.navigation.push('Login');
     } else {
@@ -121,7 +120,6 @@ class Home extends Component {
         }),
       );
     }
-
   };
 
   render() {

@@ -57,12 +57,6 @@ function saveDriverAttributes(params) {
 
 export const API = {
   fetchOrders,
-  fetchWorkingOrders,
   fetchPastOrders,
   fetchOrderDetails,
-  fetchTimings,
-  fetchDrivers,
-  fetchDriver,
-  assignDriver,
-  saveDriverAttributes,
 };

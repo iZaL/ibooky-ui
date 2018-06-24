@@ -30,20 +30,10 @@ class OrderDetailScene extends Component {
       let {orderID} = this.props.navigation.state.params;
       this.props.dispatch(ORDER_ACTIONS.fetchOrderDetails(orderID));
     }
-
-    this.props.dispatch(DRIVER_ACTIONS.fetchDrivers());
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.order && nextProps.order.total) {
-      this.setState({
-        amount: nextProps.order.amount,
-      });
-    }
   }
 
   render() {
-    let {order, drivers} = this.props;
+    let {order} = this.props;
 
     return (
       <ScrollView style={{flex: 1}} keyboardShouldPersistTap="always">

@@ -52,7 +52,7 @@ class UpcomingOrdersScene extends PureComponent {
 function mapStateToProps(state) {
   return {
     orders: ORDER_SELECTORS.getOrders(state),
-    isFetching: state.company.upcoming_orders.isFetching,
+    isFetching: state.company.orders.isFetching,
   };
 }
 

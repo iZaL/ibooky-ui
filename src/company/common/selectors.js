@@ -3,8 +3,7 @@ import {denormalize} from 'normalizr';
 import {Schema} from 'utils/schema';
 
 const schemas = state => state.entities;
-const upcomingOrders = state => state.company.upcoming_orders.ids;
-const pastOrders = state => state.company.past_orders.ids;
+const ordersReducer = state => state.company.orders.ids;
 const getItemIdProp = (state, itemID) => itemID;
 
 const getOrderByID = () => {
@@ -14,31 +13,16 @@ const getOrderByID = () => {
 };
 
 const getOrders = createSelector(
-  [schemas, upcomingOrders],
+  [schemas, ordersReducer],
   (entities, orders) => {
     return (
       (orders &&
-        orders
-          .map(orderId => denormalize(orderId, Schema.orders, entities))
-          .filter(order => !order.is_working)) ||
-      []
-    );
-  },
-);
-
-const getPastOrders = createSelector(
-  [schemas, pastOrders],
-  (entities, orders) => {
-    return (
-      (orders &&
-        orders.map(orderId => denormalize(orderId, Schema.orders, entities))) ||
-      []
+        orders.map(orderId => denormalize(orderId, Schema.orders, entities))) || []
     );
   },
 );
 
 export const SELECTORS = {
   getOrders,
-  getPastOrders,
   getOrderByID,
 };

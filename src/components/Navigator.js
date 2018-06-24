@@ -7,10 +7,7 @@ import {Router as CompanyRouter} from 'company/components/Router';
 
 export default class Navigator extends Component {
   shouldComponentUpdate(nextProps) {
-    return (
-      this.props.isAuthenticated !== nextProps.isAuthenticated ||
-      this.props.userType !== nextProps.userType
-    );
+    return this.props.user.id !== nextProps.user.id;
   }
 
   resolveScreenForUser = userType => {
@@ -25,20 +22,20 @@ export default class Navigator extends Component {
   };
 
   render() {
-    let {isAuthenticated, userType, logout} = this.props;
-    const screen = this.resolveScreenForUser(userType);
+    let {user, logout} = this.props;
 
     const AppNavigator = createStackNavigator(
       {
         Guest: {screen: GuestRouter},
         // Admin: {screen: AdminRouter},
-        // Driver: {screen: DriverRouter},
         Customer: {screen: CustomerRouter},
         Company: {screen: CompanyRouter},
       },
       {
         headerMode: 'none',
-        initialRouteName: isAuthenticated ? screen : 'Customer',
+        initialRouteName: user.id
+          ? this.resolveScreenForUser(user.type)
+          : 'Customer',
       },
     );
 
@@ -47,7 +44,7 @@ export default class Navigator extends Component {
         ref={navigatorRef => {
           NavigatorService.setContainer(navigatorRef);
         }}
-        screenProps={{isAuthenticated, logout}}
+        screenProps={{user, logout}}
       />
     );
   }

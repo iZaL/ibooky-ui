@@ -33,6 +33,7 @@ export default class Drawer extends Component {
 
     return (
       <DrawerSection>
+
         <DrawerHeader user={user} />
 
         <DrawerItem

@@ -65,7 +65,7 @@ function setPaymentSuccess(params) {
   return request(requestParams);
 }
 
-function fetchPastOrders(params = {}) {
+function fetchOrders(params = {}) {
   const path = `customer/orders`;
   return request({path, params});
 }
@@ -82,7 +82,7 @@ export const API = {
   fetchFavoriteProducts,
   fetchOrderDetails,
   fetchCategoryDetails,
-  fetchPastOrders,
+  fetchOrders,
   createOrder,
   setPaymentSuccess,
   favoriteProduct,

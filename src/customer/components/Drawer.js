@@ -5,6 +5,7 @@ import React, {Component} from 'react';
 import I18n from 'utils/locale';
 import DrawerItem from 'components/DrawerItem';
 import {DrawerSection} from 'react-native-paper';
+import DrawerHeader from "../../components/DrawerHeader";
 
 export default class Drawer extends Component {
 
@@ -20,11 +21,14 @@ export default class Drawer extends Component {
   };
 
   render() {
-    let {logout, isAuthenticated} = this.props.screenProps;
+    let {logout, user} = this.props.screenProps;
     let {activeRoute} = this.state;
 
     return (
       <DrawerSection style={{paddingTop: 30}}>
+
+        <DrawerHeader user={user} />
+
         <DrawerItem
           label={I18n.t('home')}
           routeName="HomeStack"
@@ -46,11 +50,11 @@ export default class Drawer extends Component {
 
 
         <DrawerItem
-          label={I18n.t('past_orders')}
-          routeName="PastOrdersStack"
+          label={I18n.t('orders')}
+          routeName="OrdersStack"
           onItemPress={this.onItemPress}
           iconProps={{name: 'timelapse', type: 'MaterialIcons'}}
-          active={activeRoute === 'PastOrdersStack'}
+          active={activeRoute === 'OrdersStack'}
         />
 
         <DrawerItem
@@ -64,7 +68,7 @@ export default class Drawer extends Component {
           active={this.state.activeRoute === 'LanguageSelect'}
         />
 
-        {isAuthenticated ? (
+        {user.id ? (
           <DrawerItem
             label={I18n.t('logout')}
             routeName="Logout"

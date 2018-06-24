@@ -77,15 +77,15 @@ function* fetchOrderDetails(action) {
   }
 }
 
-function* fetchPastOrders() {
+function* fetchOrders() {
   try {
     const state = yield select();
 
-    const {nextPage} = state.customer.past_orders;
+    const {nextPage} = state.customer.orders;
 
     if (nextPage === null) {
       yield put({
-        type: ACTION_TYPES.FETCH_PAST_ORDERS_FAILURE,
+        type: ACTION_TYPES.FETCH_ORDERS_FAILURE,
         error: I18n.t('no_more_records'),
       });
     } else {
@@ -93,18 +93,18 @@ function* fetchPastOrders() {
         paginated: !!nextPage,
         paginatedUrl: nextPage,
       };
-      const response = yield call(API.fetchPastOrders, params);
+      const response = yield call(API.fetchOrders, params);
       const normalized = normalize(response.data, [Schema.orders]);
       const {entities, result} = normalized;
       yield put({
-        type: ACTION_TYPES.FETCH_PAST_ORDERS_SUCCESS,
+        type: ACTION_TYPES.FETCH_ORDERS_SUCCESS,
         entities: entities,
         result: result,
         nextPage: (response.links && response.links.next) || null,
       });
     }
   } catch (error) {
-    yield put({type: ACTION_TYPES.FETCH_PAST_ORDERS_FAILURE, error});
+    yield put({type: ACTION_TYPES.FETCH_ORDERS_FAILURE, error});
   }
 }
 // Monitoring Sagas
@@ -116,8 +116,8 @@ function* fetchOrderDetailsMonitor() {
   yield takeLatest(ACTION_TYPES.FETCH_ORDER_DETAIL_REQUEST, fetchOrderDetails);
 }
 
-function* fetchPastOrdersMonitor() {
-  yield takeLatest(ACTION_TYPES.FETCH_PAST_ORDERS_REQUEST, fetchPastOrders);
+function* fetchOrdersMonitor() {
+  yield takeLatest(ACTION_TYPES.FETCH_ORDERS_REQUEST, fetchOrders);
 }
 
 function* setPaymentSuccessMonitor() {
@@ -127,6 +127,6 @@ function* setPaymentSuccessMonitor() {
 export const sagas = all([
   fork(createOrderMonitor),
   fork(fetchOrderDetailsMonitor),
-  fork(fetchPastOrdersMonitor),
+  fork(fetchOrdersMonitor),
   fork(setPaymentSuccessMonitor),
 ]);

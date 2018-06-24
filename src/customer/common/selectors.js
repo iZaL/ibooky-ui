@@ -8,7 +8,7 @@ const productsSchema = state => state.entities.products;
 const categoriesSchema = state => state.entities.categories;
 const ordersSchema = state => state.entities.orders;
 const categoryReducer = state => state.customer.categories;
-const pastOrders = state => state.customer.past_orders.ids;
+const orders = state => state.customer.orders.ids;
 const favoritesReducer = state => state.customer.favorites;
 const getIdProp = (state, id) => id;
 
@@ -154,12 +154,12 @@ const getCategoryProducts = createSelector(
   },
 );
 
-const getPastOrders = createSelector(
-  [schemas, pastOrders],
-  (entities, orders) => {
+const getOrders = createSelector(
+  [schemas, orders],
+  (entities, orderIDs) => {
     return (
-      (orders &&
-        orders.map(orderId => denormalize(orderId, Schema.orders, entities))) ||
+      (orderIDs &&
+        orderIDs.map(orderId => denormalize(orderId, Schema.orders, entities))) ||
       []
     );
   },
@@ -174,5 +174,5 @@ export const SELECTORS = {
   getCategoryProducts,
   getCategoriesWithProducts,
   getOrderByID,
-  getPastOrders,
+  getOrders,
 };

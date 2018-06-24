@@ -47,11 +47,11 @@ export const ACTION_TYPES = {
   CHECKOUT_SUCCESS: '@customer/CHECKOUT_SUCCESS',
   CHECKOUT_FAILURE: '@customer/CHECKOUT_FAILURE',
 
-  FETCH_PAST_ORDERS_REQUEST: '@customer/FETCH_PAST_ORDERS_REQUEST',
-  FETCH_PAST_ORDERS_SUCCESS: '@customer/FETCH_PAST_ORDERS_SUCCESS',
-  FETCH_PAST_ORDERS_FAILURE: '@customer/FETCH_PAST_ORDERS_FAILURE',
-  FETCH_PAST_ORDERS_REFRESH_REQUEST:
-    '@customer/FETCH_PAST_ORDERS_REFRESH_REQUEST',
+  FETCH_ORDERS_REQUEST: '@customer/FETCH_ORDERS_REQUEST',
+  FETCH_ORDERS_SUCCESS: '@customer/FETCH_ORDERS_SUCCESS',
+  FETCH_ORDERS_FAILURE: '@customer/FETCH_ORDERS_FAILURE',
+  FETCH_ORDERS_REFRESH_REQUEST:
+    '@customer/FETCH_ORDERS_REFRESH_REQUEST',
 
   SET_PAYMENT_SUCCESS_REQUEST: '@customer/SET_PAYMENT_SUCCESS_REQUEST',
   SET_PAYMENT_SUCCESS_FAILURE: '@customer/SET_PAYMENT_SUCCESS_FAILURE',
@@ -133,16 +133,16 @@ function setCategoryItem(key, value) {
   };
 }
 
-function fetchPastOrders(params) {
+function fetchOrders(params) {
   return {
-    type: ACTION_TYPES.FETCH_PAST_ORDERS_REQUEST,
+    type: ACTION_TYPES.FETCH_ORDERS_REQUEST,
     params,
   };
 }
 
-function fetchPastOrdersRefresh(params) {
+function fetchOrdersRefresh(params) {
   return {
-    type: ACTION_TYPES.FETCH_PAST_ORDERS_REFRESH_REQUEST,
+    type: ACTION_TYPES.FETCH_ORDERS_REFRESH_REQUEST,
     params,
   };
 }
@@ -178,8 +178,8 @@ export const ACTIONS = {
   setCategoryItem,
   fetchProductDetails,
   fetchOrderDetails,
-  fetchPastOrders,
-  fetchPastOrdersRefresh,
+  fetchOrders,
+  fetchOrdersRefresh,
   fetchCategoryDetails,
   favoriteProduct,
   checkout,

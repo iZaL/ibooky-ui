@@ -10,13 +10,13 @@ const initialState = {
 
 export function reducer(state = initialState, action = {}) {
   switch (action.type) {
-    case ACTION_TYPES.FETCH_PAST_ORDERS_REQUEST:
+    case ACTION_TYPES.FETCH_ORDERS_REQUEST:
       return {
         ...state,
         isFetching: true,
         error: null,
       };
-    case ACTION_TYPES.FETCH_PAST_ORDERS_SUCCESS: {
+    case ACTION_TYPES.FETCH_ORDERS_SUCCESS: {
       return {
         ...state,
         isFetching: false,
@@ -25,14 +25,14 @@ export function reducer(state = initialState, action = {}) {
         error: null,
       };
     }
-    case ACTION_TYPES.FETCH_PAST_ORDERS_FAILURE:
+    case ACTION_TYPES.FETCH_ORDERS_FAILURE:
       return {
         ...state,
         isFetching: false,
         error: action.error,
       };
 
-    case ACTION_TYPES.FETCH_PAST_ORDERS_REFRESH_REQUEST:
+    case ACTION_TYPES.FETCH_ORDERS_REFRESH_REQUEST:
       return {
         ...state,
         nextPage: undefined,

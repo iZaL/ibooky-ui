@@ -6,7 +6,7 @@ import {SELECTORS as ORDER_SELECTORS} from 'customer/common/selectors';
 import OrdersList from 'customer/orders/components/OrdersList';
 import {SELECTORS as USER_SELECTORS} from "guest/common/selectors";
 
-class PastOrdersScene extends PureComponent {
+class OrdersScene extends PureComponent {
   static propTypes = {
     orders: PropTypes.array.isRequired,
   };
@@ -16,7 +16,7 @@ class PastOrdersScene extends PureComponent {
   };
 
   componentDidMount() {
-    this.props.dispatch(CUSTOMER_ACTIONS.fetchPastOrders());
+    this.props.dispatch(CUSTOMER_ACTIONS.fetchOrders());
   }
 
   onOrdersListItemPress = (item: object) => {
@@ -26,12 +26,12 @@ class PastOrdersScene extends PureComponent {
   };
 
   onFetchMore = () => {
-    this.props.dispatch(CUSTOMER_ACTIONS.fetchPastOrders());
+    this.props.dispatch(CUSTOMER_ACTIONS.fetchOrders());
   };
 
   onPullToRefresh = () => {
-    this.props.dispatch(CUSTOMER_ACTIONS.fetchPastOrdersRefresh());
-    this.props.dispatch(CUSTOMER_ACTIONS.fetchPastOrders());
+    this.props.dispatch(CUSTOMER_ACTIONS.fetchOrdersRefresh());
+    this.props.dispatch(CUSTOMER_ACTIONS.fetchOrders());
   };
 
   favoriteProduct = product => {
@@ -64,10 +64,10 @@ class PastOrdersScene extends PureComponent {
 
 function mapStateToProps(state) {
   return {
-    orders: ORDER_SELECTORS.getPastOrders(state),
-    isFetching: state.customer.past_orders.isFetching,
+    orders: ORDER_SELECTORS.getOrders(state),
+    isFetching: state.customer.orders.isFetching,
     isAuthenticated:USER_SELECTORS.isAuthenticated(state)
   };
 }
 
-export default connect(mapStateToProps)(PastOrdersScene);
+export default connect(mapStateToProps)(OrdersScene);

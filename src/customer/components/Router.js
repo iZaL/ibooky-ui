@@ -14,7 +14,7 @@ import ProductDetail from 'customer/products/ProductDetail';
 import Cart from 'customer/cart/Cart';
 import Checkout from 'customer/cart/Checkout';
 import Payment from 'customer/cart/Payment';
-import PastOrdersScene from 'customer/orders/PastOrdersScene';
+import OrdersScene from 'customer/orders/OrdersScene';
 import OrderDetailScene from 'customer/orders/OrderDetailScene';
 import LanguageSelect from 'app/LanguageSelect';
 import Favorites from "customer/products/Favorites";
@@ -121,14 +121,14 @@ const FavoritesStack = createStackNavigator(
   },
 );
 
-const PastOrdersStack = createStackNavigator(
+const OrdersStack = createStackNavigator(
   {
-    PastOrders: {
-      screen: PastOrdersScene,
+    Orders: {
+      screen: OrdersScene,
       navigationOptions: ({navigation}) => {
         return {
           ...getDrawerIcon(navigation),
-          title: I18n.t('past_orders'),
+          title: I18n.t('orders'),
         };
       },
     },
@@ -168,8 +168,8 @@ const DrawerRoutes = {
   HomeStack: {
     screen: HomeStack,
   },
-  PastOrdersStack: {
-    screen: PastOrdersStack,
+  OrdersStack: {
+    screen: OrdersStack,
   },
   SettingStack: {
     screen: SettingStack,

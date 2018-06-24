@@ -9,16 +9,15 @@ import SectionHeading from 'components/SectionHeading';
 import OrdersList from 'company/orders/components/OrdersList';
 
 class Home extends PureComponent {
+
   static propTypes = {
     drivers: PropTypes.array.isRequired,
-    upcoming_orders: PropTypes.array.isRequired,
-    working_orders: PropTypes.array.isRequired,
+    orders: PropTypes.array.isRequired,
   };
 
   static defaultProps = {
     drivers: [],
-    upcoming_orders: [],
-    working_orders: [],
+    orders: [],
   };
 
   state = {
@@ -38,11 +37,11 @@ class Home extends PureComponent {
   };
 
   _onRefresh = () => {
-    // this.setState({refreshing: true});
+    this.setState({refreshing: true});
     this.fetchData();
-    // setTimeout(() => {
-    //   this.setState({refreshing: false});
-    // }, 1000);
+    setTimeout(() => {
+      this.setState({refreshing: false});
+    }, 1000);
   };
 
   onOrdersListItemPress = (item: object) => {

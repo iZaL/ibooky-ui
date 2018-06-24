@@ -36,20 +36,6 @@ const OrderBasicInfo = ({item, onPress, style}) => {
 
         <Divider style={{marginVertical: 5}} />
 
-        {/*<View style={styles.content}>*/}
-        {/*<Text style={styles.label}>{I18n.t('address')}</Text>*/}
-
-        {/*<AddressInfo*/}
-        {/*address={item.address}*/}
-        {/*style={{flex: 1, textAlign: 'right'}}*/}
-        {/*/>*/}
-        {/*</View>*/}
-
-        {/*<View style={styles.content}>*/}
-        {/*<Text style={styles.label}>{I18n.t('payment_mode')}</Text>*/}
-        {/*<Text style={[styles.value]}>{item.payment_mode}</Text>*/}
-        {/*</View>*/}
-
         <View style={styles.content}>
           <Text style={styles.label}>{I18n.t('order_status')}</Text>
           <Text style={[styles.value]}>{item.status}</Text>

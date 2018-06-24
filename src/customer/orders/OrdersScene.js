@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {ACTIONS as CUSTOMER_ACTIONS} from 'customer/common/actions';
 import {SELECTORS as ORDER_SELECTORS} from 'customer/common/selectors';
 import OrdersList from 'customer/orders/components/OrdersList';
-import {SELECTORS as USER_SELECTORS} from "guest/common/selectors";
+import {SELECTORS as USER_SELECTORS} from 'guest/common/selectors';
 
 class OrdersScene extends PureComponent {
   static propTypes = {
@@ -35,7 +35,7 @@ class OrdersScene extends PureComponent {
   };
 
   favoriteProduct = product => {
-    if(!this.props.isAuthenticated) {
+    if (!this.props.isAuthenticated) {
       return this.props.navigation.push('Login');
     } else {
       this.props.dispatch(
@@ -66,7 +66,7 @@ function mapStateToProps(state) {
   return {
     orders: ORDER_SELECTORS.getOrders(state),
     isFetching: state.customer.orders.isFetching,
-    isAuthenticated:USER_SELECTORS.isAuthenticated(state)
+    isAuthenticated: USER_SELECTORS.isAuthenticated(state),
   };
 }
 

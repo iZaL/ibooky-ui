@@ -23,8 +23,8 @@ export function reducer(state = initialState, action = {}) {
         ...state,
         isFetching: false,
         error: null,
-        collection: union(state.collection,action.products.collection),
-        nextPage:action.products.nextPage
+        collection: union(state.collection, action.products.collection),
+        nextPage: action.products.nextPage,
       };
     }
     case ACTION_TYPES.FETCH_FAVORITE_PRODUCTS_FAILURE:

@@ -75,7 +75,6 @@ class App extends Component {
         />
 
         <Navigator user={user} logout={this.logout} />
-
       </View>
     );
   }

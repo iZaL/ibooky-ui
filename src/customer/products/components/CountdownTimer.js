@@ -41,7 +41,6 @@ export default class CountdownTimer extends Component {
   }
 
   componentDidMount = () => {
-
     setTimeout(() => {
       let timer = setInterval(() => {
         this.tick();
@@ -100,11 +99,7 @@ export default class CountdownTimer extends Component {
       // }
 
       if (days !== '00') {
-        html.push(
-          <Text key="d">
-            {days}d {' '}
-          </Text>,
-        );
+        html.push(<Text key="d">{days}d </Text>);
       }
     }
 
@@ -113,11 +108,7 @@ export default class CountdownTimer extends Component {
       if (leadingZero) {
         hours = this.addLeadingZero(hours);
       }
-      html.push(
-        <Text key="h">
-          {hours}h{' '}
-        </Text>,
-      );
+      html.push(<Text key="h">{hours}h </Text>);
     }
 
     if (format.minute) {
@@ -125,11 +116,7 @@ export default class CountdownTimer extends Component {
       if (leadingZero) {
         minutes = this.addLeadingZero(minutes);
       }
-      html.push(
-        <Text key="m">
-          {minutes}m {' '}
-        </Text>,
-      );
+      html.push(<Text key="m">{minutes}m </Text>);
     }
 
     if (format.second) {
@@ -137,11 +124,7 @@ export default class CountdownTimer extends Component {
       if (leadingZero) {
         seconds = this.addLeadingZero(seconds);
       }
-      html.push(
-        <Text key="s">
-          {seconds}s
-        </Text>,
-      );
+      html.push(<Text key="s">{seconds}s</Text>);
     }
 
     return html;
@@ -149,7 +132,11 @@ export default class CountdownTimer extends Component {
 
   render = () => {
     if (this.state.status !== COUNTDOWN_NOT_STARTED) {
-      return <Text style={{fontSize:13,fontWeight:'500',letterSpacing:-0.5,}}>{this.renderRemainingTime()}</Text>;
+      return (
+        <Text style={{fontSize: 13, fontWeight: '500', letterSpacing: -0.5}}>
+          {this.renderRemainingTime()}
+        </Text>
+      );
     }
     return null;
   };

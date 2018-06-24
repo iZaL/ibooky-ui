@@ -53,10 +53,7 @@ function* fetchOrderDetails(action) {
 }
 
 function* fetchOrdersMonitor() {
-  yield takeLatest(
-    ACTION_TYPES.FETCH_ORDERS_REQUEST,
-    fetchOrders,
-  );
+  yield takeLatest(ACTION_TYPES.FETCH_ORDERS_REQUEST, fetchOrders);
 }
 
 function* fetchOrderDetailsMonitor() {

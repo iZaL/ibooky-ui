@@ -34,8 +34,6 @@ class QRScan extends Component {
       let {orderID} = this.props.navigation.state.params;
       this.props.dispatch(ORDER_ACTIONS.fetchOrderDetails(orderID));
     }
-
-    this.props.dispatch(DRIVER_ACTIONS.fetchDrivers());
   }
 
   componentWillReceiveProps(nextProps) {

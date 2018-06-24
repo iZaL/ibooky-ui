@@ -9,13 +9,13 @@ import {ACTIONS as CUSTOMER_ACTIONS} from 'customer/common/actions';
 import {SELECTORS as CUSTOMER_SELECTORS} from 'customer/common/selectors';
 import DrawerIcon from 'components/DrawerIcon';
 import colors from 'assets/theme/colors';
-import {SELECTORS as USER_SELECTORS} from "guest/common/selectors";
+import {SELECTORS as USER_SELECTORS} from 'guest/common/selectors';
 
 class Favorites extends Component {
   static navigationOptions = ({navigation}) => {
     return {
       headerTitle: <Text style={{color: 'black'}}>Favorites</Text>,
-      headerLeft: <DrawerIcon onPress={() => navigation.openDrawer()}/>,
+      headerLeft: <DrawerIcon onPress={() => navigation.openDrawer()} />,
       headerRight: (
         <NavButton
           icon={
@@ -70,8 +70,7 @@ class Favorites extends Component {
   };
 
   favoriteProduct = product => {
-
-    if(!this.props.isAuthenticated) {
+    if (!this.props.isAuthenticated) {
       return this.props.navigation.push('Login');
     } else {
       this.props.dispatch(
@@ -80,7 +79,6 @@ class Favorites extends Component {
         }),
       );
     }
-
   };
 
   render() {
@@ -103,7 +101,7 @@ class Favorites extends Component {
 function mapStateToProps(state) {
   return {
     products: CUSTOMER_SELECTORS.getFavoriteProducts(state),
-    isAuthenticated:USER_SELECTORS.isAuthenticated(state)
+    isAuthenticated: USER_SELECTORS.isAuthenticated(state),
   };
 }
 

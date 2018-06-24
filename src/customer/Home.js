@@ -9,7 +9,7 @@ import {ACTIONS as CUSTOMER_ACTIONS} from 'customer/common/actions';
 import {SELECTORS as CUSTOMER_SELECTORS} from 'customer/common/selectors';
 import DrawerIcon from 'components/DrawerIcon';
 import colors from 'assets/theme/colors';
-import {SELECTORS as USER_SELECTORS} from "guest/common/selectors";
+import {SELECTORS as USER_SELECTORS} from 'guest/common/selectors';
 
 class Home extends Component {
   static navigationOptions = ({navigation}) => {
@@ -111,7 +111,7 @@ class Home extends Component {
   };
 
   favoriteProduct = product => {
-    if(!this.props.isAuthenticated) {
+    if (!this.props.isAuthenticated) {
       return this.props.navigation.push('Login');
     } else {
       this.props.dispatch(
@@ -155,7 +155,7 @@ function mapStateToProps(state) {
     categories: CUSTOMER_SELECTORS.getCategoriesWithProducts(state),
     products: CUSTOMER_SELECTORS.getCategoryProducts(state),
     categoryReducer: state.customer.categories,
-    isAuthenticated:USER_SELECTORS.isAuthenticated(state)
+    isAuthenticated: USER_SELECTORS.isAuthenticated(state),
   };
 }
 

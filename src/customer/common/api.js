@@ -72,7 +72,7 @@ function fetchOrders(params = {}) {
 
 function fetchFavoriteProducts(params = {}) {
   const path = `customer/products/favorites`;
-  return request({path, params:params});
+  return request({path, params: params});
 }
 
 export const API = {

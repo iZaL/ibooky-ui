@@ -17,7 +17,7 @@ import Payment from 'customer/cart/Payment';
 import OrdersScene from 'customer/orders/OrdersScene';
 import OrderDetailScene from 'customer/orders/OrderDetailScene';
 import LanguageSelect from 'app/LanguageSelect';
-import Favorites from "customer/products/Favorites";
+import Favorites from 'customer/products/Favorites';
 
 const getDrawerIcon = navigation => {
   return {

@@ -23,8 +23,7 @@ function* fetchFavoriteProducts(action) {
   try {
     const state = yield select();
     let nextPage = undefined;
-    let favoritesReducer =
-      state.customer.favorites;
+    let favoritesReducer = state.customer.favorites;
 
     if (favoritesReducer) {
       nextPage = favoritesReducer.nextPage;
@@ -61,7 +60,6 @@ function* fetchFavoriteProducts(action) {
       entities: normalized.entities,
       products: productPayload,
     });
-
   } catch (error) {
     yield put({type: ACTION_TYPES.FETCH_FAVORITE_PRODUCTS_FAILURE, error});
   }

@@ -3,7 +3,8 @@ const defaults = {};
 if (__DEV__) {
   module.exports = {
     ...defaults,
-    API_URL: 'ibooky.test/api',
+    API_URL: '192.168.1.104:9000/api',
+    // API_URL: 'ibooky.test/api',
     PAYMENT_ENDPOINT: 'http://ibooky.test/payment',
     SOCKET_SERVER: 'http://ibooky.test:3000',
     GOOGLE_MAPS_KEY: 'AIzaSyCpQX4H0QPxVgKuNMZ0ELG_ymgT8RHcKh4',

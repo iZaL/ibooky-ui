@@ -9,7 +9,6 @@ import SectionHeading from 'components/SectionHeading';
 import OrdersList from 'company/orders/components/OrdersList';
 
 class Home extends PureComponent {
-
   static propTypes = {
     drivers: PropTypes.array.isRequired,
     orders: PropTypes.array.isRequired,
@@ -72,10 +71,7 @@ class Home extends PureComponent {
           onButtonPress={this.loadOrders}
         />
 
-        <OrdersList
-          items={orders}
-          onItemPress={this.onOrdersListItemPress}
-        />
+        <OrdersList items={orders} onItemPress={this.onOrdersListItemPress} />
       </ScrollView>
     );
   }

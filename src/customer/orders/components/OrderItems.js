@@ -24,37 +24,26 @@ export default class OrderItems extends Component {
 
         {products.map((product, index) => (
           <View style={styles.itemContainer} key={product.id}>
-            {/*<Text style={styles.categoryTitle}>*/}
-            {/*{product.category.name}*/}
-            {/*</Text>*/}
-
             <View style={styles.packageItemContainer}>
-              <Text style={styles.packageTitle}>{product.name}</Text>
+              <Text style={styles.packageTitle}>{product.name} ({I18n.t('quantity')} {product.quantity})</Text>
               {product.price && (
                 <Text style={styles.packagePrice}>{product.price} KD</Text>
               )}
             </View>
-
             {order.attributes &&
-              order.attributes.length &&
-              order.attributes
-                // .filter(attribute => service.package.id === packageModel.id)
-                .map(attribute => {
-                  return (
-                    <View style={{flex: 1}} key={attribute.id}>
-                      <Divider style={{marginVertical: 10}} />
-
-                      <View style={styles.serviceListContainer}>
-                        <Text style={styles.packageTitle}>
-                          {attribute.name}{' '}
-                        </Text>
-                        <Text style={styles.packagePrice}>
-                          {attribute.price} KD
-                        </Text>
-                      </View>
+              order.attributes.map(attribute => {
+                return (
+                  <View style={{flex: 1}} key={attribute.id}>
+                    <Divider style={{marginVertical: 10}} />
+                    <View style={styles.serviceListContainer}>
+                      <Text style={styles.attributeTitle}>
+                        {attribute.name}{' '}
+                      </Text>
                     </View>
-                  );
-                })}
+                  </View>
+                );
+              })}
+            <Divider />
           </View>
         ))}
       </View>
@@ -92,8 +81,14 @@ const styles = StyleSheet.create({
   packageTitle: {
     flex: 1,
     fontSize: 17,
+    color: colors.black,
+    fontWeight: '500',
+  },
+  attributeTitle: {
+    flex: 1,
+    fontSize: 17,
     color: colors.mediumGrey,
-    paddingLeft: 10,
+    paddingLeft: 20,
   },
   packagePrice: {
     color: colors.primary,

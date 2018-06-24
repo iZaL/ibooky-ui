@@ -29,19 +29,24 @@ export default class OrdersList extends Component {
   }
 
   renderItem = ({item}) => {
-    const {onItemPress,favorite} = this.props;
+    const {onItemPress, favorite} = this.props;
     let {product} = item;
-    return (
-      <View style={styles.container}>
-        {product.images && <ProductImages images={product.images} />}
-
-        <TouchableRipple
-          onPress={() => onItemPress(item)}
-          style={styles.itemContainer}>
-          <OrderProductInfo item={product} total={item.total_formatted} favorite={favorite} />
-        </TouchableRipple>
-      </View>
-    );
+    if(product) {
+      return (
+        <View style={styles.container}>
+          {product.images && <ProductImages images={product.images} />}
+          <TouchableRipple
+            onPress={() => onItemPress(item)}
+            style={styles.itemContainer}>
+            <OrderProductInfo
+              item={product}
+              total={item.total_formatted}
+              favorite={favorite}
+            />
+          </TouchableRipple>
+        </View>
+      );
+    }
   };
 
   render() {

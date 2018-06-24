@@ -17,7 +17,8 @@ const getOrders = createSelector(
   (entities, orders) => {
     return (
       (orders &&
-        orders.map(orderId => denormalize(orderId, Schema.orders, entities))) || []
+        orders.map(orderId => denormalize(orderId, Schema.orders, entities))) ||
+      []
     );
   },
 );

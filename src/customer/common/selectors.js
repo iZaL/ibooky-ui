@@ -32,17 +32,21 @@ const getProducts = createSelector(
 );
 
 const getFavoriteProducts = createSelector(
-  [schemas, favoritesReducer,productsSchema],
+  [schemas, favoritesReducer, productsSchema],
   (entities, favorites, products) => {
-    return favorites.collection.map(productID => {
-      let cartProduct = products[productID];
-      return {
-        ...denormalize(productID, Schema.products, entities),
-        cart: {
-          ...cartProduct,
-        },
-      };
-    }).filter(product => product.favorited === true) || [];
+    return (
+      favorites.collection
+        .map(productID => {
+          let cartProduct = products[productID];
+          return {
+            ...denormalize(productID, Schema.products, entities),
+            cart: {
+              ...cartProduct,
+            },
+          };
+        })
+        .filter(product => product.favorited === true) || []
+    );
   },
 );
 
@@ -121,16 +125,16 @@ const getCategoriesWithProducts = createSelector(
           return {
             ...denormalize(id, Schema.categories, entities),
             products:
-            (reducer.activeCategoryID &&
-              reducer.products[reducer.activeCategoryID] &&
-              reducer.products[reducer.activeCategoryID].collection.map(
-                id => {
-                  return {
-                    ...denormalize(id, Schema.products, entities),
-                  };
-                },
-              )) ||
-            [],
+              (reducer.activeCategoryID &&
+                reducer.products[reducer.activeCategoryID] &&
+                reducer.products[reducer.activeCategoryID].collection.map(
+                  id => {
+                    return {
+                      ...denormalize(id, Schema.products, entities),
+                    };
+                  },
+                )) ||
+              [],
           };
         })) ||
       []
@@ -154,16 +158,13 @@ const getCategoryProducts = createSelector(
   },
 );
 
-const getOrders = createSelector(
-  [schemas, orders],
-  (entities, orderIDs) => {
-    return (
-      (orderIDs &&
-        orderIDs.map(orderId => denormalize(orderId, Schema.orders, entities))) ||
-      []
-    );
-  },
-);
+const getOrders = createSelector([schemas, orders], (entities, orderIDs) => {
+  return (
+    (orderIDs &&
+      orderIDs.map(orderId => denormalize(orderId, Schema.orders, entities))) ||
+    []
+  );
+});
 
 export const SELECTORS = {
   getCartProducts,

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Alert, Clipboard, StyleSheet, TouchableOpacity,} from 'react-native';
+import {Alert, Clipboard, StyleSheet, TouchableOpacity} from 'react-native';
 import Modal from 'react-native-modal';
 import Share, {Button, ShareSheet} from 'react-native-share';
 
@@ -30,8 +30,7 @@ export default class extends Component {
 
         <Modal
           isVisible={this.state.visible}
-          style={{backgroundColor: 'transparent'}}
-        >
+          style={{backgroundColor: 'transparent'}}>
           <ShareSheet
             visible={this.state.visible}
             onCancel={this.onCancel.bind(this)}

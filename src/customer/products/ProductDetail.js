@@ -164,7 +164,7 @@ class ProductDetail extends Component {
       }),
     );
   };
-  
+
   render() {
     let {product} = this.props;
 

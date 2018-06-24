@@ -5,10 +5,9 @@ import React, {Component} from 'react';
 import I18n from 'utils/locale';
 import DrawerItem from 'components/DrawerItem';
 import {DrawerSection} from 'react-native-paper';
-import DrawerHeader from "../../components/DrawerHeader";
+import DrawerHeader from '../../components/DrawerHeader';
 
 export default class Drawer extends Component {
-
   onItemPress = (routeName: string) => {
     this.setState({
       activeRoute: routeName,
@@ -26,7 +25,6 @@ export default class Drawer extends Component {
 
     return (
       <DrawerSection style={{paddingTop: 30}}>
-
         <DrawerHeader user={user} />
 
         <DrawerItem
@@ -47,7 +45,6 @@ export default class Drawer extends Component {
           iconProps={{name: 'heart', type: 'MaterialCommunityIcons'}}
           active={activeRoute === 'FavoritesStack'}
         />
-
 
         <DrawerItem
           label={I18n.t('orders')}

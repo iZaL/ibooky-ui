@@ -28,41 +28,38 @@ class OrderDetailScene extends Component {
 
   componentDidMount() {
     this.props.actions.fetchOrderDetails({
-      // order_id: 10,
       order_id: this.props.navigation.getParam('orderID'),
     });
   }
 
-  trackOrder = () => {
-    this.props.navigation.navigate('TrackOrder', {
-      orderID: this.props.order.id,
-    });
-  };
-
   render() {
     let {order} = this.props;
-    console.log('orderID', this.props.navigation.getParam('orderID'));
-    return (
-      <View style={{flex: 1}}>
-        {order && (
-          <ScrollView
-            style={{flex: 1}}
-            contentContainerStyle={{paddingBottom: 30}}>
-            <OrderBasicInfo item={order} />
-            <OrderItems order={order} />
-            <OrderTotal total={order.total} />
 
-            <View>
-              <SectionHeading title={I18n.t('qr_code')} />
-
-              <View style={{alignItems: 'center', padding: 20}}>
-                <QRCode value={`${this.props.order.id}`} />
-              </View>
+    if(order) {
+      return (
+        <ScrollView
+          style={{flex: 1}}
+          contentContainerStyle={{paddingBottom: 30}}>
+          <OrderBasicInfo item={order} />
+          <OrderItems order={order} />
+          <OrderTotal total={order.total} />
+          <View>
+            <SectionHeading title={I18n.t('qr_code')} />
+            <View style={{flex: 1, padding: 20}}>
+              {order.products &&
+              order.products.map(product => {
+                return (
+                  <View style={{marginBottom: 80, alignItems: 'center'}} key={`{product.id}`}>
+                    <QRCode value={`${product.id}`}  />
+                  </View>
+                );
+              })}
             </View>
-          </ScrollView>
-        )}
-      </View>
-    );
+          </View>
+        </ScrollView>
+      );
+    }
+    return null;
   }
 }
 

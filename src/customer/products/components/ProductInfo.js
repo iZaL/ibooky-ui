@@ -46,9 +46,7 @@ export default class extends Component {
           {item.bid_valid && (
             <View style={[styles.itemContent]}>
               <Text style={styles.label}>{I18n.t('time_remaining')}</Text>
-              <CountdownTimer
-                targetDate={new Date(item.bid_end_at)}
-              />
+              <CountdownTimer targetDate={new Date(item.bid_end_at)} />
             </View>
           )}
 

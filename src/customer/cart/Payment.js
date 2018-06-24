@@ -44,15 +44,15 @@ class Payment extends Component {
     const failureUrl = `${PAYMENT_ENDPOINT}/failure`;
 
     if (navState.url.includes('result=SUCCESS')) {
-
       this.setState({
         scene: 'success',
       });
 
-      this.props.dispatch(ACTIONS.paymentSuccess({
-        order_id:this.props.navigation.getParam('orderID')
-      }));
-
+      this.props.dispatch(
+        ACTIONS.paymentSuccess({
+          order_id: this.props.navigation.getParam('orderID'),
+        }),
+      );
     } else if (navState.url === failureUrl) {
       this.setState({
         scene: 'failed',

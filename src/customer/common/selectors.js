@@ -9,6 +9,7 @@ const categoriesSchema = state => state.entities.categories;
 const ordersSchema = state => state.entities.orders;
 const categoryReducer = state => state.customer.categories;
 const pastOrders = state => state.customer.past_orders.ids;
+const favoritesReducer = state => state.customer.favorites;
 const getIdProp = (state, id) => id;
 
 const getProducts = createSelector(
@@ -27,6 +28,21 @@ const getProducts = createSelector(
         })) ||
       []
     );
+  },
+);
+
+const getFavoriteProducts = createSelector(
+  [schemas, favoritesReducer,productsSchema],
+  (entities, favorites, products) => {
+    return favorites.collection.map(productID => {
+      let cartProduct = products[productID];
+      return {
+        ...denormalize(productID, Schema.products, entities),
+        cart: {
+          ...cartProduct,
+        },
+      };
+    }).filter(product => product.favorited === true) || [];
   },
 );
 
@@ -105,16 +121,16 @@ const getCategoriesWithProducts = createSelector(
           return {
             ...denormalize(id, Schema.categories, entities),
             products:
-              (reducer.activeCategoryID &&
-                reducer.products[reducer.activeCategoryID] &&
-                reducer.products[reducer.activeCategoryID].collection.map(
-                  id => {
-                    return {
-                      ...denormalize(id, Schema.products, entities),
-                    };
-                  },
-                )) ||
-              [],
+            (reducer.activeCategoryID &&
+              reducer.products[reducer.activeCategoryID] &&
+              reducer.products[reducer.activeCategoryID].collection.map(
+                id => {
+                  return {
+                    ...denormalize(id, Schema.products, entities),
+                  };
+                },
+              )) ||
+            [],
           };
         })) ||
       []
@@ -153,6 +169,7 @@ export const SELECTORS = {
   getCartProducts,
   getProduct,
   getProducts,
+  getFavoriteProducts,
   getCategories,
   getCategoryProducts,
   getCategoriesWithProducts,

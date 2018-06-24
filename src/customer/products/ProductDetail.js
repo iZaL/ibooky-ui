@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {ScrollView, View,InteractionManager} from 'react-native';
+import {ScrollView, View, InteractionManager} from 'react-native';
 import {connect} from 'react-redux';
 import ProductDescription from 'customer/products/components/ProductDescription';
 import ProductImages from 'customer/products/components/ProductImages';
@@ -11,7 +11,7 @@ import NavButton from 'components/NavButton';
 import IconFactory from 'components/IconFactory';
 import AttributesList from 'customer/products/components/AttributesList';
 import AttributeDialog from 'customer/products/components/AttributeDialog';
-import {ACTIONS as PRODUCT_ACTIONS} from 'customer/common/actions';
+import {ACTIONS as CUSTOMER_ACTIONS} from 'customer/common/actions';
 import {SELECTORS as CUSTOMER_SELECTORS} from 'customer/common/selectors';
 import colors from 'assets/theme/colors';
 
@@ -61,7 +61,7 @@ class ProductDetail extends Component {
 
   componentDidMount() {
     this.props.dispatch(
-      PRODUCT_ACTIONS.fetchProductDetails({
+      CUSTOMER_ACTIONS.fetchProductDetails({
         product_id: this.props.navigation.getParam('productID'),
       }),
     );
@@ -73,7 +73,6 @@ class ProductDetail extends Component {
           handleRightButtonPress: this.loadCartScene,
         });
       });
-
     }, 1000);
   }
 
@@ -146,7 +145,7 @@ class ProductDetail extends Component {
       .find(prod => prod.product_id === product.id);
 
     this.props.dispatch(
-      PRODUCT_ACTIONS.setCartItem({
+      CUSTOMER_ACTIONS.setCartItem({
         product_id: product.id,
         attributes: attributeIDs,
         total: product.price,
@@ -158,6 +157,14 @@ class ProductDetail extends Component {
     this.loadCartScene();
   };
 
+  favoriteProduct = product => {
+    this.props.dispatch(
+      CUSTOMER_ACTIONS.favoriteProduct({
+        product_id: product.id,
+      }),
+    );
+  };
+  
   render() {
     let {product} = this.props;
 
@@ -174,7 +181,7 @@ class ProductDetail extends Component {
         />
 
         <View style={{paddingHorizontal: 10}}>
-          <ProductInfo item={product} />
+          <ProductInfo item={product} favorite={this.favoriteProduct} />
 
           <Divider />
 

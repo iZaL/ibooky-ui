@@ -17,10 +17,7 @@ class LanguageSelect extends Component {
     let active = this.props.app.language;
 
     return (
-      <LanguageSelectScene
-        active={active}
-        onPress={this.onLanguageSelect}
-      />
+      <LanguageSelectScene active={active} onPress={this.onLanguageSelect} />
     );
   }
 }

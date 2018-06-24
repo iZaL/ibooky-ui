@@ -5,10 +5,9 @@ import {API} from 'customer/common/api';
 import {Schema} from 'utils/schema';
 import {normalize} from 'normalizr';
 import flatten from 'lodash/flatten';
-import {ACTIONS as APP_ACTIONS} from "app/common/actions";
+import {ACTIONS as APP_ACTIONS} from 'app/common/actions';
 
 function* checkout(action) {
-
   const {order_id, attributes, resolve, reject} = action.params;
   // try {
   //   const params = {
@@ -41,7 +40,7 @@ function* checkout(action) {
     const params = {
       body: {
         ...attributes,
-        order_id:order_id
+        order_id: order_id,
       },
     };
     const response = yield call(API.checkout, params);
@@ -49,13 +48,11 @@ function* checkout(action) {
 
     yield put({
       type: ACTION_TYPES.CHECKOUT_SUCCESS,
-      entities:normalized.entities
+      entities: normalized.entities,
     });
 
     yield resolve(response.data);
-
   } catch (error) {
-
     yield put({type: ACTION_TYPES.CHECKOUT_FAILURE, error});
 
     yield put(
@@ -66,19 +63,11 @@ function* checkout(action) {
     );
 
     yield reject(error);
-
   }
-
 }
-
-
 
 function* checkoutMonitor() {
-  yield takeLatest(
-    ACTION_TYPES.CHECKOUT_REQUEST,
-    checkout,
-  );
+  yield takeLatest(ACTION_TYPES.CHECKOUT_REQUEST, checkout);
 }
-
 
 export const sagas = all([fork(checkoutMonitor)]);

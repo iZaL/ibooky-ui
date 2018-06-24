@@ -22,13 +22,13 @@ class IconFactory extends Component {
     size: PropTypes.number,
   };
 
-  shouldComponentUpdate() {
-    return false;
+  shouldComponentUpdate(nextProps) {
+    return nextProps.name !== this.props.name;
   }
 
   static defaultProps = {
     size: 24,
-    color: 'rgba(0,0,0,0.87)',
+    color: 'rgba(0,0,0,0.99)',
   };
 
   render() {

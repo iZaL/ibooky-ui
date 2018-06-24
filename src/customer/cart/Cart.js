@@ -62,8 +62,7 @@ class Cart extends PureComponent {
           this.checkout(order);
         }
       })
-      .catch(e => {
-      });
+      .catch(e => {});
   };
 
   showLoginDialog = () => {
@@ -72,17 +71,18 @@ class Cart extends PureComponent {
     });
   };
 
-  checkout = (order) => {
+  checkout = order => {
     new Promise((resolve, reject) => {
-      this.props.dispatch(ACTIONS.checkout({order_id:order.id,attributes:{}, resolve, reject}));
+      this.props.dispatch(
+        ACTIONS.checkout({order_id: order.id, attributes: {}, resolve, reject}),
+      );
     })
       .then(res => {
         return this.props.navigation.navigate('Payment', {
           orderID: res.id,
         });
       })
-      .catch(e => {
-      });
+      .catch(e => {});
   };
 
   hideLoginDialog = () => {
@@ -111,8 +111,7 @@ class Cart extends PureComponent {
     });
   };
 
-
-  onDeleteCartItem = (item) => {
+  onDeleteCartItem = item => {
     this.props.dispatch(
       ACTIONS.removeCartItem({
         product_id: item.id,

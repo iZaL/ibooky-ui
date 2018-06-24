@@ -1,6 +1,6 @@
 export const ACTION_TYPES = {
   CART_SET_ITEM: '@customer/cart/SET_ITEM',
-  CART_REMOVE_ITEM:'@customer/cart/REMOVE_ITEM',
+  CART_REMOVE_ITEM: '@customer/cart/REMOVE_ITEM',
 
   CATEGORY_SET_ITEM: '@customer/category/SET_ITEM',
 
@@ -19,6 +19,10 @@ export const ACTION_TYPES = {
   FETCH_ORDER_DETAIL_REQUEST: '@customer/FETCH_ORDER_DETAIL_REQUEST',
   FETCH_ORDER_DETAIL_SUCCESS: '@customer/FETCH_ORDER_DETAIL_SUCCESS',
   FETCH_ORDER_DETAIL_FAILURE: '@customer/FETCH_ORDER_DETAIL_FAILURE',
+
+  FETCH_FAVORITE_PRODUCTS_REQUEST: '@customer/FETCH_FAVORITE_PRODUCTS_REQUEST',
+  FETCH_FAVORITE_PRODUCTS_SUCCESS: '@customer/FETCH_FAVORITE_PRODUCTS_SUCCESS',
+  FETCH_FAVORITE_PRODUCTS_FAILURE: '@customer/FETCH_FAVORITE_PRODUCTS_FAILURE',
 
   FETCH_CATEGORIES_WITH_PRODUCTS_REQUEST:
     '@customer/FETCH_CATEGORIES_WITH_PRODUCTS_REQUEST',
@@ -63,6 +67,13 @@ function fetchCategories() {
 function fetchCategoriesWithProducts(params = {}) {
   return {
     type: ACTION_TYPES.FETCH_CATEGORIES_WITH_PRODUCTS_REQUEST,
+    params,
+  };
+}
+
+function fetchFavoriteProducts(params = {}) {
+  return {
+    type: ACTION_TYPES.FETCH_FAVORITE_PRODUCTS_REQUEST,
     params,
   };
 }
@@ -139,28 +150,28 @@ function fetchPastOrdersRefresh(params) {
 function favoriteProduct(params) {
   return {
     type: ACTION_TYPES.PRODUCT_FAVORITE_REQUEST,
-    params
+    params,
   };
 }
 
 function checkout(params) {
   return {
     type: ACTION_TYPES.CHECKOUT_REQUEST,
-    params
+    params,
   };
 }
 
 function paymentSuccess(params) {
   return {
     type: ACTION_TYPES.SET_PAYMENT_SUCCESS_REQUEST,
-    params
+    params,
   };
 }
-
 
 export const ACTIONS = {
   fetchCategories,
   fetchCategoriesWithProducts,
+  fetchFavoriteProducts,
   setCartItem,
   removeCartItem,
   createOrder,
@@ -172,5 +183,5 @@ export const ACTIONS = {
   fetchCategoryDetails,
   favoriteProduct,
   checkout,
-  paymentSuccess
+  paymentSuccess,
 };

@@ -11,11 +11,11 @@ import DrawerIcon from 'components/DrawerIcon';
 import colors from 'assets/theme/colors';
 import {SELECTORS as USER_SELECTORS} from "guest/common/selectors";
 
-class Home extends Component {
+class Favorites extends Component {
   static navigationOptions = ({navigation}) => {
     return {
-      headerTitle: <Text style={{color: 'black'}}>iBooky</Text>,
-      headerLeft: <DrawerIcon onPress={() => navigation.openDrawer()} />,
+      headerTitle: <Text style={{color: 'black'}}>Favorites</Text>,
+      headerLeft: <DrawerIcon onPress={() => navigation.openDrawer()}/>,
       headerRight: (
         <NavButton
           icon={
@@ -36,31 +36,7 @@ class Home extends Component {
   };
 
   componentDidMount() {
-    new Promise((resolve, reject) => {
-      this.props.dispatch(
-        CUSTOMER_ACTIONS.fetchCategoriesWithProducts({resolve, reject}),
-      );
-    })
-      .then(categories => {
-        if (categories[0]) {
-          this.props.dispatch(
-            CUSTOMER_ACTIONS.fetchCategoryDetails({
-              category_id: categories[0].id,
-            }),
-          );
-
-          this.props.dispatch(
-            CUSTOMER_ACTIONS.setCategoryItem(
-              'activeCategoryID',
-              categories[0].id,
-            ),
-          );
-        }
-      })
-      .catch(e => {
-        console.log('rekect', e);
-      });
-
+    this.props.dispatch(CUSTOMER_ACTIONS.fetchFavoriteProducts());
     setTimeout(() => {
       //@todo: setParams doesn't work outside of setTimeout
       InteractionManager.runAfterInteractions(() => {
@@ -73,17 +49,6 @@ class Home extends Component {
 
   loadCartScene = () => {
     this.props.navigation.navigate('Cart');
-  };
-
-  onCategoryListItemPress = (item: object) => {
-    this.props.dispatch(
-      CUSTOMER_ACTIONS.setCategoryItem('activeCategoryID', item.id),
-    );
-    this.props.dispatch(
-      CUSTOMER_ACTIONS.fetchCategoryDetails({
-        category_id: item.id,
-      }),
-    );
   };
 
   onProductListItemPress = (item: object) => {
@@ -101,13 +66,7 @@ class Home extends Component {
   };
 
   fetchMore = () => {
-    console.log('fetchMore');
-    let {activeCategoryID} = this.props.categoryReducer;
-    this.props.dispatch(
-      CUSTOMER_ACTIONS.fetchCategoryDetails({
-        category_id: activeCategoryID,
-      }),
-    );
+    this.props.dispatch(CUSTOMER_ACTIONS.fetchFavoriteProducts());
   };
 
   favoriteProduct = product => {
@@ -125,28 +84,17 @@ class Home extends Component {
   };
 
   render() {
-    let {categories, categoryReducer, products} = this.props;
-    let {activeCategoryID} = categoryReducer;
+    let {products} = this.props;
 
     return (
       <View style={{flex: 1}}>
-        {activeCategoryID && (
-          <View>
-            <CategoryList
-              items={categories}
-              onItemPress={this.onCategoryListItemPress}
-              activeID={activeCategoryID}
-            />
-
-            <ProductList
-              items={products}
-              onItemPress={this.onProductListItemPress}
-              onAddToCartPress={this.onAddToCartPress}
-              onEndReached={this.fetchMore}
-              favorite={this.favoriteProduct}
-            />
-          </View>
-        )}
+        <ProductList
+          items={products}
+          onItemPress={this.onProductListItemPress}
+          onAddToCartPress={this.onAddToCartPress}
+          onEndReached={this.fetchMore}
+          favorite={this.favoriteProduct}
+        />
       </View>
     );
   }
@@ -154,11 +102,9 @@ class Home extends Component {
 
 function mapStateToProps(state) {
   return {
-    categories: CUSTOMER_SELECTORS.getCategoriesWithProducts(state),
-    products: CUSTOMER_SELECTORS.getCategoryProducts(state),
-    categoryReducer: state.customer.categories,
+    products: CUSTOMER_SELECTORS.getFavoriteProducts(state),
     isAuthenticated:USER_SELECTORS.isAuthenticated(state)
   };
 }
 
-export default connect(mapStateToProps)(Home);
+export default connect(mapStateToProps)(Favorites);

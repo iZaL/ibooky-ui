@@ -10,8 +10,8 @@ import {TouchableRipple} from 'react-native-paper';
 import ProductInfo from 'customer/products/components/ProductInfo';
 import Button from 'components/Button';
 import I18n from 'utils/locale';
-
 export default class extends Component {
+
   static propTypes = {
     items: CategoriesProp.isRequired,
   };
@@ -21,7 +21,7 @@ export default class extends Component {
   }
 
   renderRow = ({item}) => {
-    let {onItemPress, onAddToCartPress,favorite} = this.props;
+    let {onItemPress, onAddToCartPress, favorite} = this.props;
     return (
       <View style={styles.container}>
         <ProductImages images={item.images} />
@@ -29,7 +29,7 @@ export default class extends Component {
         <TouchableRipple
           onPress={() => onItemPress(item)}
           style={styles.itemContainer}>
-          <ProductInfo item={item} favorite={favorite}/>
+          <ProductInfo item={item} favorite={favorite} />
         </TouchableRipple>
 
         <Button
@@ -50,6 +50,7 @@ export default class extends Component {
       <FlatList
         data={items}
         style={styles.listContainer}
+        contentInset={{bottom:50}}
         renderItem={this.renderRow}
         ItemSeparatorComponent={() => <Divider />}
         keyExtractor={(item, index) => `${index}`}

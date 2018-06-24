@@ -9,17 +9,17 @@ import ProductInfo from 'customer/cart/components/ProductInfo';
 import ProductQuantity from 'customer/cart/components/ProductQuantity';
 import Divider from 'components/Divider';
 import CartTotal from 'customer/cart/components/CartTotal';
-import Button from "components/Button";
+import Button from 'components/Button';
 import I18n from 'utils/locale';
-import {Colors} from "react-native-paper";
-import Dialog from "../../../components/Dialog";
+import {Colors} from 'react-native-paper';
+import Dialog from '../../../components/Dialog';
 
 export default class extends Component {
   static propTypes = {
     text: PropTypes.string,
     total: PropTypes.number,
     setQuantity: PropTypes.func.isRequired,
-    onDelete:PropTypes.func
+    onDelete: PropTypes.func,
   };
 
   // shouldComponentUpdate(nextProps) {
@@ -27,7 +27,7 @@ export default class extends Component {
   // }
 
   state = {
-    dialogVisible:false
+    dialogVisible: false,
   };
 
   setQuantity = (quantity: number) => {
@@ -36,12 +36,12 @@ export default class extends Component {
 
   onDeletePress = () => {
     this.setState({
-      dialogVisible:true
+      dialogVisible: true,
     });
   };
 
   onDeleteConfirm = () => {
-    this.setState({dialogVisible:false});
+    this.setState({dialogVisible: false});
     this.props.onDelete(this.props.item);
   };
 
@@ -61,7 +61,11 @@ export default class extends Component {
         <Divider style={{marginVertical: 5}} />
 
         <View style={styles.row}>
-          <Button title={I18n.t('delete')} onPress={this.onDeletePress} color={Colors.teal300}/>
+          <Button
+            title={I18n.t('delete')}
+            onPress={this.onDeletePress}
+            color={Colors.teal300}
+          />
           <CartTotal total={item.cart.total} hideTitle={true} />
         </View>
 
@@ -69,11 +73,12 @@ export default class extends Component {
           title={I18n.t('confirm')}
           description={I18n.t('cart_delete_item?')}
           rightPress={this.onDeleteConfirm}
-          leftPress={()=>{this.setState({dialogVisible:false})}}
+          leftPress={() => {
+            this.setState({dialogVisible: false});
+          }}
           leftText={I18n.t('cancel')}
           visible={dialogVisible}
         />
-
       </View>
     );
   }
@@ -91,8 +96,8 @@ const styles = StyleSheet.create({
     shadowOffset: {width: 1, height: 1},
     marginBottom: 10,
   },
-  row:{
-    flexDirection:'row',
-    alignItems:'center'
-  }
+  row: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
 });

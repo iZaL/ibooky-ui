@@ -4,4 +4,4 @@ import {sagas as orders} from 'customer/sagas/orders';
 import {sagas as cart} from 'customer/sagas/cart';
 import {all} from 'redux-saga/effects';
 
-export const sagas = all([categories, products, orders,cart]);
+export const sagas = all([categories, products, orders, cart]);

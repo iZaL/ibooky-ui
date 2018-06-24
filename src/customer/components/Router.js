@@ -1,6 +1,6 @@
 import React from 'react';
 import {createDrawerNavigator, createStackNavigator} from 'react-navigation';
-
+import {Platform} from 'react-native';
 import Login from 'guest/Login';
 import Register from 'guest/Register';
 import Forgot from 'guest/Forgot';
@@ -16,7 +16,8 @@ import Checkout from 'customer/cart/Checkout';
 import Payment from 'customer/cart/Payment';
 import PastOrdersScene from 'customer/orders/PastOrdersScene';
 import OrderDetailScene from 'customer/orders/OrderDetailScene';
-import LanguageSelect from "../../app/LanguageSelect";
+import LanguageSelect from 'app/LanguageSelect';
+import Favorites from "../products/Favorites";
 
 const getDrawerIcon = navigation => {
   return {
@@ -79,10 +80,47 @@ const HomeStack = createStackNavigator(
     Payment: {
       screen: Payment,
     },
-    OrderDetail: {screen: OrderDetailScene}, LanguageSelect: {
-    screen: LanguageSelect,
+    OrderDetail: {
+      screen: OrderDetailScene,
+      path: 'products/:id',
+    },
+    LanguageSelect: {
+      screen: LanguageSelect,
+    },
   },
+  {
+    navigationOptions: {
+      ...navOptions,
+    },
+    ...cardStyle,
+    // initialRouteName: 'Payment',
+  },
+);
 
+const FavoritesStack = createStackNavigator(
+  {
+    Home: {
+      screen: Favorites,
+    },
+    ProductDetail: {
+      screen: ProductDetail,
+    },
+    Cart: {
+      screen: Cart,
+    },
+    Checkout: {
+      screen: Checkout,
+    },
+    Payment: {
+      screen: Payment,
+    },
+    OrderDetail: {
+      screen: OrderDetailScene,
+      path: 'products/:id',
+    },
+    LanguageSelect: {
+      screen: LanguageSelect,
+    },
   },
   {
     navigationOptions: {
@@ -143,13 +181,18 @@ const DrawerRoutes = {
   SettingStack: {
     screen: SettingStack,
   },
+  FavoritesStack: {
+    screen: FavoritesStack,
+  },
   AuthStack: {
     screen: AuthStack,
   },
 };
 
+const prefix = Platform.OS == 'android' ? 'hungryr://hungryr/' : 'hungryr://';
+
 export const Router = createDrawerNavigator(DrawerRoutes, {
-  contentComponent: props => <Drawer {...props} />,
+  contentComponent: props => <Drawer {...props} uriPrefix={prefix} />,
   drawerWidth: 275,
-  // initialRouteName: 'PastOrdersStack',
+  initialRouteName: 'FavoritesStack',
 });

@@ -11,10 +11,12 @@ import IconFactory from 'components/IconFactory';
 import Divider from 'components/Divider';
 import CountdownTimer from 'customer/products/components/CountdownTimer';
 import PropTypes from 'prop-types';
+import Share from '../../../components/Share';
+
 export default class extends Component {
   static propTypes = {
     item: CategoryProp.isRequired,
-    favorite:PropTypes.func
+    favorite: PropTypes.func,
   };
 
   shouldComponentUpdate(nextProps) {
@@ -23,8 +25,6 @@ export default class extends Component {
 
   render() {
     let {item, favorite} = this.props;
-
-    console.log('item',item);
 
     return (
       <View style={styles.container}>
@@ -57,7 +57,7 @@ export default class extends Component {
             </View>
           )}
 
-          <TouchableRipple onPress={()=>favorite(item)}>
+          <TouchableRipple onPress={() => favorite(item)}>
             <IconFactory
               type="MaterialCommunityIcons"
               name={item.favorited ? 'heart' : 'heart-outline'}
@@ -66,15 +66,23 @@ export default class extends Component {
             />
           </TouchableRipple>
 
-          <View style={styles.itemContent}>
-            <Text style={styles.label}>{I18n.t('share')}</Text>
-            <IconFactory
-              type="Entypo"
-              name="share-alternative"
-              color={colors.error}
-              size={24}
-            />
-          </View>
+          <Share
+            payload={{
+              title: item.name,
+              message: 'message',
+              url: `hungryr://products/${item.id}`,
+              subject: 'Share Link', //  for email
+            }}>
+            <View style={styles.itemContent}>
+              <Text style={styles.label}>{I18n.t('share')}</Text>
+              <IconFactory
+                type="Entypo"
+                name="share-alternative"
+                color={colors.error}
+                size={24}
+              />
+            </View>
+          </Share>
         </View>
       </View>
     );

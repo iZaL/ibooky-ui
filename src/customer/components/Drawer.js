@@ -39,6 +39,15 @@ export default class Drawer extends Component {
         />
 
         <DrawerItem
+          label={I18n.t('favorites')}
+          routeName="FavoritesStack"
+          onItemPress={this.onItemPress}
+          iconProps={{name: 'heart', type: 'MaterialCommunityIcons'}}
+          active={activeRoute === 'PastOrdersStack'}
+        />
+
+
+        <DrawerItem
           label={I18n.t('past_orders')}
           routeName="PastOrdersStack"
           onItemPress={this.onItemPress}
@@ -58,14 +67,14 @@ export default class Drawer extends Component {
         />
 
         {/*<DrawerItem*/}
-          {/*label={I18n.t('settings')}*/}
-          {/*routeName="Settings"*/}
-          {/*onItemPress={this.onItemPress}*/}
-          {/*iconProps={{*/}
-            {/*name: 'settings',*/}
-            {/*type: 'MaterialCommunityIcons',*/}
-          {/*}}*/}
-          {/*active={activeRoute === 'Settings'}*/}
+        {/*label={I18n.t('settings')}*/}
+        {/*routeName="Settings"*/}
+        {/*onItemPress={this.onItemPress}*/}
+        {/*iconProps={{*/}
+        {/*name: 'settings',*/}
+        {/*type: 'MaterialCommunityIcons',*/}
+        {/*}}*/}
+        {/*active={activeRoute === 'Settings'}*/}
         {/*/>*/}
 
         {isAuthenticated ? (

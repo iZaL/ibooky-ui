@@ -26,7 +26,6 @@ function fetchOrderDetails(params) {
 }
 
 function favoriteProduct(params) {
-  console.log('params',params);
   const path = `customer/products/favorite`;
   let requestParams = {
     path,
@@ -37,7 +36,6 @@ function favoriteProduct(params) {
 }
 
 function checkout(params) {
-  console.log('params',params);
   const path = `customer/orders/checkout`;
   let requestParams = {
     path,
@@ -72,10 +70,16 @@ function fetchPastOrders(params = {}) {
   return request({path, params});
 }
 
+function fetchFavoriteProducts(params = {}) {
+  const path = `customer/products/favorites`;
+  return request({path, params:params});
+}
+
 export const API = {
   fetchCategories,
   fetchCategoriesWithProducts,
   fetchProductDetails,
+  fetchFavoriteProducts,
   fetchOrderDetails,
   fetchCategoryDetails,
   fetchPastOrders,

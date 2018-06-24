@@ -161,5 +161,6 @@
   "cart_delete_item?" : "Remove item from the cart ?",
 
   "view_order": "View Order",
-  "go_home" : "Go to Home"
+  "go_home" : "Go to Home",
+  "favorites" : "Favorites"
 }

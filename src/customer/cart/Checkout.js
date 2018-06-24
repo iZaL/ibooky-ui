@@ -19,7 +19,6 @@ type State = {
 };
 
 class Checkout extends PureComponent {
-
   static propTypes = {
     navigation: PropTypes.shape({
       state: PropTypes.shape({
@@ -59,25 +58,25 @@ class Checkout extends PureComponent {
   }
 
   onCheckoutPress = () => {
-
     let {order} = this.props;
 
     let attributes = {
-      ...this.state
+      ...this.state,
     };
 
     new Promise((resolve, reject) => {
-      this.props.dispatch(ACTIONS.checkout({order_id:order.id,attributes, resolve, reject}));
+      this.props.dispatch(
+        ACTIONS.checkout({order_id: order.id, attributes, resolve, reject}),
+      );
     })
       .then(res => {
-          return this.props.navigation.navigate('Payment', {
-            orderID: res.id,
-          });
+        return this.props.navigation.navigate('Payment', {
+          orderID: res.id,
+        });
       })
       .catch(e => {
         console.log('e', e);
       });
-
   };
 
   onFieldChange = (field, value) => {
@@ -125,7 +124,6 @@ class Checkout extends PureComponent {
           onPress={this.onCheckoutPress}
           style={{marginTop: 20}}
         />
-
       </ScrollView>
     );
   }

@@ -49,9 +49,9 @@ function* login(action) {
 
     //@todo:remove setTimeout and fix redirect issue
     if (redirectRoute) {
-      yield setTimeout(()=>{
-         NavigatorService.navigate(redirectRoute);
-      },1000);
+      yield setTimeout(() => {
+        NavigatorService.navigate(redirectRoute);
+      }, 1000);
     }
 
     yield resolve(response.data);

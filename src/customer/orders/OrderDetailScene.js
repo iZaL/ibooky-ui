@@ -33,6 +33,7 @@ class OrderDetailScene extends Component {
   render() {
     let {order} = this.props;
 
+    console.log('order',order);
     if(order) {
       return (
         <ScrollView

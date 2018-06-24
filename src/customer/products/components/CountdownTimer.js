@@ -94,11 +94,7 @@ export default class CountdownTimer extends Component {
 
     if (format.day) {
       let days = moment.duration(remainingTime).get('days');
-      // if (leadingZero) {
-      //   days = this.addLeadingZero(days);
-      // }
-
-      if (days !== '00') {
+      if (days != '0') {
         html.push(<Text key="d">{days}d </Text>);
       }
     }

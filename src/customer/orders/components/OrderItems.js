@@ -25,24 +25,46 @@ export default class OrderItems extends Component {
         {products.map((product, index) => (
           <View style={styles.itemContainer} key={product.id}>
             <View style={styles.packageItemContainer}>
-              <Text style={styles.packageTitle}>{product.name} ({I18n.t('quantity')} {product.quantity})</Text>
-              {product.price && (
-                <Text style={styles.packagePrice}>{product.price} KD</Text>
-              )}
+              <Text style={styles.packageTitle}>{product.name}</Text>
             </View>
-            {order.attributes &&
-              order.attributes.map(attribute => {
-                return (
-                  <View style={{flex: 1}} key={attribute.id}>
-                    <Divider style={{marginVertical: 10}} />
-                    <View style={styles.serviceListContainer}>
-                      <Text style={styles.attributeTitle}>
-                        {attribute.name}{' '}
-                      </Text>
-                    </View>
+            {product.pivot && (
+              <View>
+                <View style={{flex: 1,paddingTop:10}}>
+                  <View style={styles.serviceListContainer}>
+                    <Text style={styles.attributeTitle}>
+                      {I18n.t('quantity')}
+                    </Text>
+                    <Text >
+                      {product.pivot.quantity}
+                    </Text>
                   </View>
-                );
-              })}
+                </View>
+                <Divider/>
+                <View style={{flex: 1}}>
+                  <View style={styles.serviceListContainer}>
+                    <Text style={styles.attributeTitle}>
+                      {I18n.t('amount')}
+                    </Text>
+                    <Text >
+                      {product.pivot.price} KD
+                    </Text>
+                  </View>
+                </View>
+              </View>
+            )}
+            {order.attributes &&
+            order.attributes.map(attribute => {
+              return (
+                <View style={{flex: 1}} key={attribute.id}>
+                  <Divider />
+                  <View style={styles.serviceListContainer}>
+                    <Text style={styles.attributeTitle}>
+                      {attribute.name}{' '}
+                    </Text>
+                  </View>
+                </View>
+              );
+            })}
             <Divider />
           </View>
         ))}

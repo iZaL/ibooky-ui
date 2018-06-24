@@ -15,19 +15,20 @@ const QRCodes = ({order}) => {
       <View style={styles.rowContainer}>
         {order.products &&
         order.products.map(product => {
-          console.log('product',product);
-          return (
-            <View style={{marginBottom: 80, alignItems: 'center'}} key={`${product.id}`}>
-              <QRCode value={`${product.id}`}  />
-              <View style={{flexDirection:'row',alignItems:'center'}}>
-                <Text style={{paddingVertical:10,fontSize:17}}>{product.name}</Text>
-                {
-                  product.company &&
-                  <Text style={{paddingVertical:10,fontSize:17}}> - {product.company.name}</Text>
-                }
+          if(product.pivot) {
+            return (
+              <View style={{marginBottom: 80, alignItems: 'center'}} key={`${product.id}`}>
+                <QRCode value={`${product.pivot.code}`}  />
+                <View style={{flexDirection:'row',alignItems:'center'}}>
+                  <Text style={{paddingVertical:10,fontSize:17}}>{product.name}</Text>
+                  {
+                    product.company &&
+                    <Text style={{paddingVertical:10,fontSize:17}}> - {product.company.name}</Text>
+                  }
+                </View>
               </View>
-            </View>
-          );
+            );
+          }
         })}
       </View>
     </View>

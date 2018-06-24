@@ -5,13 +5,11 @@ import Home from 'company/Home';
 import Login from 'guest/Login';
 import DrawerIcon from 'components/DrawerIcon';
 import OrderDetailScene from 'company/orders/OrderDetailScene';
-import PastOrdersScene from 'company/orders/PastOrdersScene';
 import QRScan from 'company/orders/QRScan';
-import UpcomingOrdersScene from 'company/orders/UpcomingOrdersScene';
+import OrdersScene from 'company/orders/OrdersScene';
 import SettingsScene from 'company/SettingsScene';
 import I18n from 'utils/locale';
 import colors from 'assets/theme/colors';
-import Register from 'guest/Register';
 
 const getDrawerIcon = navigation => {
   return {
@@ -37,18 +35,6 @@ const HomeStack = createStackNavigator(
       }),
     },
     OrderDetail: {screen: OrderDetailScene},
-    DriverAdd: {
-      screen: Register,
-      navigationOptions: ({navigation}) => ({
-        title: I18n.t('driver_add'),
-      }),
-    },
-    UpcomingOrders: {
-      screen: UpcomingOrdersScene,
-      navigationOptions: ({navigation}) => ({
-        title: I18n.t('upcoming_orders'),
-      }),
-    },
   },
   {
     // initialRouteName:'TrackDetail',
@@ -58,32 +44,13 @@ const HomeStack = createStackNavigator(
   },
 );
 
-const PastOrdersStack = createStackNavigator(
+const OrdersStack = createStackNavigator(
   {
-    PastOrders: {
-      screen: PastOrdersScene,
+    Orders: {
+      screen: OrdersScene,
       navigationOptions: ({navigation}) => ({
         ...getDrawerIcon(navigation),
-        title: I18n.t('past_orders'),
-      }),
-    },
-    OrderDetail: {screen: OrderDetailScene},
-  },
-  {
-    // initialRouteName:'WorkingOrders'
-    navigationOptions: ({navigation}) => ({
-      ...navStyle,
-    }),
-  },
-);
-
-const UpcomingOrdersStack = createStackNavigator(
-  {
-    UpcomingOrders: {
-      screen: UpcomingOrdersScene,
-      navigationOptions: ({navigation}) => ({
-        ...getDrawerIcon(navigation),
-        title: I18n.t('upcoming_orders'),
+        title: I18n.t('orders'),
       }),
     },
     OrderDetail: {screen: OrderDetailScene},
@@ -127,8 +94,7 @@ const QRScanStack = createStackNavigator(
 
 const DrawerRoutes = {
   HomeStack: {screen: HomeStack},
-  PastOrdersStack: {screen: PastOrdersStack},
-  UpcomingOrdersStack: {screen: UpcomingOrdersStack},
+  OrdersStack: {screen: OrdersStack},
   SettingsStack: {screen: SettingsStack},
   QRScanStack: {screen: QRScanStack},
   Login: {screen: Login},

@@ -58,19 +58,11 @@ export default class Drawer extends Component {
         />
 
         <DrawerItem
-          label={I18n.t('upcoming_orders')}
-          routeName="UpcomingOrdersStack"
+          label={I18n.t('orders')}
+          routeName="OrdersStack"
           onItemPress={this.onItemPress}
           iconProps={{name: 'back-in-time', type: 'Entypo'}}
-          active={activeRoute === 'UpcomingOrdersStack'}
-        />
-
-        <DrawerItem
-          label={I18n.t('past_orders')}
-          routeName="PastOrdersStack"
-          onItemPress={this.onItemPress}
-          iconProps={{name: 'timelapse', type: 'MaterialIcons'}}
-          active={activeRoute === 'PastOrdersStack'}
+          active={activeRoute === 'OrdersStack'}
         />
 
         <DrawerItem

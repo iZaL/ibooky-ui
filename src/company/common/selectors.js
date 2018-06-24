@@ -13,7 +13,7 @@ const getOrderByID = () => {
   );
 };
 
-const getUpcomingOrders = createSelector(
+const getOrders = createSelector(
   [schemas, upcomingOrders],
   (entities, orders) => {
     return (
@@ -38,7 +38,7 @@ const getPastOrders = createSelector(
 );
 
 export const SELECTORS = {
-  getUpcomingOrders,
+  getOrders,
   getPastOrders,
   getOrderByID,
 };

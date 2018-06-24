@@ -1,6 +1,6 @@
 import {request} from 'utils/network';
 
-function fetchUpcomingOrders(params = {}) {
+function fetchOrders(params = {}) {
   const path = `company/orders/upcoming`;
   return request({path, requiresAuthentication: true, params});
 }
@@ -56,7 +56,7 @@ function saveDriverAttributes(params) {
 }
 
 export const API = {
-  fetchUpcomingOrders,
+  fetchOrders,
   fetchWorkingOrders,
   fetchPastOrders,
   fetchOrderDetails,

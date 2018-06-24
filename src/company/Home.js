@@ -31,12 +31,7 @@ class Home extends PureComponent {
 
   fetchData = () => {
     this.props.dispatch(
-      ORDER_ACTIONS.fetchUpcomingOrders({
-        force: true,
-      }),
-    );
-    this.props.dispatch(
-      ORDER_ACTIONS.fetchWorkingOrders({
+      ORDER_ACTIONS.fetchOrders({
         force: true,
       }),
     );
@@ -56,16 +51,12 @@ class Home extends PureComponent {
     });
   };
 
-  loadUpcomingOrders = () => {
-    this.props.navigation.navigate('UpcomingOrders');
-  };
-
-  loadCurrentOrders = () => {
-    this.props.navigation.navigate('WorkingOrders');
+  loadOrders = () => {
+    this.props.navigation.navigate('Orders');
   };
 
   render() {
-    const {upcoming_orders} = this.props;
+    const {orders} = this.props;
 
     return (
       <ScrollView
@@ -77,13 +68,13 @@ class Home extends PureComponent {
           />
         }>
         <SectionHeading
-          title={I18n.t('upcoming_orders')}
+          title={I18n.t('orders')}
           buttonTitle={I18n.t('view_all')}
-          onButtonPress={this.loadUpcomingOrders}
+          onButtonPress={this.loadOrders}
         />
 
         <OrdersList
-          items={upcoming_orders}
+          items={orders}
           onItemPress={this.onOrdersListItemPress}
         />
       </ScrollView>
@@ -93,7 +84,7 @@ class Home extends PureComponent {
 
 function mapStateToProps(state) {
   return {
-    upcoming_orders: ORDER_SELECTORS.getUpcomingOrders(state),
+    orders: ORDER_SELECTORS.getOrders(state),
   };
 }
 

@@ -5,15 +5,15 @@ import {Schema} from 'utils/schema';
 import {normalize} from 'normalizr';
 import I18n from 'utils/locale';
 
-function* fetchUpcomingOrders(action) {
+function* fetchOrders(action) {
   try {
     const state = yield select();
 
-    const {nextPage} = state.company.upcoming_orders;
+    const {nextPage} = state.company.orders;
 
     if (nextPage === null && !action.params.force) {
       yield put({
-        type: ACTION_TYPES.FETCH_UPCOMING_ORDERS_FAILURE,
+        type: ACTION_TYPES.FETCH_ORDERS_FAILURE,
         error: I18n.t('no_more_records'),
       });
     } else {
@@ -22,51 +22,20 @@ function* fetchUpcomingOrders(action) {
         paginatedUrl: nextPage,
       };
 
-      const response = yield call(API.fetchUpcomingOrders, params);
+      const response = yield call(API.fetchOrders, params);
 
       const normalized = normalize(response.data, [Schema.orders]);
       const {entities, result} = normalized;
 
       yield put({
-        type: ACTION_TYPES.FETCH_UPCOMING_ORDERS_SUCCESS,
+        type: ACTION_TYPES.FETCH_ORDERS_SUCCESS,
         entities: entities,
         result: result,
         nextPage: (response.links && response.links.next) || null,
       });
     }
   } catch (error) {
-    yield put({type: ACTION_TYPES.FETCH_UPCOMING_ORDERS_FAILURE, error});
-  }
-}
-
-function* fetchPastOrders(action) {
-  try {
-    const state = yield select();
-
-    const {nextPage} = state.company.past_orders;
-
-    if (nextPage === null && !action.params.force) {
-      yield put({
-        type: ACTION_TYPES.FETCH_PAST_ORDERS_FAILURE,
-        error: I18n.t('no_more_records'),
-      });
-    } else {
-      const params = {
-        paginated: !!nextPage,
-        paginatedUrl: nextPage,
-      };
-      const response = yield call(API.fetchPastOrders, params);
-      const normalized = normalize(response.data, [Schema.orders]);
-      const {entities, result} = normalized;
-      yield put({
-        type: ACTION_TYPES.FETCH_PAST_ORDERS_SUCCESS,
-        entities: entities,
-        result: result,
-        nextPage: (response.links && response.links.next) || null,
-      });
-    }
-  } catch (error) {
-    yield put({type: ACTION_TYPES.FETCH_PAST_ORDERS_FAILURE, error});
+    yield put({type: ACTION_TYPES.FETCH_ORDERS_FAILURE, error});
   }
 }
 
@@ -83,15 +52,11 @@ function* fetchOrderDetails(action) {
   }
 }
 
-function* fetchUpcomingOrdersMonitor() {
+function* fetchOrdersMonitor() {
   yield takeLatest(
-    ACTION_TYPES.FETCH_UPCOMING_ORDERS_REQUEST,
-    fetchUpcomingOrders,
+    ACTION_TYPES.FETCH_ORDERS_REQUEST,
+    fetchOrders,
   );
-}
-
-function* fetchPastOrdersMonitor() {
-  yield takeLatest(ACTION_TYPES.FETCH_PAST_ORDERS_REQUEST, fetchPastOrders);
 }
 
 function* fetchOrderDetailsMonitor() {
@@ -99,7 +64,6 @@ function* fetchOrderDetailsMonitor() {
 }
 
 export const sagas = all([
-  fork(fetchUpcomingOrdersMonitor),
-  fork(fetchPastOrdersMonitor),
+  fork(fetchOrdersMonitor),
   fork(fetchOrderDetailsMonitor),
 ]);

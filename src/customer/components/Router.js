@@ -189,10 +189,10 @@ const DrawerRoutes = {
   },
 };
 
-const prefix = Platform.OS == 'android' ? 'hungryr://hungryr/' : 'hungryr://';
+const prefix = Platform.OS === 'android' ? 'hungryr://hungryr/' : 'hungryr://';
 
 export const Router = createDrawerNavigator(DrawerRoutes, {
   contentComponent: props => <Drawer {...props} uriPrefix={prefix} />,
   drawerWidth: 275,
-  initialRouteName: 'FavoritesStack',
+  // initialRouteName: 'FavoritesStack',
 });

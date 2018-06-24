@@ -2,14 +2,12 @@
  * @flow
  */
 import React, {Component} from 'react';
-import {StyleSheet, View} from 'react-native';
-import colors from 'assets/theme/colors';
 import I18n from 'utils/locale';
 import DrawerItem from 'components/DrawerItem';
-import Divider from 'components/Divider';
 import {DrawerSection} from 'react-native-paper';
 
 export default class Drawer extends Component {
+
   onItemPress = (routeName: string) => {
     this.setState({
       activeRoute: routeName,
@@ -65,17 +63,6 @@ export default class Drawer extends Component {
           }}
           active={this.state.activeRoute === 'LanguageSelect'}
         />
-
-        {/*<DrawerItem*/}
-        {/*label={I18n.t('settings')}*/}
-        {/*routeName="Settings"*/}
-        {/*onItemPress={this.onItemPress}*/}
-        {/*iconProps={{*/}
-        {/*name: 'settings',*/}
-        {/*type: 'MaterialCommunityIcons',*/}
-        {/*}}*/}
-        {/*active={activeRoute === 'Settings'}*/}
-        {/*/>*/}
 
         {isAuthenticated ? (
           <DrawerItem

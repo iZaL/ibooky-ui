@@ -3,17 +3,12 @@
  */
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {
-  ACTIONS as DRIVER_ACTIONS,
-  ACTIONS as ORDER_ACTIONS,
-} from 'company/common/actions';
+import {ACTIONS as ORDER_ACTIONS,} from 'company/common/actions';
 import {SELECTORS as ORDER_SELECTORS} from 'company/common/selectors';
-import {ScrollView, View} from 'react-native';
-import OrderItems from 'customer/orders/components/OrderItems';
-import OrderBasicInfo from 'customer/orders/components/OrderBasicInfo';
+import {View} from 'react-native';
 import PropTypes from 'prop-types';
-import OrderTotal from 'customer/orders/components/OrderTotal';
 import {RNCamera} from 'react-native-camera';
+
 class QRScan extends Component {
   static propTypes = {
     navigation: PropTypes.shape({
@@ -74,8 +69,6 @@ class QRScan extends Component {
           }}
           style={{
             flex: 1,
-            // justifyContent: 'flex-end',
-            // alignItems: 'center'
           }}
           type={RNCamera.Constants.Type.back}
           flashMode={RNCamera.Constants.FlashMode.on}

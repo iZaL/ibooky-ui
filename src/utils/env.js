@@ -3,6 +3,7 @@ const defaults = {};
 if (__DEV__) {
   module.exports = {
     ...defaults,
+    // API_URL: 'hungryr.ideasowners.net/api',
     API_URL: '192.168.1.104:9000/api',
     // API_URL: 'ibooky.test/api',
     PAYMENT_ENDPOINT: 'http://ibooky.test/payment',

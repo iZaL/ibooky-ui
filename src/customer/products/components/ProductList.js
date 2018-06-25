@@ -44,12 +44,12 @@ export default class extends Component {
   };
 
   render() {
-    let {items, onEndReached} = this.props;
+    let {items, onEndReached,isFetching} = this.props;
 
     return (
       <FlatList
         data={items}
-        style={styles.listContainer}
+        style={[styles.listContainer,isFetching && {opacity:.5}]}
         contentInset={{bottom: 50}}
         renderItem={this.renderRow}
         ItemSeparatorComponent={() => <Divider />}

@@ -43,15 +43,27 @@ export function reducer(state = initialState, action = {}) {
         ...state,
         [action.key]: action.value,
       };
-    case ACTION_TYPES.FETCH_CATEGORY_DETAIL_SUCCESS:
+    case ACTION_TYPES.FETCH_CATEGORY_DETAIL_REQUEST:
       return {
         ...state,
         isFetching: true,
+        error: null,
+      };
+    case ACTION_TYPES.FETCH_CATEGORY_DETAIL_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
         error: null,
         products: {
           ...state.products,
           ...action.products,
         },
+      };
+    case ACTION_TYPES.FETCH_CATEGORY_DETAIL_FAILURE:
+      return {
+        ...state,
+        isFetching: false,
+        error: null,
       };
     default:
       return state;

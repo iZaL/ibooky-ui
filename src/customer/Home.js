@@ -10,6 +10,7 @@ import {SELECTORS as CUSTOMER_SELECTORS} from 'customer/common/selectors';
 import DrawerIcon from 'components/DrawerIcon';
 import colors from 'assets/theme/colors';
 import {SELECTORS as USER_SELECTORS} from 'guest/common/selectors';
+import Spinner from "../components/Spinner";
 
 class Home extends Component {
   static navigationOptions = ({navigation}) => {
@@ -124,10 +125,15 @@ class Home extends Component {
 
   render() {
     let {categories, categoryReducer, products} = this.props;
-    let {activeCategoryID} = categoryReducer;
+    let {activeCategoryID,isFetching} = categoryReducer;
+
+    console.log('categoryReducer',categoryReducer);
 
     return (
       <View style={{flex: 1}}>
+
+        <Spinner isVisible={isFetching} />
+
         {activeCategoryID && (
           <View>
             <CategoryList
@@ -135,13 +141,13 @@ class Home extends Component {
               onItemPress={this.onCategoryListItemPress}
               activeID={activeCategoryID}
             />
-
             <ProductList
               items={products}
               onItemPress={this.onProductListItemPress}
               onAddToCartPress={this.onAddToCartPress}
               onEndReached={this.fetchMore}
               favorite={this.favoriteProduct}
+              isFetching={isFetching}
             />
           </View>
         )}

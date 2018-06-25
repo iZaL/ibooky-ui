@@ -10,6 +10,7 @@ import {SELECTORS as CUSTOMER_SELECTORS} from 'customer/common/selectors';
 import DrawerIcon from 'components/DrawerIcon';
 import colors from 'assets/theme/colors';
 import {SELECTORS as USER_SELECTORS} from 'guest/common/selectors';
+import Spinner from "components/Spinner";
 
 class Favorites extends Component {
   static navigationOptions = ({navigation}) => {
@@ -82,16 +83,22 @@ class Favorites extends Component {
   };
 
   render() {
-    let {products} = this.props;
+    let {products,favorites} = this.props;
+
+    console.log('favorites',favorites);
 
     return (
       <View style={{flex: 1}}>
+
+        <Spinner isVisible={favorites.isFetching} />
+
         <ProductList
           items={products}
           onItemPress={this.onProductListItemPress}
           onAddToCartPress={this.onAddToCartPress}
           onEndReached={this.fetchMore}
           favorite={this.favoriteProduct}
+          isFetching={favorites.isFetching}
         />
       </View>
     );
@@ -102,6 +109,7 @@ function mapStateToProps(state) {
   return {
     products: CUSTOMER_SELECTORS.getFavoriteProducts(state),
     isAuthenticated: USER_SELECTORS.isAuthenticated(state),
+    favorites:state.customer.favorites
   };
 }
 

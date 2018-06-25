@@ -4,10 +4,11 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {ACTIONS as ORDER_ACTIONS,} from 'company/common/actions';
-import {SELECTORS as ORDER_SELECTORS} from 'company/common/selectors';
-import {View} from 'react-native';
+import {ScrollView, Text, View} from 'react-native';
 import PropTypes from 'prop-types';
 import {RNCamera} from 'react-native-camera';
+import Button from "components/Button";
+import I18n from 'utils/locale';
 
 class QRScan extends Component {
   static propTypes = {
@@ -22,6 +23,11 @@ class QRScan extends Component {
 
   state = {
     scanResultVisible: false,
+    showLoading: false,
+    showError:false,
+    successResultVisible:false,
+    scannedOrder:{},
+    code:null
   };
 
   componentDidMount() {
@@ -39,11 +45,61 @@ class QRScan extends Component {
     }
   }
 
-  onBarCodeRead = code => {
-    const orderID = code.data;
-    this.props.navigation.navigate('OrderDetail', {
-      orderID: orderID,
+  onBarCodeRead = payload => {
+    const code = payload.data;
+
+    this.setState({
+      showLoading:true,
     });
+    // fetch appropriate order
+    // show order
+    new Promise((resolve, reject) => {
+      this.props.dispatch(
+        ORDER_ACTIONS.scanCode({code:code , resolve, reject}),
+      );
+    })
+      .then(res => {
+        this.setState({
+          scannedOrder:res,
+          code:code
+        },()=>{
+          this.showScanResult();
+          this.setState({
+            showLoading:false
+          });
+        });
+      })
+      .catch(e => {
+        this.setState({
+          showLoading:false,
+          showError:true,
+          code:null
+        });
+      });
+  };
+
+  redeemCode = () => {
+    const code = this.state.code;
+
+    this.setState({
+      showLoading:true
+    });
+    // fetch appropriate order
+    // show order
+    new Promise((resolve, reject) => {
+      this.props.dispatch(
+        ORDER_ACTIONS.redeemCode({code:code , resolve, reject}),
+      );
+    })
+      .then(res => {
+        this.showSuccessResult();
+      })
+      .catch(e => {
+        this.setState({
+          showLoading:false,
+          showError:true
+        });
+      });
   };
 
   showScanResult = () => {
@@ -52,14 +108,45 @@ class QRScan extends Component {
     });
   };
 
-  hideScanResult = () => {
+  showSuccessResult = () => {
     this.setState({
-      scanResultVisible: false,
+      successResultVisible: true,
     });
   };
 
   render() {
-    let {scanResultVisible} = this.state;
+    let {scanResultVisible,showLoading,showError,successResultVisible} = this.state;
+
+    if(showLoading) {
+      return null;
+    }
+
+    if(showError) {
+      return (
+        <ScrollView style={{paddingTop:100}}>
+          <Button raised primary onPress={()=>this.showScanResult()}  title='Re Scan there is an error'/>
+        </ScrollView>
+      );
+    }
+
+    if(scanResultVisible) {
+      return (
+        <ScrollView style={{paddingTop:100}}>
+          <Button raised primary onPress={()=>this.redeemCode()}  title='Redeem'/>
+          <Button raised primary onPress={()=>this.showScanResult()}  title='Re Scan'/>
+        </ScrollView>
+      );
+    }
+
+    if(successResultVisible) {
+      return (
+        <ScrollView style={{paddingTop:100}}>
+          <Title>{I18n.t('success')}</Title>
+          <Button raised primary onPress={()=>this.showScanResult()}  title='Re Scan'/>
+        </ScrollView>
+      );
+    }
+
 
     return (
       <View style={{flex: 1}} keyboardShouldPersistTap="always">
@@ -84,8 +171,7 @@ class QRScan extends Component {
 }
 
 const makeMapStateToProps = () => {
-  const getOrderByID = ORDER_SELECTORS.getOrderByID();
-  const mapStateToProps = (state, props) => {
+  const mapStateToProps = () => {
     return {};
   };
   return mapStateToProps;

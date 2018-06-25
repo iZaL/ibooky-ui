@@ -4,6 +4,7 @@ import {API} from 'company/common/api';
 import {Schema} from 'utils/schema';
 import {normalize} from 'normalizr';
 import I18n from 'utils/locale';
+import {ACTIONS as APP_ACTIONS} from "app/common/actions";
 
 function* fetchOrders(action) {
   try {
@@ -52,6 +53,70 @@ function* fetchOrderDetails(action) {
   }
 }
 
+function* scanCode(action) {
+  const {code, resolve, reject} = action.params;
+  try {
+    const params = {
+      body: {
+        code:code,
+      },
+    };
+    const response = yield call(API.scanCode, params);
+    console.log('response',response);
+    const normalized = normalize(response.data, Schema.orders);
+
+    yield put({
+      type: ACTION_TYPES.SCAN_CODE_SUCCESS,
+      entities: normalized.entities,
+    });
+
+    yield resolve(response.data);
+  } catch (error) {
+    yield put({type: ACTION_TYPES.SCAN_CODE_FAILURE, error});
+
+    yield put(
+      APP_ACTIONS.setNotification({
+        message: error,
+        type: 'error',
+      }),
+    );
+
+    yield reject(error);
+  }
+}
+
+function* redeemCode(action) {
+  const {code, resolve, reject} = action.params;
+  try {
+    const params = {
+      body: {
+        code:code,
+      },
+    };
+    const response = yield call(API.redeemCode, params);
+    const normalized = normalize(response.data, Schema.orders);
+
+    yield put({
+      type: ACTION_TYPES.REDEEM_CODE_SUCCESS,
+      entities: normalized.entities,
+    });
+
+    yield resolve(response.data);
+  } catch (error) {
+    yield put({type: ACTION_TYPES.REDEEM_CODE_FAILURE, error});
+
+    yield put(
+      APP_ACTIONS.setNotification({
+        message: error,
+        type: 'error',
+      }),
+    );
+
+    yield reject(error);
+  }
+}
+
+
 function* fetchOrdersMonitor() {
   yield takeLatest(ACTION_TYPES.FETCH_ORDERS_REQUEST, fetchOrders);
 }
@@ -60,7 +125,16 @@ function* fetchOrderDetailsMonitor() {
   yield takeLatest(ACTION_TYPES.FETCH_ORDER_DETAILS_REQUEST, fetchOrderDetails);
 }
 
+function* scanCodeMonitor() {
+  yield takeLatest(ACTION_TYPES.SCAN_CODE_REQUEST, scanCode);
+}
+function* redeemCodeMonitor() {
+  yield takeLatest(ACTION_TYPES.REDEEM_CODE_REQUEST, redeemCode);
+}
+
 export const sagas = all([
   fork(fetchOrdersMonitor),
   fork(fetchOrderDetailsMonitor),
+  fork(scanCodeMonitor),
+  fork(redeemCodeMonitor),
 ]);

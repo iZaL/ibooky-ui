@@ -9,33 +9,6 @@ import {ACTIONS as APP_ACTIONS} from 'app/common/actions';
 
 function* checkout(action) {
   const {order_id, attributes, resolve, reject} = action.params;
-  // try {
-  //   const params = {
-  //     body: {
-  //       ...item,
-  //     },
-  //   };
-  //   const response = yield call(API.createOrder, params);
-  //   const normalized = normalize(response.data, Schema.orders);
-  //   yield put({
-  //     type: ACTION_TYPES.CREATE_ORDER_SUCCESS,
-  //     entities: normalized.entities,
-  //     payload: response.data,
-  //   });
-  //   yield resolve(response.data);
-  // } catch (error) {
-  //   yield put({type: ACTION_TYPES.CREATE_ORDER_FAILURE, error});
-  //
-  //   yield put(
-  //     APP_ACTIONS.setNotification({
-  //       message: error,
-  //       type: 'error',
-  //     }),
-  //   );
-  //
-  //   yield reject(error);
-  // }
-
   try {
     const params = {
       body: {

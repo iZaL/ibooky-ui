@@ -153,6 +153,7 @@
   "checkout_as_guest" : "Checkout as guest",
   "order_success" : "Order has been confirmed",
   "payment_success" : "Payment Success",
+  "success" : "Success",
   "payment_failed" : "Payment Failed",
   "order_failed" : "Order failed",
   "qr_code" : "QR Code",

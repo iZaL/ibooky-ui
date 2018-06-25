@@ -4,17 +4,14 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {ACTIONS as ORDER_ACTIONS,} from 'company/common/actions';
-import {ActivityIndicator, ScrollView, Text, View} from 'react-native';
+import {ActivityIndicator, ScrollView, View} from 'react-native';
 import PropTypes from 'prop-types';
 import {RNCamera} from 'react-native-camera';
-import Button from "components/Button";
-import I18n from 'utils/locale';
 import ScanButtons from "./components/ScanButtons";
 import OrderItems from 'customer/orders/components/OrderItems';
 import OrderBasicInfo from 'customer/orders/components/OrderBasicInfo';
 import OrderTotal from 'customer/orders/components/OrderTotal';
-import {Title} from "react-native-paper";
-import colors from "../../assets/theme/colors";
+import colors from "assets/theme/colors";
 
 class QRScan extends Component {
   static propTypes = {

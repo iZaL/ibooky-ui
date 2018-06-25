@@ -163,5 +163,8 @@
 
   "view_order": "View Order",
   "go_home" : "Go to Home",
-  "favorites" : "Favorites"
+  "favorites" : "Favorites",
+
+  "redeem" : "Redeem",
+  "rescan" : "Rescan"
 }

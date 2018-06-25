@@ -4,11 +4,17 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {ACTIONS as ORDER_ACTIONS,} from 'company/common/actions';
-import {ScrollView, Text, View} from 'react-native';
+import {ActivityIndicator, ScrollView, Text, View} from 'react-native';
 import PropTypes from 'prop-types';
 import {RNCamera} from 'react-native-camera';
 import Button from "components/Button";
 import I18n from 'utils/locale';
+import ScanButtons from "./components/ScanButtons";
+import OrderItems from 'customer/orders/components/OrderItems';
+import OrderBasicInfo from 'customer/orders/components/OrderBasicInfo';
+import OrderTotal from 'customer/orders/components/OrderTotal';
+import {Title} from "react-native-paper";
+import colors from "../../assets/theme/colors";
 
 class QRScan extends Component {
   static propTypes = {
@@ -23,11 +29,10 @@ class QRScan extends Component {
 
   state = {
     scanResultVisible: false,
-    showLoading: false,
-    showError:false,
     successResultVisible:false,
-    scannedOrder:{},
-    code:null
+    loading: false,
+    order:{},
+    code:null,
   };
 
   componentDidMount() {
@@ -37,22 +42,13 @@ class QRScan extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.order && nextProps.order.total) {
-      this.setState({
-        amount: nextProps.order.amount,
-      });
-    }
-  }
-
   onBarCodeRead = payload => {
     const code = payload.data;
 
     this.setState({
-      showLoading:true,
+      loading:true,
     });
-    // fetch appropriate order
-    // show order
+
     new Promise((resolve, reject) => {
       this.props.dispatch(
         ORDER_ACTIONS.scanCode({code:code , resolve, reject}),
@@ -60,19 +56,15 @@ class QRScan extends Component {
     })
       .then(res => {
         this.setState({
-          scannedOrder:res,
+          order:res,
           code:code
-        },()=>{
+        },() => {
           this.showScanResult();
-          this.setState({
-            showLoading:false
-          });
         });
       })
       .catch(e => {
         this.setState({
-          showLoading:false,
-          showError:true,
+          loading:false,
           code:null
         });
       });
@@ -82,10 +74,9 @@ class QRScan extends Component {
     const code = this.state.code;
 
     this.setState({
-      showLoading:true
+      loading:true
     });
-    // fetch appropriate order
-    // show order
+
     new Promise((resolve, reject) => {
       this.props.dispatch(
         ORDER_ACTIONS.redeemCode({code:code , resolve, reject}),
@@ -96,8 +87,8 @@ class QRScan extends Component {
       })
       .catch(e => {
         this.setState({
-          showLoading:false,
-          showError:true
+          loading:false,
+          code:null
         });
       });
   };
@@ -105,66 +96,75 @@ class QRScan extends Component {
   showScanResult = () => {
     this.setState({
       scanResultVisible: true,
+      loading:false,
     });
   };
 
   showSuccessResult = () => {
     this.setState({
-      successResultVisible: true,
+      scanResultVisible: false,
+      loading:false,
+      code:null
+    });
+  };
+
+  showScanner = () => {
+    this.setState({
+      scanResultVisible: false,
+      loading:false,
     });
   };
 
   render() {
-    let {scanResultVisible,showLoading,showError,successResultVisible} = this.state;
+    let {scanResultVisible,loading,order} = this.state;
 
-    if(showLoading) {
-      return null;
-    }
-
-    if(showError) {
+    if(loading) {
       return (
-        <ScrollView style={{paddingTop:100}}>
-          <Button raised primary onPress={()=>this.showScanResult()}  title='Re Scan there is an error'/>
-        </ScrollView>
-      );
+        <View style={{flex:1,backgroundColor:'white',alignItems:'center',justifyContent:'center'}}>
+          <ActivityIndicator animating={true} color={colors.primary} />
+        </View>
+      )
     }
-
-    if(scanResultVisible) {
-      return (
-        <ScrollView style={{paddingTop:100}}>
-          <Button raised primary onPress={()=>this.redeemCode()}  title='Redeem'/>
-          <Button raised primary onPress={()=>this.showScanResult()}  title='Re Scan'/>
-        </ScrollView>
-      );
-    }
-
-    if(successResultVisible) {
-      return (
-        <ScrollView style={{paddingTop:100}}>
-          <Title>{I18n.t('success')}</Title>
-          <Button raised primary onPress={()=>this.showScanResult()}  title='Re Scan'/>
-        </ScrollView>
-      );
-    }
-
 
     return (
-      <View style={{flex: 1}} keyboardShouldPersistTap="always">
-        <RNCamera
-          ref={ref => {
-            this.camera = ref;
-          }}
-          style={{
-            flex: 1,
-          }}
-          type={RNCamera.Constants.Type.back}
-          flashMode={RNCamera.Constants.FlashMode.on}
-          permissionDialogTitle={'Permission to use camera'}
-          permissionDialogMessage={
-            'We need your permission to use your camera to scan QR Code'
-          }
-          onBarCodeRead={this.onBarCodeRead}
+      <View style={{flex: 1,}} keyboardShouldPersistTap="always">
+        {
+          scanResultVisible ?
+            <ScrollView contentInset={{bottom:50}}>
+              <OrderBasicInfo item={order} />
+              <OrderItems order={{
+                ...order,
+                products:order.products.filter(product => product.is_owner === true)
+              }} />
+              <OrderTotal total={order.total} />
+            </ScrollView>
+            :
+            <View style={{flex:1,backgroundColor:'black',marginVertical:200,marginHorizontal:100}}>
+              <RNCamera
+                ref={ref => {
+                  this.camera = ref;
+                }}
+                style={{
+                  flex: 1,
+                }}
+                type={RNCamera.Constants.Type.back}
+                flashMode={RNCamera.Constants.FlashMode.on}
+                permissionDialogTitle={'Permission to use camera'}
+                permissionDialogMessage={
+                  'We need your permission to use your camera to scan QR Code'
+                }
+                onBarCodeRead={this.onBarCodeRead}
+              />
+            </View>
+        }
+
+        <ScanButtons
+          redeem={this.redeemCode}
+          rescan={this.showScanner}
+          canRedeem={true}
+          canRescan={true}
         />
+
       </View>
     );
   }

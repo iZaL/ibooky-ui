@@ -11,8 +11,8 @@ import {SELECTORS as ORDER_SELECTORS} from 'company/common/selectors';
 import {ScrollView} from 'react-native';
 import OrderItems from 'customer/orders/components/OrderItems';
 import OrderBasicInfo from 'customer/orders/components/OrderBasicInfo';
-import PropTypes from 'prop-types';
 import OrderTotal from 'customer/orders/components/OrderTotal';
+import PropTypes from 'prop-types';
 
 class OrderDetailScene extends Component {
   static propTypes = {

@@ -11,7 +11,7 @@ import OrderBasicInfo from 'customer/orders/components/OrderBasicInfo';
 import OrderTotal from 'customer/orders/components/OrderTotal';
 import {bindActionCreators} from 'redux';
 import {ACTIONS} from 'customer/common/actions';
-import QRCodes from "customer/orders/components/QRCodes";
+import QRCodes from 'customer/orders/components/QRCodes';
 
 class OrderDetailScene extends Component {
   static propTypes = {
@@ -33,8 +33,8 @@ class OrderDetailScene extends Component {
   render() {
     let {order} = this.props;
 
-    console.log('order',order);
-    if(order) {
+    console.log('order', order);
+    if (order) {
       return (
         <ScrollView
           style={{flex: 1}}
@@ -42,7 +42,7 @@ class OrderDetailScene extends Component {
           <OrderBasicInfo item={order} />
           <OrderItems order={order} />
           <OrderTotal total={order.total} />
-          <QRCodes order={order}/>
+          <QRCodes order={order} />
         </ScrollView>
       );
     }

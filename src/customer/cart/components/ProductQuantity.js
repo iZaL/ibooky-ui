@@ -68,7 +68,7 @@ export default class extends Component {
           save={this.onQuantityDialogSavePress}
           onItemPress={this.onQuantityDialogItemPress}
           selected={selected}
-          items={[1, 2, 3]}
+          items={[1, 2, 3, 4, 5]}
         />
       </View>
     );

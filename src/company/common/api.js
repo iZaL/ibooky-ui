@@ -34,5 +34,5 @@ export const API = {
   fetchOrders,
   fetchOrderDetails,
   scanCode,
-  redeemCode
+  redeemCode,
 };

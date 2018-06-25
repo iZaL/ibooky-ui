@@ -16,7 +16,6 @@ export const ACTION_TYPES = {
   REDEEM_CODE_REQUEST: '@company/REDEEM_CODE_REQUEST',
   REDEEM_CODE_SUCCESS: '@company/REDEEM_CODE_SUCCESS',
   REDEEM_CODE_FAILURE: '@company/REDEEM_CODE_FAILURE',
-
 };
 
 function fetchOrders(params) {

@@ -11,7 +11,7 @@ import IconFactory from 'components/IconFactory';
 import Divider from 'components/Divider';
 import CountdownTimer from 'customer/products/components/CountdownTimer';
 import PropTypes from 'prop-types';
-import Share from '../../../components/Share';
+import Share from 'components/Share';
 
 export default class extends Component {
   static propTypes = {

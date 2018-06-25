@@ -12,7 +12,7 @@ import CartTotal from 'customer/cart/components/CartTotal';
 import Button from 'components/Button';
 import I18n from 'utils/locale';
 import {Colors} from 'react-native-paper';
-import Dialog from '../../../components/Dialog';
+import Dialog from 'components/Dialog';
 
 export default class extends Component {
   static propTypes = {

@@ -31,7 +31,7 @@ export default class OrdersList extends Component {
   renderItem = ({item}) => {
     const {onItemPress, favorite} = this.props;
     let {product} = item;
-    if(product) {
+    if (product) {
       return (
         <View style={styles.container}>
           {product.images && <ProductImages images={product.images} />}

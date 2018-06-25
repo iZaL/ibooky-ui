@@ -29,42 +29,38 @@ export default class OrderItems extends Component {
             </View>
             {product.pivot && (
               <View>
-                <View style={{flex: 1,paddingTop:10}}>
+                <View style={{flex: 1, paddingTop: 10}}>
                   <View style={styles.serviceListContainer}>
                     <Text style={styles.attributeTitle}>
                       {I18n.t('quantity')}
                     </Text>
-                    <Text >
-                      {product.pivot.quantity}
-                    </Text>
+                    <Text>{product.pivot.quantity}</Text>
                   </View>
                 </View>
-                <Divider/>
+                <Divider />
                 <View style={{flex: 1}}>
                   <View style={styles.serviceListContainer}>
                     <Text style={styles.attributeTitle}>
                       {I18n.t('amount')}
                     </Text>
-                    <Text >
-                      {product.pivot.price} KD
-                    </Text>
+                    <Text>{product.pivot.price} KD</Text>
                   </View>
                 </View>
               </View>
             )}
             {order.attributes &&
-            order.attributes.map(attribute => {
-              return (
-                <View style={{flex: 1}} key={attribute.id}>
-                  <Divider />
-                  <View style={styles.serviceListContainer}>
-                    <Text style={styles.attributeTitle}>
-                      {attribute.name}{' '}
-                    </Text>
+              order.attributes.map(attribute => {
+                return (
+                  <View style={{flex: 1}} key={attribute.id}>
+                    <Divider />
+                    <View style={styles.serviceListContainer}>
+                      <Text style={styles.attributeTitle}>
+                        {attribute.name}{' '}
+                      </Text>
+                    </View>
                   </View>
-                </View>
-              );
-            })}
+                );
+              })}
             <Divider />
           </View>
         ))}

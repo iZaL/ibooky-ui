@@ -14,22 +14,28 @@ const QRCodes = ({order}) => {
       <SectionHeading title={I18n.t('qr_code')} />
       <View style={styles.rowContainer}>
         {order.products &&
-        order.products.map(product => {
-          if(product.pivot) {
-            return (
-              <View style={{marginBottom: 80, alignItems: 'center'}} key={`${product.id}`}>
-                <QRCode value={`${product.pivot.code}`}  />
-                <View style={{flexDirection:'row',alignItems:'center'}}>
-                  <Text style={{paddingVertical:10,fontSize:17}}>{product.name}</Text>
-                  {
-                    product.company &&
-                    <Text style={{paddingVertical:10,fontSize:17}}> - {product.company.name}</Text>
-                  }
+          order.products.map(product => {
+            if (product.pivot) {
+              return (
+                <View
+                  style={{marginBottom: 80, alignItems: 'center'}}
+                  key={`${product.id}`}>
+                  <QRCode value={`${product.pivot.code}`} />
+                  <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                    <Text style={{paddingVertical: 10, fontSize: 17}}>
+                      {product.name}
+                    </Text>
+                    {product.company && (
+                      <Text style={{paddingVertical: 10, fontSize: 17}}>
+                        {' '}
+                        - {product.company.name}
+                      </Text>
+                    )}
+                  </View>
                 </View>
-              </View>
-            );
-          }
-        })}
+              );
+            }
+          })}
       </View>
     </View>
   );
@@ -37,15 +43,15 @@ const QRCodes = ({order}) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex:1,
-    padding:10,
+    flex: 1,
+    padding: 10,
   },
   total: {
     color: colors.primary,
     fontSize: 22,
     textAlign: 'right',
   },
-  rowContainer:{flex: 1, padding: 20}
+  rowContainer: {flex: 1, padding: 20},
 });
 
 export default QRCodes;

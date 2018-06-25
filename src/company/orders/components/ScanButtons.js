@@ -6,19 +6,13 @@ import I18n from 'utils/locale';
 import Dialog from 'components/Dialog';
 
 export default class ScanButtons extends Component {
-
   static propTypes = {
     rescan: PropTypes.func.isRequired,
     redeem: PropTypes.func.isRequired,
   };
 
   render() {
-    let {
-      redeem,
-      rescan,
-      canRedeem,
-      canRescan,
-    } = this.props;
+    let {redeem, rescan, canRedeem, canRescan} = this.props;
 
     return (
       <View style={styles.container}>
@@ -48,13 +42,13 @@ export default class ScanButtons extends Component {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: 'white',
-    alignItems:'center'
+    alignItems: 'center',
   },
-  buttonContainer:{
-    flexDirection:'row',
-    justifyContent:'space-between',
-    alignItems:'center',
-    padding:10
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: 10,
   },
   map: {
     flex: 1,

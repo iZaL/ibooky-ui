@@ -14,6 +14,7 @@ import AttributeDialog from 'customer/products/components/AttributeDialog';
 import {ACTIONS as CUSTOMER_ACTIONS} from 'customer/common/actions';
 import {SELECTORS as CUSTOMER_SELECTORS} from 'customer/common/selectors';
 import colors from 'assets/theme/colors';
+import Spinner from '../../components/Spinner';
 
 class ProductDetail extends Component {
   static navigationOptions = ({navigation}) => {
@@ -166,7 +167,7 @@ class ProductDetail extends Component {
   };
 
   render() {
-    let {product} = this.props;
+    let {product, productReducer} = this.props;
 
     let {
       attributesListDialogVisible,
@@ -175,56 +176,62 @@ class ProductDetail extends Component {
     } = this.state;
 
     return (
-      <ScrollView style={{flex: 1}} contentContainerStyle={{paddingBottom: 50}}>
-        <ProductImages
-          images={product.images.length ? product.images : [product.image]}
-        />
+      <View style={{flex: 1}}>
+        <Spinner isVisible={productReducer.isFetching} />
 
-        <View style={{paddingHorizontal: 10}}>
-          <ProductInfo item={product} favorite={this.favoriteProduct} />
-
-          <Divider />
-
-          {product.show_attributes && (
-            <View>
-              <AttributesList
-                items={product.attributes || []}
-                onItemPress={this.onAttributesListItemPress}
-                activeIDs={attributeIDs}
-              />
-
-              <AttributeDialog
-                visible={attributesListDialogVisible}
-                save={this.onAttributesListDialogSavePress}
-                onItemPress={this.onAttributeDialogItemPress}
-                item={
-                  product.attributes
-                    ? product.attributes.find(
-                        attribute => attribute.id === activeParentID,
-                      )
-                    : {children: []}
-                }
-                activeIDs={attributeIDs}
-              />
-
-              <Divider />
-            </View>
-          )}
-
-          <Button
-            primary
-            raised
-            dark
-            title={I18n.t('buy_now').toUpperCase()}
-            onPress={() => this.onAddToCartPress(product)}
-            disabled={!product.bid_valid}
+        <ScrollView
+          style={[{flex: 1}, productReducer.isFetching && {opacity: 0.5}]}
+          contentContainerStyle={{paddingBottom: 50}}>
+          <ProductImages
+            images={product.images.length ? product.images : [product.image]}
           />
 
-          <Divider />
+          <View style={{paddingHorizontal: 10}}>
+            <ProductInfo item={product} favorite={this.favoriteProduct} />
 
-          <ProductDescription text={product.description} />
-        </View>
-      </ScrollView>
+            <Divider />
+
+            {product.show_attributes && (
+              <View>
+                <AttributesList
+                  items={product.attributes || []}
+                  onItemPress={this.onAttributesListItemPress}
+                  activeIDs={attributeIDs}
+                />
+
+                <AttributeDialog
+                  visible={attributesListDialogVisible}
+                  save={this.onAttributesListDialogSavePress}
+                  onItemPress={this.onAttributeDialogItemPress}
+                  item={
+                    product.attributes
+                      ? product.attributes.find(
+                          attribute => attribute.id === activeParentID,
+                        )
+                      : {children: []}
+                  }
+                  activeIDs={attributeIDs}
+                />
+
+                <Divider />
+              </View>
+            )}
+
+            <Button
+              primary
+              raised
+              dark
+              title={I18n.t('buy_now').toUpperCase()}
+              onPress={() => this.onAddToCartPress(product)}
+              disabled={!product.bid_valid}
+            />
+
+            <Divider />
+
+            <ProductDescription text={product.description} />
+          </View>
+        </ScrollView>
+      </View>
     );
   }
 }
@@ -235,6 +242,7 @@ function mapStateToProps(state, props) {
   return {
     cart: state.customer.cart,
     product: getCartProduct(state, productID),
+    productReducer: state.customer.products,
   };
 }
 

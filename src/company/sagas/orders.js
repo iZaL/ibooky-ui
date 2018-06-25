@@ -4,7 +4,7 @@ import {API} from 'company/common/api';
 import {Schema} from 'utils/schema';
 import {normalize} from 'normalizr';
 import I18n from 'utils/locale';
-import {ACTIONS as APP_ACTIONS} from "app/common/actions";
+import {ACTIONS as APP_ACTIONS} from 'app/common/actions';
 
 function* fetchOrders(action) {
   try {
@@ -58,11 +58,11 @@ function* scanCode(action) {
   try {
     const params = {
       body: {
-        code:code,
+        code: code,
       },
     };
     const response = yield call(API.scanCode, params);
-    console.log('response',response);
+    console.log('response', response);
     const normalized = normalize(response.data, Schema.orders);
 
     yield put({
@@ -90,7 +90,7 @@ function* redeemCode(action) {
   try {
     const params = {
       body: {
-        code:code,
+        code: code,
       },
     };
     const response = yield call(API.redeemCode, params);
@@ -115,7 +115,6 @@ function* redeemCode(action) {
     yield reject(error);
   }
 }
-
 
 function* fetchOrdersMonitor() {
   yield takeLatest(ACTION_TYPES.FETCH_ORDERS_REQUEST, fetchOrders);

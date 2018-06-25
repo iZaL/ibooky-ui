@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import {Caption, Subheading} from 'react-native-paper';
 import I18n from 'utils/locale';
 import colors from 'assets/theme/colors';
-import Dialog from '../../../components/Dialog';
+import Dialog from 'components/Dialog';
 
 export default class extends Component {
   static propTypes = {

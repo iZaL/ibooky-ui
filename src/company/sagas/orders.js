@@ -62,7 +62,6 @@ function* scanCode(action) {
       },
     };
     const response = yield call(API.scanCode, params);
-    console.log('response', response);
     const normalized = normalize(response.data, Schema.orders);
 
     yield put({

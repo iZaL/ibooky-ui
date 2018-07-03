@@ -20,7 +20,6 @@ class Page extends Component {
 
   render() {
     let {page} = this.props;
-    console.log('page',page);
     if(page) {
       return (
         <ScrollView style={{flex: 1,padding:10}}>

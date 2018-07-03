@@ -48,7 +48,6 @@ class App extends Component {
   };
 
   onReceivePushNotifications = (notification: object) => {
-    console.log('notification', notification);
   };
 
   render() {

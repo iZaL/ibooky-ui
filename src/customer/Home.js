@@ -64,7 +64,6 @@ class Home extends Component {
         }
       })
       .catch(e => {
-        console.log('rekect', e);
       });
 
     setTimeout(() => {

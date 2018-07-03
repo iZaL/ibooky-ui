@@ -39,8 +39,6 @@ function* productSearch(action) {
     const products = response.data;
     const productIDs = response.productIDs;
 
-    console.log('productIDs',productIDs);
-
     const productPayload = {
       nextPage: response.links.next,
       collection: productIDs,

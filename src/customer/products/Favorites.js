@@ -73,7 +73,6 @@ class Favorites extends Component {
   };
 
   fetchMore = () => {
-    console.log('fetching more');
     this.props.dispatch(CUSTOMER_ACTIONS.fetchFavoriteProducts());
   };
 
@@ -92,7 +91,6 @@ class Favorites extends Component {
   render() {
     let {products,favorites} = this.props;
 
-    console.log('favorites.isFetching',favorites.isFetching);
     return (
       <View style={{flex: 1}}>
 

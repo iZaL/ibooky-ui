@@ -58,7 +58,6 @@ class Search extends Component {
   };
 
   fetchMore = () => {
-    console.log('fetching more');
   };
 
   favoriteProduct = product => {
@@ -74,7 +73,6 @@ class Search extends Component {
   };
 
   onSearch = (term) => {
-    console.log('term',term);
     this.props.dispatch(CUSTOMER_ACTIONS.searchProducts({
       term:term
     }));
@@ -82,7 +80,6 @@ class Search extends Component {
 
   render() {
     let {products,search} = this.props;
-    console.log('search',search);
     return (
       <View style={{flex: 1}}>
 

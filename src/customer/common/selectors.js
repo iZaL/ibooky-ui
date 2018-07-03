@@ -186,9 +186,6 @@ const getOrders = createSelector([schemas, orders], (entities, orderIDs) => {
 });
 
 const getPage = createSelector([schemas, pagesSchema,getIdProp], (entities, pages, type) => {
-  console.log('entities',entities);
-  console.log('pages',pages);
-  console.log('type',type);
   return Object.keys(pages).map(pageID => pages[pageID]).find(page => page.type === type) || {};
 });
 

@@ -27,7 +27,6 @@ export default class extends Component {
   render() {
     let {item, favorite} = this.props;
 
-    console.log('item.bid_end_at',item.bid_end_at);
     return (
       <View style={styles.container}>
         <Title style={{textAlign:'left'}}>{item.name}</Title>

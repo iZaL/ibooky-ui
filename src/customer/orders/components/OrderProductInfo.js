@@ -22,7 +22,6 @@ export default class extends Component {
 
   render() {
     let {item, total, favorite} = this.props;
-    console.log('item', item);
     return (
       <View style={styles.container}>
         <Title>{item.name}</Title>

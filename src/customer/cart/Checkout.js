@@ -75,7 +75,6 @@ class Checkout extends PureComponent {
         });
       })
       .catch(e => {
-        console.log('e', e);
       });
   };
 

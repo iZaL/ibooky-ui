@@ -27,7 +27,6 @@ export default class DrawerHeader extends Component {
 
   render() {
     let {user} = this.props;
-    console.log('user', user);
     return (
       <View style={styles.container}>
         <Title style={{color: colors.fadedWhite}}>{user.name}</Title>

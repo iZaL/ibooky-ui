@@ -28,5 +28,7 @@ export default class extends Component {
 }
 
 const styles = StyleSheet.create({
-  text: {},
+  text: {
+    textAlign:'left'
+  },
 });

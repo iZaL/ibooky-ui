@@ -39,6 +39,10 @@ export const ACTION_TYPES = {
   PRODUCT_FAVORITE_SUCCESS: '@customer/PRODUCT_FAVORITE_SUCCESS',
   PRODUCT_FAVORITE_FAILURE: '@customer/PRODUCT_FAVORITE_FAILURE',
 
+  PRODUCT_SEARCH_REQUEST: '@customer/PRODUCT_SEARCH_REQUEST',
+  PRODUCT_SEARCH_SUCCESS: '@customer/PRODUCT_SEARCH_SUCCESS',
+  PRODUCT_SEARCH_FAILURE: '@customer/PRODUCT_SEARCH_FAILURE',
+
   CREATE_ORDER_REQUEST: '@customer/CREATE_ORDER_REQUEST',
   CREATE_ORDER_SUCCESS: '@customer/CREATE_ORDER_SUCCESS',
   CREATE_ORDER_FAILURE: '@customer/CREATE_ORDER_FAILURE',
@@ -46,6 +50,10 @@ export const ACTION_TYPES = {
   CHECKOUT_REQUEST: '@customer/CHECKOUT_REQUEST',
   CHECKOUT_SUCCESS: '@customer/CHECKOUT_SUCCESS',
   CHECKOUT_FAILURE: '@customer/CHECKOUT_FAILURE',
+
+  FETCH_PAGE_REQUEST: '@customer/FETCH_PAGE_REQUEST',
+  FETCH_PAGE_SUCCESS: '@customer/FETCH_PAGE_SUCCESS',
+  FETCH_PAGE_FAILURE: '@customer/FETCH_PAGE_FAILURE',
 
   FETCH_ORDERS_REQUEST: '@customer/FETCH_ORDERS_REQUEST',
   FETCH_ORDERS_SUCCESS: '@customer/FETCH_ORDERS_SUCCESS',
@@ -146,9 +154,23 @@ function fetchOrdersRefresh(params) {
   };
 }
 
+function fetchPage(params) {
+  return {
+    type: ACTION_TYPES.FETCH_PAGE_REQUEST,
+    params,
+  };
+}
+
 function favoriteProduct(params) {
   return {
     type: ACTION_TYPES.PRODUCT_FAVORITE_REQUEST,
+    params,
+  };
+}
+
+function searchProducts(params) {
+  return {
+    type: ACTION_TYPES.PRODUCT_SEARCH_REQUEST,
     params,
   };
 }
@@ -181,6 +203,8 @@ export const ACTIONS = {
   fetchOrdersRefresh,
   fetchCategoryDetails,
   favoriteProduct,
+  searchProducts,
   checkout,
   paymentSuccess,
+  fetchPage
 };

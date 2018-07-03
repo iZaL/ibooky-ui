@@ -7,6 +7,7 @@ export function reducer(
     products: {},
     attributes: {},
     orders: {},
+    pages:{}
   },
   action = {},
 ) {

@@ -6,8 +6,18 @@ import I18n from 'utils/locale';
 import DrawerItem from 'components/DrawerItem';
 import {DrawerSection} from 'react-native-paper';
 import DrawerHeader from 'components/DrawerHeader';
+import {View} from "react-native";
 
 export default class Drawer extends Component {
+
+  state = {
+    activeRoute: 'HomeStack',
+  };
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return this.state.activeRoute !== nextState.activeRoute;
+  }
+
   onItemPress = (routeName: string) => {
     this.setState({
       activeRoute: routeName,
@@ -15,16 +25,13 @@ export default class Drawer extends Component {
     this.props.navigation.navigate(routeName);
   };
 
-  state = {
-    activeRoute: 'HomeStack',
-  };
-
   render() {
     let {logout, user} = this.props.screenProps;
     let {activeRoute} = this.state;
 
     return (
-      <DrawerSection style={{paddingTop: 30}}>
+      <View>
+      <DrawerSection>
         <DrawerHeader user={user} />
 
         <DrawerItem
@@ -36,6 +43,14 @@ export default class Drawer extends Component {
             type: 'MaterialCommunityIcons',
           }}
           active={activeRoute === 'HomeStack'}
+        />
+
+        <DrawerItem
+          label={I18n.t('search')}
+          routeName="SearchStack"
+          onItemPress={this.onItemPress}
+          iconProps={{name: 'search', type: 'MaterialIcons'}}
+          active={activeRoute === 'SearchStack'}
         />
 
         <DrawerItem
@@ -88,7 +103,33 @@ export default class Drawer extends Component {
             active={activeRoute === 'Login'}
           />
         )}
+
       </DrawerSection>
+
+        <DrawerSection>
+          <DrawerItem
+            label={I18n.t('privacy_policy')}
+            routeName="Privacy"
+            onItemPress={this.onItemPress}
+            iconProps={{
+              name: 'screen-lock-portrait',
+              type: 'MaterialIcons',
+            }}
+            active={activeRoute === 'Privacy'}
+          />
+          <DrawerItem
+            label={I18n.t('delivery_policy')}
+            routeName="Delivery"
+            onItemPress={this.onItemPress}
+            iconProps={{
+              name: 'ios-jet',
+              type: 'Ionicons',
+            }}
+            active={activeRoute === 'Delivery'}
+          />
+        </DrawerSection>
+
+      </View>
     );
   }
 }

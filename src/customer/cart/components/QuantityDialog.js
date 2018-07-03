@@ -28,7 +28,7 @@ export default class extends Component {
 
     return (
       <Dialog visible={visible}>
-        <DialogTitle>{`${I18n.t('select')} ${I18n.t(
+        <DialogTitle style={{textAlign:'left'}}>{`${I18n.t('select')} ${I18n.t(
           'quantity',
         )} `}</DialogTitle>
         <DialogScrollArea style={{maxHeight: 170, paddingHorizontal: 0}}>

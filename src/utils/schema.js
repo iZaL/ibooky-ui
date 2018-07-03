@@ -4,13 +4,7 @@ const productsSchema = new schema.Entity('products');
 const attributesSchema = new schema.Entity('attributes');
 const ordersSchema = new schema.Entity('orders');
 const usersSchema = new schema.Entity('users');
-
-// const profileSchema = new schema.Union(
-//   {
-//     companies: companiesSchema,
-//   },
-//   input => input.schema,
-// );
+const pagesSchema = new schema.Entity('pages');
 
 ordersSchema.define({
   products: [productsSchema],
@@ -36,4 +30,5 @@ export const Schema = {
   users: usersSchema,
   products: productsSchema,
   attributes: attributesSchema,
+  pages:pagesSchema
 };

@@ -8,6 +8,7 @@ import {DrawerSection} from 'react-native-paper';
 import DrawerHeader from 'components/DrawerHeader';
 
 export default class Drawer extends Component {
+
   state = {
     activeRoute: 'HomeStack',
   };
@@ -21,10 +22,6 @@ export default class Drawer extends Component {
       activeRoute: routeName,
     });
     this.props.navigation.navigate(routeName);
-  };
-
-  logout = () => {
-    this.props.screenProps.logout();
   };
 
   render() {

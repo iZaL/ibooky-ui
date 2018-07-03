@@ -49,7 +49,7 @@ export default class extends Component {
     return (
       <FlatList
         data={items}
-        style={[styles.listContainer, isFetching && {opacity: 0.5}]}
+        style={[styles.listContainer, isFetching && {opacity: 0}]}
         contentInset={{bottom: 50}}
         renderItem={this.renderRow}
         ItemSeparatorComponent={() => <Divider />}

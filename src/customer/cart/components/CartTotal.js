@@ -27,7 +27,7 @@ export default class extends Component {
 
     return (
       <View style={[styles.container, style]}>
-        <Subheading style={{flex: 1, color: colors.primary, fontSize: 17}}>
+        <Subheading style={{flex: 1, color: colors.primary, fontSize: 17,textAlign:'left'}}>
           {hideTitle ? '' : I18n.t('total')}
         </Subheading>
 

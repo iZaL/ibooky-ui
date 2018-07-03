@@ -54,7 +54,7 @@ export default class extends Component {
 
     return (
       <View style={styles.container}>
-        <Subheading style={{flex: 1}}>{I18n.t('quantity')}</Subheading>
+        <Subheading style={{flex: 1,paddingHorizontal:5}}>{I18n.t('quantity')}</Subheading>
 
         <Touchable onPress={this.showQuantityDialog}>
           <View style={styles.selectBox}>

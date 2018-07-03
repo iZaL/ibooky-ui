@@ -59,7 +59,15 @@ export default class CountdownTimer extends Component {
     clearInterval(this.state.intervalId);
   };
 
+  jsCoreDateCreator = (dateString) => {
+    // dateString *HAS* to be in this format "YYYY-MM-DD HH:MM:SS"
+    let dateParam = dateString.split(/[\s-:]/);
+    dateParam[1] = (parseInt(dateParam[1], 10) - 1).toString();
+    return new Date(...dateParam)
+  };
+
   calculateRemainingTime = () => {
+    // console.log('dateString',this.props.targetDate);
     return -1 * moment().diff(this.props.targetDate);
   };
 

@@ -28,8 +28,8 @@ export default class extends Component {
 
     return (
       <View style={styles.container}>
-        <Title>{item.name}</Title>
-        <Subheading>
+        <Title style={{textAlign:'left'}}>{item.name}</Title>
+        <Subheading style={{textAlign:'left'}}>
           {I18n.t('save')} {item.sale_percentage_formatted}
         </Subheading>
 
@@ -38,7 +38,7 @@ export default class extends Component {
         <View style={styles.itemInfoContainer}>
           <View style={styles.itemContent}>
             {item.on_sale && (
-              <Text style={styles.label}>{item.actual_price_formatted}</Text>
+              <Text style={[styles.label,styles.strike]}>{item.actual_price_formatted}</Text>
             )}
             <Text style={styles.value}>{item.price_formatted}</Text>
           </View>
@@ -114,6 +114,7 @@ const styles = StyleSheet.create({
     color: colors.error,
     fontSize: 12,
     fontWeight: '400',
+    textAlign:'left',
   },
   itemContent: {
     alignItems: 'center',
@@ -123,5 +124,9 @@ const styles = StyleSheet.create({
     color: colors.primary,
     fontWeight: '700',
     fontSize: 20,
+    textAlign:'left',
   },
+  strike:{
+    textDecorationLine: 'line-through'
+  }
 });

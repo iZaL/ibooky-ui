@@ -11,6 +11,7 @@ import DrawerIcon from 'components/DrawerIcon';
 import colors from 'assets/theme/colors';
 import {SELECTORS as USER_SELECTORS} from 'guest/common/selectors';
 import Spinner from "components/Spinner";
+import debounce from 'lodash/debounce';
 
 class Favorites extends Component {
   static navigationOptions = ({navigation}) => {
@@ -34,6 +35,11 @@ class Favorites extends Component {
         />
       ),
     };
+  };
+
+  constructor() {
+    super();
+    this.fetchMore = debounce(this.fetchMore,3000);
   };
 
   componentDidMount() {
@@ -67,6 +73,7 @@ class Favorites extends Component {
   };
 
   fetchMore = () => {
+    console.log('fetching more');
     this.props.dispatch(CUSTOMER_ACTIONS.fetchFavoriteProducts());
   };
 
@@ -85,8 +92,7 @@ class Favorites extends Component {
   render() {
     let {products,favorites} = this.props;
 
-    console.log('favorites',favorites);
-
+    console.log('favorites.isFetching',favorites.isFetching);
     return (
       <View style={{flex: 1}}>
 

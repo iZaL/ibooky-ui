@@ -15,9 +15,7 @@ export function reducer(state = initialState, action = {}) {
         ...state,
         isFetching: true,
         error: null,
-        // products:
       };
-
     case ACTION_TYPES.FETCH_FAVORITE_PRODUCTS_SUCCESS: {
       return {
         ...state,
@@ -33,6 +31,14 @@ export function reducer(state = initialState, action = {}) {
         isFetching: false,
         error: action.error,
       };
+    case ACTION_TYPES.PRODUCT_FAVORITE_REQUEST: {
+      return {
+        ...state,
+        isFetching: false,
+        error: null,
+        collection: union(state.collection, [action.params.product_id]),
+      };
+    }
 
     default:
       return state;

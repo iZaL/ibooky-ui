@@ -80,6 +80,8 @@ PODS:
     - React/RCTBlob
   - RNI18n (2.0.12):
     - React
+  - RNShare (1.0.27):
+    - React
   - RNSVG (6.3.1):
     - React
   - RNVectorIcons (4.6.0):
@@ -104,6 +106,7 @@ DEPENDENCIES:
   - React/RCTVibration (from `../node_modules/react-native`)
   - React/RCTWebSocket (from `../node_modules/react-native`)
   - RNI18n (from `../node_modules/react-native-i18n`)
+  - RNShare (from `../node_modules/react-native-share`)
   - RNSVG (from `../node_modules/react-native-svg`)
   - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
   - yoga (from `../node_modules/react-native/ReactCommon/yoga/yoga.podspec`)
@@ -121,6 +124,8 @@ EXTERNAL SOURCES:
     :path: ../node_modules/react-native-maps
   RNI18n:
     :path: ../node_modules/react-native-i18n
+  RNShare:
+    :path: ../node_modules/react-native-share
   RNSVG:
     :path: ../node_modules/react-native-svg
   RNVectorIcons:
@@ -137,10 +142,11 @@ SPEC CHECKSUMS:
   react-native-google-maps: 2cfe3b01f8422c7dae51d8764139fd70f888cfce
   react-native-maps: 066c2afcc89e18726377bcc685315f989ca22449
   RNI18n: db9be06a40336f04d136f24dd5de3f5eb9f3207c
+  RNShare: 80d4472ab25e77d9f824cb8d49d7e85af91c66e0
   RNSVG: 6252323c0312735f0af5f58b5adf2965b6a9ffbf
   RNVectorIcons: c0dbfbf6068fefa240c37b0f71bd03b45dddac44
   yoga: a23273df0088bf7f2bb7e5d7b00044ea57a2a54a
 
-PODFILE CHECKSUM: c8b0c7075a313ef1d05049c6c1d929bc73c81722
+PODFILE CHECKSUM: 96383b8788457392f6125f85d68892111a0ff489
 
 COCOAPODS: 1.4.0

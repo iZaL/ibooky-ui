@@ -4,6 +4,7 @@ import {reducer as orders} from 'customer/reducers/orders';
 import {reducer as categories} from 'customer/reducers/categories';
 import {reducer as favorites} from 'customer/reducers/favorites';
 import {reducer as products} from 'customer/reducers/products';
+import {reducer as search} from 'customer/reducers/search';
 
 export const reducer = combineReducers({
   cart,
@@ -11,4 +12,5 @@ export const reducer = combineReducers({
   orders,
   favorites,
   products,
+  search
 });

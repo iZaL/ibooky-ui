@@ -22,8 +22,8 @@ export default class extends Component {
       <View style={styles.container}>
         <Image source={{uri: item.image}} style={styles.image} />
         <View style={{flex: 1, paddingHorizontal: 10}}>
-          <Title>{item.name}</Title>
-          <Caption>{item.description}</Caption>
+          <Title style={{textAlign:'left'}}>{item.name}</Title>
+          <Caption style={{textAlign:'left'}}>{item.description}</Caption>
         </View>
       </View>
     );

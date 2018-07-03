@@ -11,6 +11,7 @@ import DrawerIcon from 'components/DrawerIcon';
 import colors from 'assets/theme/colors';
 import {SELECTORS as USER_SELECTORS} from 'guest/common/selectors';
 import Spinner from '../components/Spinner';
+import debounce from "lodash/debounce";
 
 class Home extends Component {
   static navigationOptions = ({navigation}) => {
@@ -35,6 +36,10 @@ class Home extends Component {
       ),
     };
   };
+  constructor() {
+    super();
+    this.fetchMore = debounce(this.fetchMore,3000);
+  }
 
   componentDidMount() {
     new Promise((resolve, reject) => {
@@ -102,7 +107,6 @@ class Home extends Component {
   };
 
   fetchMore = () => {
-    console.log('fetchMore');
     let {activeCategoryID} = this.props.categoryReducer;
     this.props.dispatch(
       CUSTOMER_ACTIONS.fetchCategoryDetails({
@@ -126,8 +130,6 @@ class Home extends Component {
   render() {
     let {categories, categoryReducer, products} = this.props;
     let {activeCategoryID, isFetching} = categoryReducer;
-
-    console.log('categoryReducer', categoryReducer);
 
     return (
       <View style={{flex: 1}}>

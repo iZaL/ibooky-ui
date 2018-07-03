@@ -5,11 +5,13 @@ import {Schema} from 'utils/schema';
 const cartProducts = state => state.customer.cart.products;
 const schemas = state => state.entities;
 const productsSchema = state => state.entities.products;
+const pagesSchema = state => state.entities.pages;
 const categoriesSchema = state => state.entities.categories;
 const ordersSchema = state => state.entities.orders;
 const categoryReducer = state => state.customer.categories;
 const orders = state => state.customer.orders.ids;
 const favoritesReducer = state => state.customer.favorites;
+const searchReducer = state => state.customer.search;
 const getIdProp = (state, id) => id;
 
 const getProducts = createSelector(
@@ -46,6 +48,23 @@ const getFavoriteProducts = createSelector(
           };
         })
         .filter(product => product.favorited === true) || []
+    );
+  },
+);
+const getSearchProducts = createSelector(
+  [schemas, searchReducer, productsSchema],
+  (entities, reducer, products) => {
+    return (
+      reducer.collection
+        .map(productID => {
+          let cartProduct = products[productID];
+          return {
+            ...denormalize(productID, Schema.products, entities),
+            cart: {
+              ...cartProduct,
+            },
+          };
+        }) || []
     );
   },
 );
@@ -166,14 +185,23 @@ const getOrders = createSelector([schemas, orders], (entities, orderIDs) => {
   );
 });
 
+const getPage = createSelector([schemas, pagesSchema,getIdProp], (entities, pages, type) => {
+  console.log('entities',entities);
+  console.log('pages',pages);
+  console.log('type',type);
+  return Object.keys(pages).map(pageID => pages[pageID]).find(page => page.type === type) || {};
+});
+
 export const SELECTORS = {
   getCartProducts,
   getProduct,
   getProducts,
   getFavoriteProducts,
+  getSearchProducts,
   getCategories,
   getCategoryProducts,
   getCategoriesWithProducts,
   getOrderByID,
   getOrders,
+  getPage
 };

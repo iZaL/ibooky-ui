@@ -70,6 +70,16 @@ function fetchOrders(params = {}) {
   return request({path, params});
 }
 
+function fetchPage(params = {}) {
+  const path = `customer/page`;
+  return request({path, params});
+}
+
+function searchProducts(params = {}) {
+  const path = `customer/products/search`;
+  return request({path, params});
+}
+
 function fetchFavoriteProducts(params = {}) {
   const path = `customer/products/favorites`;
   return request({path, params: params});
@@ -77,12 +87,14 @@ function fetchFavoriteProducts(params = {}) {
 
 export const API = {
   fetchCategories,
+  fetchPage,
   fetchCategoriesWithProducts,
   fetchProductDetails,
   fetchFavoriteProducts,
   fetchOrderDetails,
   fetchCategoryDetails,
   fetchOrders,
+  searchProducts,
   createOrder,
   setPaymentSuccess,
   favoriteProduct,

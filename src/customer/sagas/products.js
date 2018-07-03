@@ -19,6 +19,45 @@ function* fetchProductDetails(action) {
   }
 }
 
+function* productSearch(action) {
+  try {
+    const state = yield select();
+    let nextPage = undefined;
+    let searchReducer = state.customer.search;
+
+    if (searchReducer) {
+      nextPage = searchReducer.nextPage;
+    }
+
+    const params = {
+      paginated: !!nextPage,
+      paginatedUrl: nextPage,
+      query:`term=${action.params.term}`
+    };
+
+    const response = yield call(API.searchProducts, params);
+    const products = response.data;
+    const productIDs = response.productIDs;
+
+    console.log('productIDs',productIDs);
+
+    const productPayload = {
+      nextPage: response.links.next,
+      collection: productIDs,
+    };
+
+    const normalized = normalize(products, [Schema.products]);
+
+    yield put({
+      type: ACTION_TYPES.PRODUCT_SEARCH_SUCCESS,
+      entities: normalized.entities,
+      products: productPayload,
+    });
+  } catch (error) {
+    yield put({type: ACTION_TYPES.PRODUCT_SEARCH_FAILURE, error});
+  }
+}
+
 function* fetchFavoriteProducts(action) {
   try {
     const state = yield select();
@@ -65,6 +104,7 @@ function* fetchFavoriteProducts(action) {
   }
 }
 
+
 function* favoriteProduct(action) {
   try {
     const params = {
@@ -100,9 +140,13 @@ function* fetchFavoriteProductsMonitor() {
 function* favoriteProductMonitor() {
   yield takeLatest(ACTION_TYPES.PRODUCT_FAVORITE_REQUEST, favoriteProduct);
 }
+function* productSearchMonitor() {
+  yield takeLatest(ACTION_TYPES.PRODUCT_SEARCH_REQUEST, productSearch);
+}
 
 export const sagas = all([
   fork(fetchProductDetailsMonitor),
   fork(fetchFavoriteProductsMonitor),
   fork(favoriteProductMonitor),
+  fork(productSearchMonitor),
 ]);

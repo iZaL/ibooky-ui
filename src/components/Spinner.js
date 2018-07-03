@@ -19,7 +19,7 @@ export default class extends Component {
   static defaultProps = {
     isVisible: false,
     color: colors.primary,
-    size: 30,
+    size: 60,
     type: 'Bounce',
   };
 
@@ -36,8 +36,8 @@ export default class extends Component {
 const styles = StyleSheet.create({
   container: {
     position: 'absolute',
-    top: Dimensions.get('window').height / 2 - 45,
-    right: Dimensions.get('window').width / 2 - 15,
+    top: Dimensions.get('window').height / 2 - 90,
+    right: Dimensions.get('window').width / 2 - 30,
     zIndex: 100000,
   },
 });

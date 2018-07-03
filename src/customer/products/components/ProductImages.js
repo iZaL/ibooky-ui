@@ -49,11 +49,11 @@ export default class extends Component {
 
 const styles = StyleSheet.create({
   swiper: {
-    backgroundColor: colors.error,
     height: 424,
   },
   image: {
     width: Dimensions.get('window').width,
     height: '100%',
+    backgroundColor: colors.fadedWhite,
   },
 });

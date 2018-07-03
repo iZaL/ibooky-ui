@@ -18,6 +18,8 @@ import OrdersScene from 'customer/orders/OrdersScene';
 import OrderDetailScene from 'customer/orders/OrderDetailScene';
 import LanguageSelect from 'app/LanguageSelect';
 import Favorites from 'customer/products/Favorites';
+import Search from 'customer/products/Search';
+import Page from "customer/Page";
 
 const getDrawerIcon = navigation => {
   return {
@@ -80,9 +82,14 @@ const HomeStack = createStackNavigator(
     Payment: {
       screen: Payment,
     },
-
     LanguageSelect: {
       screen: LanguageSelect,
+    },
+    Delivery: {
+      screen: Page,
+    },
+    Privacy: {
+      screen: Page,
     },
   },
   {
@@ -94,6 +101,23 @@ const HomeStack = createStackNavigator(
   },
 );
 
+const SearchStack = createStackNavigator(
+  {
+    Home: {
+      screen: Search,
+    },
+    ProductDetail: {
+      screen: ProductDetail,
+    },
+  },
+  {
+    navigationOptions: {
+      ...navOptions,
+    },
+    ...cardStyle,
+    // initialRouteName: 'Payment',
+  },
+);
 const FavoritesStack = createStackNavigator(
   {
     Home: {
@@ -177,6 +201,9 @@ const DrawerRoutes = {
   FavoritesStack: {
     screen: FavoritesStack,
   },
+  SearchStack: {
+    screen: SearchStack,
+  },
   AuthStack: {
     screen: AuthStack,
   },
@@ -187,5 +214,5 @@ const prefix = Platform.OS === 'android' ? 'hungryr://hungryr/' : 'hungryr://';
 export const Router = createDrawerNavigator(DrawerRoutes, {
   contentComponent: props => <Drawer {...props} uriPrefix={prefix} />,
   drawerWidth: 275,
-  // initialRouteName: 'FavoritesStack',
+  // initialRouteName: 'SearchStack',
 });

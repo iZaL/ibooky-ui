@@ -121,6 +121,12 @@ class Cart extends PureComponent {
     });
   };
 
+  onRegisterPress = () => {
+    this.props.navigation.navigate('Register', {
+      redirectRoute: 'Cart',
+    });
+  };
+
   onDeleteCartItem = item => {
     this.props.dispatch(
       ACTIONS.removeCartItem({
@@ -178,9 +184,10 @@ class Cart extends PureComponent {
           />
 
           <Dialog
-            leftPress={this.onGuestCheckoutPress}
+            leftPress={this.onRegisterPress}
             rightPress={this.onLoginPress}
-            leftText={I18n.t('checkout_as_guest')}
+            description={I18n.t('login_required')}
+            leftText={I18n.t('register')}
             rightText={I18n.t('login')}
             title={I18n.t('checkout')}
             visible={this.state.loginDialogVisible}

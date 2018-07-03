@@ -168,5 +168,6 @@
   "redeem" : "Redeem",
   "rescan" : "Rescan",
   "privacy_policy" : "Privacy Policy",
-  "delivery_policy" : "Delivery Policy"
+  "delivery_policy" : "Delivery Policy",
+  "login_required" : "You must be logged in before you can purchase"
 }

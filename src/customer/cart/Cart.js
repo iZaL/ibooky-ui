@@ -14,7 +14,7 @@ import {ACTIONS} from 'customer/common/actions';
 import {SELECTORS as USER_SELECTORS} from 'guest/common/selectors';
 import Dialog from 'components/Dialog';
 import CartTotal from 'customer/cart/components/CartTotal';
-import Spinner from '../../components/Spinner';
+import Spinner from 'components/Spinner';
 
 type State = {
   loginDialogVisible: boolean,

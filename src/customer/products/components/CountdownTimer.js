@@ -100,6 +100,7 @@ export default class CountdownTimer extends Component {
     let {format, leadingZero, timeSeparator} = this.props;
     let {remainingTime} = this.state;
 
+
     if (format.day) {
       let days = moment.duration(remainingTime).get('days');
       if (days != '0') {

@@ -12,6 +12,7 @@ import Divider from 'components/Divider';
 import CountdownTimer from 'customer/products/components/CountdownTimer';
 import PropTypes from 'prop-types';
 import Share from 'components/Share';
+import moment from 'moment';
 
 export default class extends Component {
   static propTypes = {
@@ -26,6 +27,7 @@ export default class extends Component {
   render() {
     let {item, favorite} = this.props;
 
+    console.log('item.bid_end_at',item.bid_end_at);
     return (
       <View style={styles.container}>
         <Title style={{textAlign:'left'}}>{item.name}</Title>
@@ -46,7 +48,8 @@ export default class extends Component {
           {item.bid_valid && (
             <View style={[styles.itemContent]}>
               <Text style={styles.label}>{I18n.t('time_remaining')}</Text>
-              <CountdownTimer targetDate={new Date(item.bid_end_at)} />
+              <CountdownTimer targetDate={moment(item.bid_end_at)} />
+              {/*<CountdownTimer targetDate={new Date(item.bid_end_at)} />*/}
             </View>
           )}
 

@@ -70,6 +70,11 @@ function fetchCategories() {
     type: ACTION_TYPES.FETCH_CATEGORIES_REQUEST,
   };
 }
+function fetchProducts() {
+  return {
+    type: ACTION_TYPES.FETCH_PRODUCTS_REQUEST,
+  };
+}
 
 function fetchCategoriesWithProducts(params = {}) {
   return {
@@ -191,6 +196,7 @@ function paymentSuccess(params) {
 
 export const ACTIONS = {
   fetchCategories,
+  fetchProducts,
   fetchCategoriesWithProducts,
   fetchFavoriteProducts,
   setCartItem,

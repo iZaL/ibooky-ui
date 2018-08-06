@@ -19,6 +19,19 @@ function* fetchProductDetails(action) {
   }
 }
 
+function* fetchProducts(action) {
+  try {
+    const response = yield call(API.fetchProducts, action.params);
+    const normalized = normalize(response.data, [Schema.products]);
+    yield put({
+      type: ACTION_TYPES.FETCH_PRODUCTS_SUCCESS,
+      entities: normalized.entities,
+    });
+  } catch (error) {
+    yield put({type: ACTION_TYPES.FETCH_PRODUCTS_FAILURE, error});
+  }
+}
+
 function* productSearch(action) {
   try {
     const state = yield select();
@@ -142,9 +155,14 @@ function* productSearchMonitor() {
   yield takeLatest(ACTION_TYPES.PRODUCT_SEARCH_REQUEST, productSearch);
 }
 
+function* fetchProductsMonitor() {
+  yield takeLatest(ACTION_TYPES.FETCH_PRODUCTS_REQUEST, fetchProducts);
+}
+
 export const sagas = all([
   fork(fetchProductDetailsMonitor),
   fork(fetchFavoriteProductsMonitor),
   fork(favoriteProductMonitor),
   fork(productSearchMonitor),
+  fork(fetchProductsMonitor),
 ]);

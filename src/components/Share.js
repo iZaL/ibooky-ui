@@ -16,7 +16,40 @@ export default class extends Component {
   }
 
   onOpen = () => {
-    this.setState({visible: true});
+    let {payload} = this.props;
+
+    console.log('payload',payload);
+    Share.open({
+      ...payload,
+      // social: platform
+    });
+
+
+    // this.setState({visible: true});
+  };
+
+  share = (platform) => {
+    let {payload} = this.props;
+    this.onCancel();
+
+    console.log('payload',payload);
+
+    // Share.shareSingle({
+    //   ...payload,
+    //   social: platform
+    // });
+    Share.open({
+      ...payload,
+      // social: platform
+    });
+
+    // setTimeout(() => {
+    //   Share.shareSingle(
+    //     Object.assign(payload, {
+    //       social: platform,
+    //     }),
+    //   );
+    // }, 300);
   };
 
   render() {
@@ -37,96 +70,21 @@ export default class extends Component {
             style={styles.sheetContainer}>
             <Button
               iconSrc={{uri: TWITTER_ICON}}
-              onPress={() => {
-                this.onCancel();
-                setTimeout(() => {
-                  Share.shareSingle(
-                    Object.assign(payload, {
-                      social: 'twitter',
-                    }),
-                  );
-                }, 300);
-              }}>
+              onPress={()=>this.share('twitter')}
+            >
               Twitter
             </Button>
             <Button
               iconSrc={{uri: FACEBOOK_ICON}}
-              onPress={() => {
-                this.onCancel();
-                setTimeout(() => {
-                  Share.shareSingle(
-                    Object.assign(payload, {
-                      social: 'facebook',
-                    }),
-                  );
-                }, 300);
-              }}>
+              onPress={()=>this.share('facebook')}
+            >
               Facebook
             </Button>
             <Button
               iconSrc={{uri: WHATSAPP_ICON}}
-              onPress={() => {
-                this.onCancel();
-                setTimeout(() => {
-                  Share.shareSingle(
-                    Object.assign(payload, {
-                      social: 'whatsapp',
-                    }),
-                  );
-                }, 300);
-              }}>
+              onPress={()=>this.share('Whatsapp')}
+            >
               Whatsapp
-            </Button>
-            <Button
-              iconSrc={{uri: GOOGLE_PLUS_ICON}}
-              onPress={() => {
-                this.onCancel();
-                setTimeout(() => {
-                  Share.shareSingle(
-                    Object.assign(payload, {
-                      social: 'googleplus',
-                    }),
-                  );
-                }, 300);
-              }}>
-              Google +
-            </Button>
-            <Button
-              iconSrc={{uri: EMAIL_ICON}}
-              onPress={() => {
-                this.onCancel();
-                setTimeout(() => {
-                  Share.shareSingle(
-                    Object.assign(payload, {
-                      social: 'email',
-                    }),
-                  );
-                }, 300);
-              }}>
-              Email
-            </Button>
-            <Button
-              iconSrc={{uri: CLIPBOARD_ICON}}
-              onPress={() => {
-                this.onCancel();
-                setTimeout(() => {
-                  if (typeof payload['url'] !== undefined) {
-                    Clipboard.setString(payload['url']);
-                    Alert.alert('Link copiado al portapapeles');
-                  }
-                }, 300);
-              }}>
-              Copy Link
-            </Button>
-            <Button
-              iconSrc={{uri: MORE_ICON}}
-              onPress={() => {
-                this.onCancel();
-                setTimeout(() => {
-                  Share.open(payload);
-                }, 300);
-              }}>
-              More
             </Button>
           </ShareSheet>
         </Modal>

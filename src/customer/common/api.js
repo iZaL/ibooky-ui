@@ -5,6 +5,11 @@ function fetchCategories() {
   return request({path});
 }
 
+function fetchProducts() {
+  const path = `customer/products`;
+  return request({path});
+}
+
 function fetchCategoryDetails(params) {
   const path = `customer/categories/${params.category_id}/details`;
   return request({path, params: params});
@@ -87,6 +92,7 @@ function fetchFavoriteProducts(params = {}) {
 
 export const API = {
   fetchCategories,
+  fetchProducts,
   fetchPage,
   fetchCategoriesWithProducts,
   fetchProductDetails,

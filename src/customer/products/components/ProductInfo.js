@@ -56,15 +56,16 @@ export default class extends Component {
             <IconFactory
               type="MaterialCommunityIcons"
               name={item.favorited ? 'heart' : 'heart-outline'}
-              color={item.favorited ? colors.error : colors.darkGrey}
-              size={24}
+              color={item.favorited ? colors.error : colors.error}
+              size={30}
+              style={{marginTop:12}}
             />
           </TouchableRipple>
 
           <Share
             payload={{
               title: item.name,
-              message: 'message',
+              message: item.name,
               url: `hungryr://products/${item.id}`,
               subject: 'Share Link', //  for email
             }}>

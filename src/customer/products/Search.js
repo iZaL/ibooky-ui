@@ -16,6 +16,8 @@ import I18n from 'utils/locale';
 import SearchBox from "./components/SearchBox";
 
 class Search extends Component {
+
+
   static navigationOptions = ({navigation}) => {
     return {
       headerTitle: <Text style={{color: 'black'}}>{I18n.t('search')}</Text>,
@@ -39,9 +41,9 @@ class Search extends Component {
     };
   };
 
-  constructor() {
-    super();
-  };
+  componentDidMount() {
+    this.props.dispatch(CUSTOMER_ACTIONS.fetchProducts());
+  }
 
   onProductListItemPress = (item: object) => {
     this.props.navigation.navigate('ProductDetail', {
@@ -79,7 +81,9 @@ class Search extends Component {
   };
 
   render() {
-    let {products,search} = this.props;
+    let {products,search,any_products} = this.props;
+    console.log('search.term',search.term);
+    console.log('any_products',any_products);
     return (
       <View style={{flex: 1}}>
 
@@ -87,7 +91,7 @@ class Search extends Component {
         <Spinner isVisible={search.isFetching} />
 
         <ProductList
-          items={products}
+          items={search.term ? products : any_products}
           onItemPress={this.onProductListItemPress}
           onAddToCartPress={this.onAddToCartPress}
           onEndReached={this.fetchMore}
@@ -102,6 +106,7 @@ class Search extends Component {
 function mapStateToProps(state) {
   return {
     products: CUSTOMER_SELECTORS.getSearchProducts(state),
+    any_products:CUSTOMER_SELECTORS.getProducts(state),
     isAuthenticated: USER_SELECTORS.isAuthenticated(state),
     search:state.customer.search,
   };

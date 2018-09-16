@@ -64,10 +64,10 @@ export default class extends Component {
 
           <Share
             payload={{
-              title: item.name,
-              message: item.name,
-              url: `hungryr://products/${item.id}`,
-              subject: 'Share Link', //  for email
+              title: `Checkout the coupon ${item.name} title`,
+              message: `Checkout the coupon ${item.name} message`,
+              subject: `Checkout the coupon ${item.name} subject`,
+              url: `hungryr://coupon/${item.id}`,
             }}>
             <View style={styles.itemContent}>
               <Text style={styles.label}>{I18n.t('share')}</Text>

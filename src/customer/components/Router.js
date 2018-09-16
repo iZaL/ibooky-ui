@@ -72,6 +72,7 @@ const HomeStack = createStackNavigator(
     },
     ProductDetail: {
       screen: ProductDetail,
+      path:'products/:productID'
     },
     Cart: {
       screen: Cart,
@@ -155,6 +156,7 @@ const OrdersStack = createStackNavigator(
           title: I18n.t('orders'),
         };
       },
+      path:'orders',
     },
     OrderDetail: {
       screen: OrderDetailScene,
@@ -197,6 +199,7 @@ const DrawerRoutes = {
   },
   SettingStack: {
     screen: SettingStack,
+    // path:'settings'
   },
   FavoritesStack: {
     screen: FavoritesStack,
@@ -209,10 +212,7 @@ const DrawerRoutes = {
   },
 };
 
-const prefix = Platform.OS === 'android' ? 'hungryr://hungryr/' : 'hungryr://';
-
 export const Router = createDrawerNavigator(DrawerRoutes, {
-  contentComponent: props => <Drawer {...props} uriPrefix={prefix} />,
+  contentComponent: props => <Drawer {...props}  />,
   drawerWidth: 275,
-  // initialRouteName: 'SearchStack',
 });

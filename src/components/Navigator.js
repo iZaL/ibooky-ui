@@ -4,6 +4,8 @@ import {createStackNavigator} from 'react-navigation';
 import {Router as GuestRouter} from 'guest/components/Router';
 import {Router as CustomerRouter} from 'customer/components/Router';
 import {Router as CompanyRouter} from 'company/components/Router';
+import {Platform} from 'react-native';
+import Login from "../guest/Login";
 
 export default class Navigator extends Component {
   shouldComponentUpdate(nextProps) {
@@ -27,8 +29,9 @@ export default class Navigator extends Component {
     const AppNavigator = createStackNavigator(
       {
         Guest: {screen: GuestRouter},
-        // Admin: {screen: AdminRouter},
-        Customer: {screen: CustomerRouter},
+        Customer: {
+          screen: CustomerRouter,
+        },
         Company: {screen: CompanyRouter},
       },
       {
@@ -39,12 +42,15 @@ export default class Navigator extends Component {
       },
     );
 
+    const prefix = Platform.OS === 'android' ? 'hungryr://hungryr/' : 'hungryr://';
+
     return (
       <AppNavigator
         ref={navigatorRef => {
           NavigatorService.setContainer(navigatorRef);
         }}
         screenProps={{user, logout}}
+        uriPrefix={prefix}
       />
     );
   }

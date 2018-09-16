@@ -82,8 +82,6 @@ class Search extends Component {
 
   render() {
     let {products,search,any_products} = this.props;
-    console.log('search.term',search.term);
-    console.log('any_products',any_products);
     return (
       <View style={{flex: 1}}>
 

@@ -43,7 +43,7 @@ class Payment extends Component {
     const successUrl = `${PAYMENT_ENDPOINT}/success`;
     const failureUrl = `${PAYMENT_ENDPOINT}/failure`;
 
-    if (navState.url.includes('result=SUCCESS')) {
+    if (navState.url.includes('result=CAPTURED')) {
       this.setState({
         scene: 'success',
       });
